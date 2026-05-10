@@ -158,39 +158,86 @@ class VectorStore:
         Returns:
             [(chunk, similarity_score), ...] 列表
         """
-        if not self.chunks or self.embeddings is None:
+        if not self.chunks:
             return []
 
-        query_embedding = self.embedding_provider.embed_single(query)
-
-        if self.use_faiss and self.faiss_index:
+        # 尝试向量搜索
+        if self.embeddings is not None:
             try:
-                import faiss
-                distances, indices = self.faiss_index.search(
-                    np.array([query_embedding], dtype='float32'),
-                    min(top_k, len(self.chunks))
-                )
-                results = []
-                for dist, idx in zip(distances[0], indices[0]):
-                    if idx >= 0 and idx < len(self.chunks):
-                        # L2 距离转换为相似度 (1 - normalized_distance)
-                        similarity = 1 / (1 + dist)
-                        results.append((self.chunks[idx], float(similarity)))
-                return results
-            except Exception as e:
-                print(f"FAISS search failed: {e}")
+                query_embedding = self.embedding_provider.embed_single(query)
 
-        # sklearn NearestNeighbors fallback
-        distances, indices = self.nn_model.kneighbors(
-            np.array([query_embedding]),
-            n_neighbors=min(top_k, len(self.chunks))
-        )
-        results = []
-        for dist, idx in zip(distances[0], indices[0]):
-            # cosine 距离转换为相似度
-            similarity = 1 - dist
-            results.append((self.chunks[idx], float(similarity)))
-        return results
+                if self.use_faiss and self.faiss_index:
+                    try:
+                        import faiss
+                        distances, indices = self.faiss_index.search(
+                            np.array([query_embedding], dtype='float32'),
+                            min(top_k, len(self.chunks))
+                        )
+                        results = []
+                        for dist, idx in zip(distances[0], indices[0]):
+                            if idx >= 0 and idx < len(self.chunks):
+                                similarity = 1 / (1 + dist)
+                                results.append((self.chunks[idx], float(similarity)))
+                        if results:
+                            return results
+                    except Exception as e:
+                        print(f"FAISS search failed: {e}")
+
+                # sklearn NearestNeighbors fallback
+                try:
+                    distances, indices = self.nn_model.kneighbors(
+                        np.array([query_embedding]),
+                        n_neighbors=min(top_k, len(self.chunks))
+                    )
+                    results = []
+                    for dist, idx in zip(distances[0], indices[0]):
+                        similarity = 1 - dist
+                        results.append((self.chunks[idx], float(similarity)))
+                    if results:
+                        return results
+                except Exception as e:
+                    print(f"sklearn search failed: {e}")
+            except Exception as e:
+                print(f"Vector search error: {e}")
+
+        # 关键词匹配 fallback
+        print("Using keyword matching fallback")
+        return self._keyword_search(query, top_k)
+
+    def _keyword_search(self, query: str, top_k: int = 5) -> List[Tuple[dict, float]]:
+        """关键词匹配搜索
+
+        Args:
+            query: 查询文本
+            top_k: 返回结果数
+
+        Returns:
+            [(chunk, relevance_score), ...] 列表
+        """
+        # 提取查询关键词
+        query_words = set(query.split())
+        if len(query_words) == 0:
+            return []
+
+        # 计算每个 chunk 与查询的匹配度
+        scored_chunks = []
+        for chunk in self.chunks:
+            content = chunk.get('content', '').lower()
+            chunk_words = set(content.split())
+
+            # 计算交集比例
+            if len(chunk_words) == 0:
+                score = 0.0
+            else:
+                intersection = len(query_words & chunk_words)
+                score = intersection / (len(query_words) + len(chunk_words) - intersection + 1e-6)
+
+            if score > 0:
+                scored_chunks.append((chunk, float(score)))
+
+        # 按相关性排序，返回 top_k
+        scored_chunks.sort(key=lambda x: x[1], reverse=True)
+        return scored_chunks[:top_k]
 
 
 class RAGEngine:
@@ -198,25 +245,96 @@ class RAGEngine:
 
     def __init__(self, data_dir: str = "./data/processed"):
         self.data_dir = Path(data_dir)
+        self.metadata_dir = Path("./data/metadata")
         self.embedding_provider = EmbeddingProvider()
         self.vector_store = VectorStore(self.embedding_provider)
         self.chunks = []
 
     def load_and_index(self):
-        """加载已解析教材并建立索引"""
-        processed_dir = self.data_dir
+        """加载已解析教材并建立索引
 
-        if not processed_dir.exists():
-            print(f"Warning: {processed_dir} does not exist, creating it")
-            processed_dir.mkdir(parents=True, exist_ok=True)
-            return False
-
+        优先读取 ./data/metadata/*_chapters.json (模块一输出)，
+        兼容 ./data/processed 目录 (模块二输出)
+        """
         chunk_manager = ChunkManager(chunk_size=700, overlap=100)
         all_chunks = []
 
-        # 遍历所有教材的已解析 JSON
-        for json_file in processed_dir.glob("*.json"):
-            if json_file.name.startswith('_'):
+        # 优先从 metadata 目录读取（模块一的输出）
+        if self.metadata_dir.exists():
+            all_chunks.extend(self._load_from_metadata(chunk_manager))
+
+        # 兼容 processed 目录（模块二的输出）
+        if self.data_dir.exists():
+            all_chunks.extend(self._load_from_processed(chunk_manager))
+
+        # 添加到向量库
+        if all_chunks:
+            self.vector_store.add_chunks(all_chunks)
+            self.chunks = all_chunks
+            return True
+
+        return False
+
+    def _load_from_metadata(self, chunk_manager) -> List[dict]:
+        """从 metadata 目录加载章节数据（模块一输出）"""
+        all_chunks = []
+
+        for chapters_file in self.metadata_dir.glob("*_chapters.json"):
+            try:
+                # 提取教材 ID
+                textbook_id = chapters_file.stem.replace('_chapters', '')
+
+                with open(chapters_file, 'r', encoding='utf-8') as f:
+                    chapters_data = json.load(f)
+
+                # 尝试加载对应的元数据
+                metadata_file = self.metadata_dir / f"{textbook_id}_metadata.json"
+                textbook_name = textbook_id
+                if metadata_file.exists():
+                    try:
+                        with open(metadata_file, 'r', encoding='utf-8') as f:
+                            metadata = json.load(f)
+                            textbook_name = metadata.get('title', textbook_id)
+                    except:
+                        pass
+
+                # 处理章节
+                for chapter in chapters_data:
+                    chapter_id = chapter.get('id', '')
+                    chapter_num = chapter.get('chapter_num', 0)
+                    chapter_title = chapter.get('title', '')
+                    content = chapter.get('content', '')
+                    start_page = chapter.get('start_page', 0)
+
+                    if not content or not content.strip():
+                        continue
+
+                    # 为章节内容创建 chunks
+                    metadata_dict = {
+                        'textbook': textbook_name,
+                        'textbook_id': textbook_id,
+                        'chapter': chapter_title,
+                        'chapter_id': chapter_id,
+                        'chapter_num': chapter_num,
+                        'page': start_page,
+                        'page_number': start_page,  # 兼容两种命名
+                    }
+
+                    chunks = chunk_manager.chunk_text(content, metadata_dict)
+                    all_chunks.extend(chunks)
+
+            except Exception as e:
+                print(f"Error loading from metadata {chapters_file}: {e}")
+                continue
+
+        return all_chunks
+
+    def _load_from_processed(self, chunk_manager) -> List[dict]:
+        """从 processed 目录加载数据（模块二输出，兼容）"""
+        all_chunks = []
+
+        for json_file in self.data_dir.glob("*.json"):
+            if json_file.name.startswith('_') or json_file.name in ['merged_kg.json', 'merge_decisions.json']:
                 continue
 
             try:
@@ -235,6 +353,9 @@ class RAGEngine:
                     content = chapter.get('content', '')
                     start_page = chapter.get('start_page', 0)
 
+                    if not content or not content.strip():
+                        continue
+
                     # 为章节内容创建 chunks
                     metadata = {
                         'textbook': textbook_name,
@@ -243,20 +364,17 @@ class RAGEngine:
                         'chapter_id': chapter_id,
                         'chapter_num': chapter_num,
                         'page': start_page,
+                        'page_number': start_page,
                     }
 
                     chunks = chunk_manager.chunk_text(content, metadata)
                     all_chunks.extend(chunks)
 
             except Exception as e:
-                print(f"Error loading {json_file}: {e}")
+                print(f"Error loading from processed {json_file}: {e}")
                 continue
 
-        # 添加到向量库
-        self.vector_store.add_chunks(all_chunks)
-        self.chunks = all_chunks
-
-        return len(all_chunks) > 0
+        return all_chunks
 
     def query(self, question: str, top_k: int = 5) -> Dict:
         """查询并生成答案"""
@@ -285,12 +403,13 @@ class RAGEngine:
         source_chunks = []
         source_texts = []
         for chunk, similarity in search_results:
-            source_chunks.append({
+            source_chunk_dict = {
                 'id': chunk['id'],
                 'content': chunk['content'][:200] + '...' if len(chunk['content']) > 200 else chunk['content'],
                 'similarity': similarity,
                 'metadata': chunk['metadata']
-            })
+            }
+            source_chunks.append(source_chunk_dict)
             source_texts.append(chunk['content'])
 
         # 调用 LLM 生成答案
@@ -356,12 +475,13 @@ class RAGEngine:
         for chunk in source_chunks:
             metadata = chunk['metadata']
             citation = {
-                'chapter_id': metadata.get('chapter_id', ''),
-                'chapter': metadata.get('chapter', ''),
                 'textbook': metadata.get('textbook', ''),
-                'page_number': metadata.get('page', 0),
+                'chapter': metadata.get('chapter', ''),
+                'chapter_id': metadata.get('chapter_id', ''),
+                'page_number': metadata.get('page_number', metadata.get('page', 0)),
                 'chunk_id': chunk['id'],
                 'text_excerpt': chunk['content'][:100] + '...' if len(chunk['content']) > 100 else chunk['content'],
+                'relevance_score': chunk.get('similarity', 0.0),
             }
             citations.append(citation)
         return citations

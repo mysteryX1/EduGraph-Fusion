@@ -64,31 +64,66 @@ class ReportGenerator:
         total_words = 0
         textbooks = []
 
-        # 扫描所有教材
-        for json_file in self.data_dir.glob("*.json"):
-            if json_file.name.startswith('_'):
-                continue
+        # 优先从 metadata 目录读取（模块一输出）
+        metadata_dir = Path("./data/metadata")
+        if metadata_dir.exists():
+            for chapters_file in metadata_dir.glob("*_chapters.json"):
+                try:
+                    textbook_id = chapters_file.stem.replace('_chapters', '')
 
-            try:
-                with open(json_file, 'r', encoding='utf-8') as f:
-                    data = json.load(f)
+                    with open(chapters_file, 'r', encoding='utf-8') as f:
+                        chapters_data = json.load(f)
 
-                title = data.get('title', json_file.stem)
-                chapters = data.get('chapters', [])
-                word_count = sum(ch.get('word_count', 0) for ch in chapters)
+                    # 尝试加载元数据
+                    metadata_file = metadata_dir / f"{textbook_id}_metadata.json"
+                    title = textbook_id
+                    if metadata_file.exists():
+                        try:
+                            with open(metadata_file, 'r', encoding='utf-8') as f:
+                                meta = json.load(f)
+                                title = meta.get('title', textbook_id)
+                        except:
+                            pass
 
-                textbooks.append({
-                    'title': title,
-                    'word_count': word_count,
-                    'chapter_count': len(chapters)
-                })
+                    word_count = sum(ch.get('word_count', 0) for ch in chapters_data)
+                    textbooks.append({
+                        'title': title,
+                        'word_count': word_count,
+                        'chapter_count': len(chapters_data)
+                    })
+                    total_textbooks += 1
+                    total_words += word_count
 
-                total_textbooks += 1
-                total_words += word_count
+                except Exception as e:
+                    print(f"Error reading from metadata {chapters_file}: {e}")
+                    continue
 
-            except Exception as e:
-                print(f"Error reading {json_file}: {e}")
-                continue
+        # 如果 metadata 目录为空，尝试从 processed 目录读取
+        if total_textbooks == 0 and self.data_dir.exists():
+            for json_file in self.data_dir.glob("*.json"):
+                if json_file.name.startswith('_') or json_file.name in ['merged_kg.json', 'merge_decisions.json']:
+                    continue
+
+                try:
+                    with open(json_file, 'r', encoding='utf-8') as f:
+                        data = json.load(f)
+
+                    title = data.get('title', json_file.stem)
+                    chapters = data.get('chapters', [])
+                    word_count = sum(ch.get('word_count', 0) for ch in chapters)
+
+                    textbooks.append({
+                        'title': title,
+                        'word_count': word_count,
+                        'chapter_count': len(chapters)
+                    })
+
+                    total_textbooks += 1
+                    total_words += word_count
+
+                except Exception as e:
+                    print(f"Error reading {json_file}: {e}")
+                    continue
 
         # 计算压缩比（假设整合后保留 80% 的内容）
         merged_words = int(total_words * 0.8)

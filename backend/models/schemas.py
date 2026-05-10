@@ -9,14 +9,21 @@ class KGNode(BaseModel):
     name: str
     type: str  # concept, entity, process, etc.
     description: Optional[str] = None
+    definition: Optional[str] = None
+    chapter: Optional[str] = None
+    page: Optional[int] = None
+    source_textbook: Optional[str] = None
+    frequency: int = 1
+    sources: List[str] = []  # 出现位置列表
 
 
 class KGEdge(BaseModel):
     """知识图谱边"""
     source_id: str
     target_id: str
-    relation_type: str
+    relation_type: str  # prerequisite, contains, parallel, related
     weight: float = 1.0
+    confidence: float = 1.0
 
 
 class Citation(BaseModel):

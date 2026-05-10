@@ -11,7 +11,14 @@
       "Bash(curl -s http://127.0.0.1:8000/health)",
       "Bash(python -m json.tool)",
       "Bash(python -c \"from backend.main import app; print\\('OK'\\)\")",
-      "Bash(python -c \"from backend.main import app; print\\('✅ 应用导入成功'\\)\")"
+      "Bash(python -c \"from backend.main import app; print\\('✅ 应用导入成功'\\)\")",
+      "Bash(git remote *)",
+      "Bash(git branch *)",
+      "Bash(git push *)",
+      "Bash(Get-ChildItem -Recurse -Depth 2)",
+      "Bash(Select-Object FullName)",
+      "Bash(python *)",
+      "Bash(git add *)"
     ]
   }
 }

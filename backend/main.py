@@ -6,7 +6,7 @@ from contextlib import asynccontextmanager
 from pathlib import Path
 import uvicorn
 
-from .routers import upload, textbooks, rag, feedback, report
+from .routers import upload, textbooks, rag, feedback, report, kg, merge
 
 
 # 初始化应用
@@ -48,6 +48,8 @@ app.include_router(textbooks.router)
 app.include_router(rag.router)
 app.include_router(feedback.router)
 app.include_router(report.router)
+app.include_router(kg.router)
+app.include_router(merge.router)
 
 
 # 基础路由
@@ -73,6 +75,10 @@ async def root():
             "generate_report": "POST /api/report/generate",
             "get_report": "GET /api/report/latest",
             "report_summary": "GET /api/report/summary",
+            "build_kg": "POST /api/kg/build",
+            "get_kg": "GET /api/kg",
+            "merge": "POST /api/merge",
+            "get_merge_decisions": "GET /api/merge/decisions",
         }
     }
 

@@ -1,32 +1,80 @@
-# 快速开始指南
+# EduGraph Fusion - 快速开始指南
 
 ## 📋 项目概述
 
-这是一个 FastAPI 后端服务，用于教材文件上传、解析和知识提取。支持 PDF、Markdown 和文本文件格式。
+**EduGraph Fusion** 是一个完整的教材知识管理系统，包括：
+- 🔙 **后端**: FastAPI 服务，处理文件上传、解析、知识图谱构建、RAG 检索等
+- 🎨 **前端**: React 单页应用，提供交互式用户界面
+- 📚 **功能**: 多教材管理、知识图谱可视化、语义检索、用户反馈、报告生成
 
-## 🚀 5 分钟快速启动
+## 🚀 10 分钟快速启动（完整系统）
 
-### 1️⃣ 安装依赖
+### 前置条件
+- Python 3.8+
+- Node.js 16+
+- Git
+
+### 1️⃣ 克隆项目并配置环境
 
 ```bash
-pip install -r requirements.txt
+# 克隆项目
+git clone <repository-url>
+cd 黑客松2
+
+# 复制配置文件
+cp .env.example .env
 ```
 
-### 2️⃣ 启动服务
+### 2️⃣ 启动后端服务（终端 1）
 
 ```bash
+cd backend
+
+# 创建虚拟环境（首次）
+python -m venv venv
+
+# 激活虚拟环境
+# Windows
+venv\Scripts\activate
+# macOS/Linux
+source venv/bin/activate
+
+# 安装依赖
+pip install -r ../requirements.txt
+
+# 启动服务
 python run.py
 ```
 
-或使用 uvicorn：
-
-```bash
-python -m uvicorn backend.main:app --reload --host 0.0.0.0 --port 8000
+**输出示例**:
+```
+INFO:     Uvicorn running on http://0.0.0.0:8000
+INFO:     Application startup complete
 ```
 
-### 3️⃣ 访问 API
+### 3️⃣ 启动前端应用（终端 2）
 
-打开浏览器访问: **http://localhost:8000/docs**
+```bash
+cd frontend
+
+# 安装依赖（首次）
+npm install
+
+# 启动开发服务器
+npm run dev
+```
+
+**输出示例**:
+```
+  VITE v5.0.8  ready in 245 ms
+  ➜  Local:   http://localhost:3000/
+```
+
+### 4️⃣ 打开浏览器
+
+- **前端应用**: http://localhost:3000 ⭐ **从这里开始**
+- **后端 API 文档**: http://localhost:8000/docs
+- **后端健康检查**: http://localhost:8000/health
 
 ## 📚 主要功能
 
