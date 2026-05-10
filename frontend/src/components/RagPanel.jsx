@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { buildRagIndex, getRagStatus, queryRag } from '../api';
 
 const normalizeStatus = (data) => ({
@@ -14,6 +14,58 @@ const normalizeResult = (data, fallbackQuestion) => ({
   source_chunks: Array.isArray(data?.source_chunks) ? data.source_chunks : [],
 });
 
+const valueAt = (obj, keys) => {
+  for (const key of keys) {
+    const value = key.split('.').reduce((current, part) => current?.[part], obj);
+    if (value !== undefined && value !== null && value !== '') return value;
+  }
+  return null;
+};
+
+const formatCitation = (citation, index) => {
+  if (typeof citation === 'string') {
+    return citation;
+  }
+
+  const title = valueAt(citation, [
+    'textbook_title',
+    'textbook_name',
+    'filename',
+    'source_textbook',
+    'metadata.title',
+    'metadata.filename',
+    'metadata.source_textbook',
+  ]);
+  const chapter = valueAt(citation, ['chapter', 'metadata.chapter', 'section', 'metadata.section']);
+  const page = valueAt(citation, ['page', 'pages', 'metadata.page', 'metadata.pages']);
+  const score = valueAt(citation, ['score', 'similarity', 'metadata.score']);
+
+  const parts = [];
+  if (title) parts.push(String(title));
+  if (chapter) parts.push(String(chapter));
+  if (page) parts.push(`p.${page}`);
+  if (score !== null) {
+    const numericScore = Number(score);
+    parts.push(`score ${Number.isFinite(numericScore) ? numericScore.toFixed(2) : score}`);
+  }
+
+  return `来源 ${index + 1}：${parts.length > 0 ? parts.join(' / ') : '来源信息不完整'}`;
+};
+
+const buildCitationList = (result) => {
+  const raw = result.citations.length > 0 ? result.citations : result.source_chunks;
+  const seen = new Set();
+
+  return raw
+    .map((item, index) => formatCitation(item, index))
+    .filter((text) => text && !/\[object Object\]|undefined/.test(text))
+    .filter((text) => {
+      if (seen.has(text)) return false;
+      seen.add(text);
+      return true;
+    });
+};
+
 export default function RagPanel() {
   const [question, setQuestion] = useState('');
   const [topK, setTopK] = useState(5);
@@ -22,6 +74,8 @@ export default function RagPanel() {
   const [message, setMessage] = useState(null);
   const [result, setResult] = useState(null);
   const [status, setStatus] = useState(null);
+
+  const citations = useMemo(() => (result ? buildCitationList(result) : []), [result]);
 
   useEffect(() => {
     let cancelled = false;
@@ -32,15 +86,12 @@ export default function RagPanel() {
         if (!cancelled && response.success) {
           setStatus(normalizeStatus(response.data));
         }
-      } catch (error) {
-        if (!cancelled) {
-          setStatus(normalizeStatus(null));
-        }
+      } catch {
+        if (!cancelled) setStatus(normalizeStatus(null));
       }
     };
 
     loadStatus();
-
     return () => {
       cancelled = true;
     };
@@ -53,9 +104,7 @@ export default function RagPanel() {
 
     try {
       const response = await buildRagIndex();
-      if (!response.success) {
-        throw new Error(response.error || '索引构建失败');
-      }
+      if (!response.success) throw new Error(response.error || '索引构建失败');
 
       const nextStatus = normalizeStatus({ ...response.data, indexed: true });
       setStatus(nextStatus);
@@ -64,10 +113,7 @@ export default function RagPanel() {
         text: `索引构建完成：${nextStatus.chunk_count} 个文本块，${nextStatus.textbook_count} 本教材`,
       });
     } catch (error) {
-      setMessage({
-        type: 'error',
-        text: error.message || '索引构建失败',
-      });
+      setMessage({ type: 'error', text: error.message || '索引构建失败' });
     } finally {
       setIndexLoading(false);
     }
@@ -75,8 +121,8 @@ export default function RagPanel() {
 
   const handleQuery = async (event) => {
     event.preventDefault();
-
     const cleanQuestion = question.trim();
+
     if (!cleanQuestion) {
       setMessage({ type: 'error', text: '请输入问题' });
       return;
@@ -93,16 +139,10 @@ export default function RagPanel() {
 
     try {
       const response = await queryRag(cleanQuestion, topK);
-      if (!response.success) {
-        throw new Error(response.error || '检索失败');
-      }
-
+      if (!response.success) throw new Error(response.error || '检索失败');
       setResult(normalizeResult(response.data, cleanQuestion));
     } catch (error) {
-      setMessage({
-        type: 'error',
-        text: error.message || '检索失败，请稍后重试',
-      });
+      setMessage({ type: 'error', text: error.message || '检索失败，请稍后重试' });
     } finally {
       setLoading(false);
     }
@@ -176,15 +216,7 @@ export default function RagPanel() {
       )}
 
       {result && (
-        <div
-          style={{
-            marginTop: 16,
-            background: '#fff',
-            padding: 12,
-            borderRadius: 4,
-            border: '1px solid #e0e0e0',
-          }}
-        >
+        <div style={{ marginTop: 16, background: '#fff', padding: 12, borderRadius: 4, border: '1px solid #e0e0e0' }}>
           <div className="section-title" style={{ marginTop: 0 }}>
             检索结果
           </div>
@@ -217,11 +249,11 @@ export default function RagPanel() {
 
           <div className="form-group">
             <label style={{ color: '#666', fontWeight: 'normal' }}>引用来源</label>
-            {result.citations.length > 0 ? (
+            {citations.length > 0 ? (
               <div style={{ fontSize: 12 }}>
-                {result.citations.map((citation, index) => (
+                {citations.map((citation) => (
                   <div
-                    key={`${citation}-${index}`}
+                    key={citation}
                     style={{
                       padding: '6px 8px',
                       background: '#f5f5f5',
@@ -230,7 +262,7 @@ export default function RagPanel() {
                       color: '#555',
                     }}
                   >
-                    {String(citation)}
+                    {citation}
                   </div>
                 ))}
               </div>

@@ -1,5 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { generateReport, getLatestReport, getReportSummary } from '../api';
+
+const normalizeReport = (data) => ({
+  report_id: data?.report_id || data?.id || 'latest',
+  created_at: data?.created_at || data?.generated_at || new Date().toISOString(),
+  content: data?.content || '',
+  summary: data?.summary || '',
+  report_path: data?.report_path || '',
+});
 
 export default function ReportPanel() {
   const [loading, setLoading] = useState(false);
@@ -14,12 +22,25 @@ export default function ReportPanel() {
   const loadReportSummary = async () => {
     try {
       const result = await getReportSummary();
-      if (result.success) {
-        setReportSummary(result.data);
-      }
+      if (result.success) setReportSummary(result.data);
     } catch (error) {
       console.error('Failed to load report summary:', error);
     }
+  };
+
+  const loadLatestReport = async () => {
+    const latest = await getLatestReport();
+    if (!latest.success) {
+      throw new Error(latest.error || '读取报告正文失败');
+    }
+
+    const normalized = normalizeReport(latest.data);
+    if (!normalized.content) {
+      throw new Error('报告已生成，但未读取到正文');
+    }
+
+    setReportData(normalized);
+    return normalized;
   };
 
   const handleGenerateReport = async () => {
@@ -33,26 +54,20 @@ export default function ReportPanel() {
         include_recommendations: true,
       });
 
-      if (result.success) {
-        setMessage({
-          type: 'success',
-          text: '报告生成成功！报告 ID: ' + result.data.report_id,
-        });
-        // 如果生成报告返回了内容，直接显示
-        if (result.data.content) {
-          setReportData(result.data);
-        }
-        loadReportSummary();
-      } else {
-        setMessage({
-          type: 'error',
-          text: result.error || '报告生成失败',
-        });
+      if (!result.success) {
+        throw new Error(result.error || '报告生成失败');
       }
+
+      const latest = await loadLatestReport();
+      setMessage({
+        type: 'success',
+        text: `报告生成成功：${latest.report_id}`,
+      });
+      loadReportSummary();
     } catch (error) {
       setMessage({
         type: 'error',
-        text: '生成失败：' + (error.message || '未知错误'),
+        text: error.message || '报告生成失败',
       });
     } finally {
       setLoading(false);
@@ -64,25 +79,11 @@ export default function ReportPanel() {
     setMessage(null);
 
     try {
-      const result = await getLatestReport();
-      if (result.success && result.data) {
-        setReportData({
-          report_id: result.data.report_id,
-          created_at: result.data.created_at,
-          content: result.data.content || '报告已生成，但接口未返回正文内容',
-          summary: result.data.summary || '',
-          report_path: result.data.report_path || '',
-        });
-      } else {
-        setMessage({
-          type: 'error',
-          text: result.error || '加载报告失败',
-        });
-      }
+      await loadLatestReport();
     } catch (error) {
       setMessage({
         type: 'error',
-        text: '加载失败：' + (error.message || '未知错误'),
+        text: error.message || '加载报告失败',
       });
     } finally {
       setLoading(false);
@@ -93,43 +94,39 @@ export default function ReportPanel() {
     <div className="report-panel">
       <div className="section-title">综合报告</div>
 
-      <div style={{ marginBottom: '16px' }}>
-        <button
-          className={`btn btn-primary btn-full-width ${loading ? 'loading' : ''}`}
-          onClick={handleGenerateReport}
-          disabled={loading}
-        >
+      <div style={{ marginBottom: 16 }}>
+        <button className={`btn btn-primary btn-full-width ${loading ? 'loading' : ''}`} onClick={handleGenerateReport} disabled={loading}>
           {loading && <span className="loading-spinner"></span>}
           {loading ? '生成中...' : '生成新报告'}
         </button>
       </div>
+
+      {message && (
+        <div className={`alert alert-${message.type}`} style={{ marginTop: 12, marginBottom: 12 }}>
+          <span className="alert-message">{message.text}</span>
+        </div>
+      )}
 
       {reportSummary && (
         <>
           <div className="divider"></div>
           <div className="section-title">最新报告</div>
 
-          <div className="stat-card" style={{ marginBottom: '12px' }}>
+          <div className="stat-card" style={{ marginBottom: 12 }}>
             <div className="stat-label">报告 ID</div>
-            <div style={{ fontSize: '12px', color: '#666', wordBreak: 'break-all', marginTop: '4px' }}>
-              {reportSummary.latest_report}
+            <div style={{ fontSize: 12, color: '#666', wordBreak: 'break-all', marginTop: 4 }}>
+              {reportSummary.latest_report || '暂无'}
             </div>
           </div>
 
-          <div className="stat-card" style={{ marginBottom: '12px' }}>
+          <div className="stat-card" style={{ marginBottom: 12 }}>
             <div className="stat-label">生成时间</div>
-            <div style={{ fontSize: '12px', color: '#666', marginTop: '4px' }}>
-              {reportSummary.generated_at
-                ? new Date(reportSummary.generated_at).toLocaleString('zh-CN')
-                : '暂无'}
+            <div style={{ fontSize: 12, color: '#666', marginTop: 4 }}>
+              {reportSummary.generated_at ? new Date(reportSummary.generated_at).toLocaleString('zh-CN') : '暂无'}
             </div>
           </div>
 
-          <button
-            className="btn btn-secondary btn-full-width"
-            onClick={handleViewLatest}
-            disabled={loading || !reportSummary.latest_report}
-          >
+          <button className="btn btn-secondary btn-full-width" onClick={handleViewLatest} disabled={loading}>
             查看详情
           </button>
         </>
@@ -138,42 +135,29 @@ export default function ReportPanel() {
       {reportData && (
         <>
           <div className="divider"></div>
-          <div className="section-title">报告内容</div>
-
+          <div className="section-title">报告正文</div>
           <div
             style={{
-              padding: '12px',
+              padding: 12,
               background: '#f5f5f5',
-              borderRadius: '4px',
-              maxHeight: '300px',
+              borderRadius: 4,
+              maxHeight: 360,
               overflowY: 'auto',
-              fontSize: '12px',
-              lineHeight: '1.6',
-              color: '#666',
+              fontSize: 12,
+              lineHeight: 1.6,
+              color: '#333',
               whiteSpace: 'pre-wrap',
               wordBreak: 'break-word',
             }}
           >
-            {reportData.content || '(空)'}
+            {reportData.content}
           </div>
         </>
       )}
 
-      {message && (
-        <div className={`alert alert-${message.type}`} style={{ marginTop: '12px' }}>
-          <span className="alert-message">{message.text}</span>
-        </div>
-      )}
-
-      <div className="divider" style={{ marginTop: '20px' }}></div>
-      <div style={{ fontSize: '11px', color: '#999', lineHeight: '1.6' }}>
-        <p>报告包括：</p>
-        <ul style={{ marginLeft: '16px', marginTop: '6px' }}>
-          <li>知识图谱统计分析</li>
-          <li>教材信息汇总</li>
-          <li>系统建议</li>
-          <li>质量指标评分</li>
-        </ul>
+      <div className="divider" style={{ marginTop: 20 }}></div>
+      <div style={{ fontSize: 11, color: '#999', lineHeight: 1.6 }}>
+        报告包含知识图谱统计、教材信息汇总、系统建议和质量指标。
       </div>
     </div>
   );

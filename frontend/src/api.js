@@ -259,13 +259,15 @@ export const queryRag = async (question, topK = 5) => {
   try {
     const response = await api.post('/rag/query', { question, top_k: topK });
     const data = response.data.data || response.data;
+    const sourceChunks = Array.isArray(data?.source_chunks) ? data.source_chunks : [];
+    const citations = Array.isArray(data?.citations) ? data.citations : [];
     return {
       success: true,
       data: {
         question: data?.question || question,
-        answer: data?.answer || data?.content || '当前知识库中未找到相关信息',
-        citations: Array.isArray(data?.citations) ? data.citations : [],
-        source_chunks: Array.isArray(data?.source_chunks) ? data.source_chunks : [],
+        answer: data?.answer || data?.content || '未找到相关答案',
+        citations,
+        source_chunks: sourceChunks,
       },
     };
   } catch (error) {
@@ -378,13 +380,22 @@ export const generateReport = async (reportConfig = {}) => {
 export const getLatestReport = async () => {
   try {
     const response = await api.get('/report/latest');
-    const data = response.data.data || response.data;
+    const raw = response.data;
+    const data = typeof raw === 'string' ? { content: raw } : (raw.data || raw || {});
+    const content =
+      (typeof data === 'string' ? data : null) ||
+      data?.content ||
+      data?.report_content ||
+      data?.markdown ||
+      data?.text ||
+      data?.data?.content ||
+      '';
     return {
       success: true,
       data: {
         report_id: data?.report_id || data?.id || 'unknown',
         created_at: data?.created_at || data?.generated_at || new Date().toISOString(),
-        content: data?.content || data?.report_content || data?.markdown || data?.data?.content || '',
+        content,
         summary: data?.summary || '',
         report_path: data?.report_path || '',
       },
