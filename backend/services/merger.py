@@ -370,14 +370,29 @@ class NodeMerger:
             }, f, ensure_ascii=False, indent=2)
 
     def get_decisions(self) -> List[Dict]:
-        """获取所有合并决策"""
+        """获取所有合并决策，兼容 list 和 dict 两种格式"""
         decisions_file = self.processed_dir / "merge_decisions.json"
 
-        if decisions_file.exists():
-            with open(decisions_file, 'r', encoding='utf-8') as f:
-                return json.load(f)
+        if not decisions_file.exists():
+            return []
 
-        return []
+        try:
+            with open(decisions_file, 'r', encoding='utf-8') as f:
+                data = json.load(f)
+
+            # 兼容两种格式：list 或 dict
+            if isinstance(data, list):
+                return data
+            elif isinstance(data, dict):
+                # 如果是 dict 格式，提取 decisions 列表
+                decisions = data.get('decisions', [])
+                return decisions if isinstance(decisions, list) else []
+            else:
+                return []
+
+        except (json.JSONDecodeError, IOError) as e:
+            print(f"Error reading merge_decisions.json: {e}")
+            return []
 
     def get_merged_kg(self) -> Dict:
         """获取合并后的知识图谱"""

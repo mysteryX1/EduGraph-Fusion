@@ -7,9 +7,14 @@ from ..services.feedback import FeedbackProcessor
 router = APIRouter(prefix="/api/feedback", tags=["Feedback"])
 
 
+from typing import Optional
+
 class FeedbackRequest(BaseModel):
-    """反馈请求"""
-    instruction: str
+    """反馈请求（兼容多种字段名）"""
+    instruction: Optional[str] = None
+    feedback: Optional[str] = None
+    text: Optional[str] = None
+    content: Optional[str] = None
 
 
 @router.post("")
@@ -22,6 +27,12 @@ async def submit_feedback(request: FeedbackRequest) -> Dict:
     - "拆分 XXX 和 YYY" - 拆分两个知识节点
     - "合并 XXX 和 YYY" - 合并两个知识节点
 
+    兼容的请求体字段:
+    - instruction: 标准字段
+    - feedback: 备选字段
+    - text: 备选字段
+    - content: 备选字段
+
     Args:
         request: 包含自然语言指令的请求
 
@@ -29,14 +40,18 @@ async def submit_feedback(request: FeedbackRequest) -> Dict:
         处理结果和修改摘要
     """
     try:
-        if not request.instruction or not request.instruction.strip():
+        # 兼容多种字段名
+        instruction = (request.instruction or request.feedback or
+                      request.text or request.content or "").strip()
+
+        if not instruction:
             raise HTTPException(
                 status_code=status.HTTP_400_BAD_REQUEST,
-                detail="Instruction cannot be empty"
+                detail="Instruction/feedback/text/content cannot be empty. Please provide a valid instruction like '保留 函数' or '删除 内容'"
             )
 
         processor = FeedbackProcessor(data_dir="./data/processed")
-        result = processor.process_instruction(request.instruction)
+        result = processor.process_instruction(instruction)
 
         if result.get('success'):
             summary = processor.get_feedback_summary()
@@ -44,7 +59,7 @@ async def submit_feedback(request: FeedbackRequest) -> Dict:
                 'status': 'success',
                 'message': result.get('summary', 'Feedback processed'),
                 'data': {
-                    'instruction': request.instruction,
+                    'instruction': instruction,
                     'action': result.get('action'),
                     'summary': result.get('summary'),
                     'knowledge_graph_summary': summary

@@ -42,11 +42,14 @@ export default function App() {
   const handleNodeClick = (nodeData) => {
     setSelectedNode({
       name: nodeData.name,
-      definition: '这是关于 ' + nodeData.name + ' 的定义',
-      chapter: '第 1-5 章',
-      page: '10-50',
-      source_textbook: nodeData.source_textbook || '教材',
-      frequency: nodeData.value || 0,
+      definition: nodeData.definition || nodeData.description || '暂无定义',
+      chapter: nodeData.chapter || '未知',
+      page: nodeData.page || nodeData.pages || '-',
+      source_textbook: nodeData.source_textbook || nodeData.source || '未知',
+      frequency: nodeData.frequency || nodeData.value || 0,
+      sources: nodeData.sources || [],
+      degree: nodeData.degree || 0,
+      category: nodeData.category || '其他',
     });
   };
 

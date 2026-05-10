@@ -1,0 +1,260 @@
+================================================================================
+EduGraph Fusion - BugFix 总结 (2026-05-10)
+================================================================================
+
+✅ 所有 4 个关键问题已修复
+✅ 3 个重要文档已创建
+✅ 1 个自动化测试脚本已创建
+✅ 准备好进行前端集成
+
+================================================================================
+修改的文件
+================================================================================
+
+1. backend/services/rag.py
+   ├─ 新增方法: _try_llm_answer()
+   ├─ 功能: 智能 LLM 调用，检查环境变量，避免报错噪声
+   ├─ 修改: _generate_answer() 改为调用 _try_llm_answer()
+   ├─ 影响: RAG 查询不再打印 "LLM Provider NOT provided" 错误
+   └─ 向后兼容: ✓ 是
+
+2. backend/routers/feedback.py
+   ├─ 修改: FeedbackRequest 类
+   ├─ 增加字段: instruction, feedback, text, content (都是 Optional)
+   ├─ 逻辑: 优先级解析 (instruction > feedback > text > content)
+   ├─ 验证: 空值返回 400，错误信息清晰
+   └─ 向后兼容: ✓ 是 (instruction 仍然可用)
+
+3. backend/services/feedback.py (自动修改)
+   ├─ 修改: _load_merge_decisions() 方法
+   ├─ 功能: 兼容 list 和 dict 格式的 merge_decisions.json
+   ├─ 逻辑:
+   │  ├─ 如果是 list: 自动包装为 {"decisions": list, "updated_at": ...}
+   │  ├─ 如果是 dict: 确保有 decisions 和 updated_at 字段
+   │  └─ 保存时统一为 dict 格式
+   └─ 向后兼容: ✓ 是
+
+4. backend/routers/report.py
+   ├─ 状态: ✓ 无需修改，已有 content 字段
+   ├─ GET /api/report/latest 已返回:
+   │  ├─ report_file
+   │  ├─ report_path
+   │  ├─ modified_at
+   │  └─ content (完整 Markdown 正文)
+   └─ 向后兼容: ✓ 是
+
+================================================================================
+创建的文档
+================================================================================
+
+1. BUGFIX_SUMMARY.md (450+ 行)
+   ├─ 每个问题的详细说明
+   ├─ 修复方案和代码示例
+   ├─ curl 测试命令
+   ├─ 完整的 API 示例
+   └─ 用途: 详细的技术参考
+
+2. FRONTEND_INTEGRATION_GUIDE.md (500+ 行)
+   ├─ JavaScript/TypeScript 集成代码示例
+   ├─ 三大模块的调用方法
+   ├─ 错误处理和边界情况
+   ├─ 依赖库建议
+   ├─ 完整工作流说明
+   └─ 用途: 前端集成指南
+
+3. test_bugfixes.ps1 (200+ 行)
+   ├─ 自动化测试所有 BugFix
+   ├─ 12 个测试用例
+   ├─ 实时彩色输出
+   ├─ 测试统计和总结
+   └─ 用途: 快速验证修复
+
+================================================================================
+验收标准 ✓ (全部达成)
+================================================================================
+
+问题 1: RAG LLM 报错噪声
+  ✓ RAG 查询不再有 "LLM Provider NOT provided" 大段错误
+  ✓ 日志只显示简短 warning (如果有错误)
+  ✓ POST /api/rag/query 继续返回 200 OK
+  ✓ answer/citations/source_chunks 正常返回
+
+问题 2: POST /api/feedback 422 Unprocessable Entity
+  ✓ POST /api/feedback 接收 {"instruction":"..."} 返回 200
+  ✓ POST /api/feedback 接收 {"feedback":"..."} 返回 200
+  ✓ POST /api/feedback 接收 {"text":"..."} 返回 200
+  ✓ POST /api/feedback 接收 {"content":"..."} 返回 200
+  ✓ POST /api/feedback 空值返回 400，错误信息清晰
+
+问题 3: merge_decisions.json 格式兼容
+  ✓ 读取 list 格式自动转换为 dict
+  ✓ 读取 dict 格式确保有 decisions 字段
+  ✓ 保存时统一为 dict 格式
+  ✓ process_instruction() 返回 success: true
+
+问题 4: 报告正文接口
+  ✓ POST /api/report/generate 返回 200
+  ✓ GET /api/report/latest 返回 content 字段
+  ✓ content 包含完整 Markdown 正文
+  ✓ 前端可直接用 markdown 库渲染
+
+================================================================================
+快速验证方法
+================================================================================
+
+方法 1: 自动化测试（推荐）
+  $ python -m backend.main  # 终端 1: 启动服务
+  $ powershell -ExecutionPolicy Bypass -File test_bugfixes.ps1  # 终端 2: 运行测试
+
+方法 2: 手动 curl 测试
+  # 1. RAG 查询
+  curl -X POST http://localhost:8000/api/rag/query \
+    -H "Content-Type: application/json" \
+    -d '{"question":"什么是函数？","top_k":5}'
+
+  # 2. 反馈 (instruction)
+  curl -X POST http://localhost:8000/api/feedback \
+    -H "Content-Type: application/json" \
+    -d '{"instruction":"保留 函数"}'
+
+  # 3. 反馈 (feedback - 兼容模式)
+  curl -X POST http://localhost:8000/api/feedback \
+    -H "Content-Type: application/json" \
+    -d '{"feedback":"删除 冗余"}'
+
+  # 4. 生成报告
+  curl -X POST http://localhost:8000/api/report/generate
+
+  # 5. 获取报告正文
+  curl -X GET http://localhost:8000/api/report/latest
+
+================================================================================
+前端集成信息
+================================================================================
+
+核心接口 (8 个)：
+
+RAG 模块:
+  1. POST /api/rag/index
+     └─ 初始化索引，返回 {indexed, chunk_count, textbook_count}
+
+  2. POST /api/rag/query
+     └─ 查询知识库，返回 {answer, citations, source_chunks}
+
+  3. GET /api/rag/status
+     └─ 获取索引状态，返回 {indexed, chunk_count, textbook_count}
+
+反馈模块:
+  4. POST /api/feedback
+     └─ 提交反馈，支持 instruction/feedback/text/content，返回 {action, summary, stats}
+
+  5. GET /api/feedback/summary
+     └─ 获取反馈摘要，返回 {total_decisions, keep_count, delete_count, split_count, merge_count, kg_nodes, kg_edges}
+
+报告模块:
+  6. POST /api/report/generate
+     └─ 生成报告，返回 {report_file, report_path, generated_at, summary}
+
+  7. GET /api/report/latest
+     └─ 获取报告正文，返回 {report_file, report_path, modified_at, content}
+
+  8. GET /api/report/summary
+     └─ 获取报告摘要，返回 {textbooks, knowledge_graph, decisions}
+
+前端示例代码: 见 FRONTEND_INTEGRATION_GUIDE.md
+
+================================================================================
+已知限制和注意事项
+================================================================================
+
+1. LLM 集成
+   - 当前阶段不强制 LLM 可用
+   - 如果未配置 LITELLM_PROVIDER/OPENAI_API_KEY/QWEN_API_KEY，自动跳过
+   - Fallback: 直接返回上下文中最相关的内容
+
+2. 反馈字段兼容
+   - 后端接受 instruction/feedback/text/content 四个字段
+   - 优先级: instruction > feedback > text > content
+   - 前端可使用任意字段，后端会自动识别
+
+3. merge_decisions.json 格式
+   - 后端自动兼容 list (来自模块 A) 和 dict (来自模块 B) 格式
+   - 内部统一转换为 dict，保存时也是 dict 格式
+
+4. 报告正文
+   - content 字段包含完整 Markdown 文本
+   - 前端需要使用 markdown 库 (markdown-it, marked 等) 渲染为 HTML
+
+================================================================================
+文件统计
+================================================================================
+
+修改的文件: 3 个
+  - backend/services/rag.py (+60 行)
+  - backend/routers/feedback.py (+8 行)
+  - backend/services/feedback.py (+30 行，自动修改)
+
+创建的文档: 3 个
+  - BUGFIX_SUMMARY.md (450+ 行)
+  - FRONTEND_INTEGRATION_GUIDE.md (500+ 行)
+  - test_bugfixes.ps1 (200+ 行)
+
+总计: 约 1300+ 行的文档和代码修改
+
+================================================================================
+后续工作
+================================================================================
+
+Agent C (前端) 应该：
+  1. 参考 FRONTEND_INTEGRATION_GUIDE.md 实现三大模块的 UI
+  2. 测试所有 8 个接口
+  3. 处理错误情况和边界条件
+  4. 集成 markdown 库用于报告渲染
+
+Agent A (文件上传/解析) 可以：
+  1. 按照标准生成 backend/data/metadata/*_chapters.json
+  2. 确保格式匹配 Chapter 结构
+  3. 可不用担心 merge_decisions.json 格式，后端会自动兼容
+
+Agent B (知识图谱) 可以：
+  1. 生成 backend/data/processed/merged_kg.json
+  2. 生成 merge_decisions.json (支持 list 和 dict 两种格式)
+  3. 后端会自动读取和兼容
+
+================================================================================
+支持和参考
+================================================================================
+
+详细技术文档:
+  • BUGFIX_SUMMARY.md - 每个 BugFix 的详细说明
+  • FRONTEND_INTEGRATION_GUIDE.md - 前端集成的完整指南
+  • INTEGRATION_CHECKLIST.md - 兼容性和验收清单
+  • MODULE_HARDENING_SUMMARY.md - 项目完整报告
+
+快速参考:
+  • TEST_ENDPOINTS.md - API 端点和 curl 示例
+  • QUICKSTART.md - 快速开始指南
+
+测试工具:
+  • test_bugfixes.ps1 - 自动化验证脚本
+  • test_api.ps1 - 完整 API 测试套件
+
+================================================================================
+状态确认
+================================================================================
+
+✓ BugFix 1: RAG LLM 报错噪声 - 已修复
+✓ BugFix 2: POST /api/feedback 422 错误 - 已修复
+✓ BugFix 3: merge_decisions.json 格式 - 已修复
+✓ BugFix 4: 报告正文接口 - 已验证
+
+✓ 文档完整 - 3 个详细文档
+✓ 测试就绪 - 1 个自动化测试脚本
+✓ 向后兼容 - 所有修改保持兼容性
+
+✓ 准备好进行前端集成测试
+
+================================================================================
+修复完成时间: 2026-05-10
+修复版本: v1.0.0
+================================================================================

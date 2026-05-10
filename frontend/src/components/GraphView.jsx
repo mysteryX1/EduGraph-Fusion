@@ -45,35 +45,68 @@ export default function GraphView({ onNodeClick }) {
       return TEXTBOOK_COLORS[node.source_textbook] || '#1890ff';
     };
 
-    const nodes = (graphData.nodes || []).map((node) => ({
-      id: node.id,
-      name: node.name,
-      value: node.value || 30,
-      category: node.category || '默认',
-      symbolSize: Math.max(20, Math.min(80, (node.value || 30) / 2)),
-      itemStyle: {
-        color: getNodeColor(node),
-        borderColor: '#fff',
-        borderWidth: 2,
-      },
-      label: {
-        show: true,
-        formatter: node.name,
-        fontSize: 12,
-        fontWeight: 'bold',
-        color: '#fff',
-        position: 'top',
-      },
-      ...node,
-    }));
+    // 计算节点度数（连接数）以动态调整大小
+    const calculateNodeDegree = (nodeId) => {
+      return (graphData.links || []).filter(
+        (link) => link.source === nodeId || link.target === nodeId
+      ).length;
+    };
 
-    const links = (graphData.links || []).map((link) => ({
-      ...link,
-      lineStyle: {
-        width: (link.value || 1) / 5,
-        color: 'rgba(0, 0, 0, 0.2)',
-      },
-    }));
+    const nodes = (graphData.nodes || []).map((node) => {
+      const frequency = node.frequency || node.value || 10;
+      const degree = calculateNodeDegree(node.id);
+      // 节点大小基于 frequency 和 degree 动态计算，范围 25-100
+      const baseSize = Math.max(25, Math.min(100, frequency / 2 + degree * 5));
+      const labelSize = Math.max(10, Math.min(14, frequency / 20));
+
+      // 节点标签只显示前 10 个字符
+      const shortName = node.name.length > 10 ? node.name.slice(0, 10) + '...' : node.name;
+
+      return {
+        id: node.id,
+        name: node.name,
+        value: frequency,
+        category: node.category || '默认',
+        degree,
+        symbolSize: baseSize,
+        itemStyle: {
+          color: getNodeColor(node),
+          borderColor: '#fff',
+          borderWidth: 2,
+        },
+        label: {
+          show: true,
+          formatter: shortName,
+          fontSize: labelSize,
+          fontWeight: 'bold',
+          color: '#fff',
+          position: 'inside',
+          overflow: 'truncate',
+        },
+        ...node,
+      };
+    });
+
+    const links = (graphData.links || []).map((link) => {
+      // 关系类型颜色映射
+      const relationTypeColors = {
+        prerequisite: '#FF6B6B',  // 前置关系 - 红色
+        contains: '#4ECDC4',      // 包含关系 - 绿色
+        parallel: '#95E1D3',      // 平行关系 - 浅绿
+        related: '#FFA07A',       // 相关关系 - 橙色
+      };
+      const relationType = link.relation_type || link.type || 'related';
+      const relationColor = relationTypeColors[relationType] || 'rgba(0, 0, 0, 0.2)';
+
+      return {
+        ...link,
+        lineStyle: {
+          width: Math.max(1, (link.value || 1) / 5),
+          color: relationColor,
+          opacity: 0.6,
+        },
+      };
+    });
 
     const option = {
       title: {
@@ -89,17 +122,22 @@ export default function GraphView({ onNodeClick }) {
         trigger: 'item',
         formatter: (params) => {
           if (params.dataType === 'node') {
-            return `<strong>${params.data.name}</strong><br/>
-                   分类: ${params.data.category}<br/>
-                   频率: ${params.data.value}`;
+            const data = params.data;
+            return `<strong>${data.name}</strong><br/>
+                   分类: ${data.category || '未分类'}<br/>
+                   频率: ${data.frequency || data.value || 0}<br/>
+                   连接数: ${data.degree || 0}<br/>
+                   来源: ${data.source_textbook || '未知'}`;
           } else {
-            return `关联强度: ${params.data.value}`;
+            const relationType = params.data.relation_type || params.data.type || 'related';
+            return `关系类型: ${relationType}<br/>强度: ${params.data.value || 1}`;
           }
         },
-        backgroundColor: 'rgba(0, 0, 0, 0.8)',
+        backgroundColor: 'rgba(0, 0, 0, 0.9)',
         borderColor: '#333',
         textStyle: {
           color: '#fff',
+          fontSize: 12,
         },
       },
       animationDuration: 800,

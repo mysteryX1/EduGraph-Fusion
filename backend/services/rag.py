@@ -428,7 +428,31 @@ class RAGEngine:
 
     def _generate_answer(self, question: str, context: str, source_chunks: List[dict]) -> str:
         """使用 LLM 生成答案"""
-        prompt = f"""你是一个教学知识助手。根据以下上下文回答问题。
+        # 先尝试 LLM，如果没有配置则直接用 fallback
+        answer = self._try_llm_answer(question, context)
+        if answer:
+            return answer
+
+        # Fallback: 返回上下文中最相关的部分
+        if source_chunks:
+            first_source = source_chunks[0]
+            textbook = first_source['metadata'].get('textbook', '')
+            chapter = first_source['metadata'].get('chapter', '')
+            return f"基于《{textbook}》的《{chapter}》章节，相关内容为：\n{first_source['content'][:500]}..."
+        return "无法生成答案，请稍后重试"
+
+    def _try_llm_answer(self, question: str, context: str) -> str:
+        """尝试使用 LLM 生成答案，失败则返回空"""
+        try:
+            import os
+            # 检查是否配置了 LLM 提供商
+            has_provider = os.getenv("LITELLM_PROVIDER") or os.getenv("OPENAI_API_KEY") or os.getenv("QWEN_API_KEY")
+            if not has_provider:
+                return ""  # 没有配置，跳过 LLM 调用
+
+            import litellm
+
+            prompt = f"""你是一个教学知识助手。根据以下上下文回答问题。
 
 严格遵循以下规则：
 1. 只能基于提供的上下文回答问题
@@ -442,11 +466,8 @@ class RAGEngine:
 
 请提供基于上下文的答案："""
 
-        try:
-            import litellm
-
             response = litellm.completion(
-                model="qwen3-32b",  # 使用配置文件中的模型
+                model="qwen3-32b",
                 messages=[
                     {"role": "system", "content": "你是一个专业的教学知识助手。"},
                     {"role": "user", "content": prompt}
@@ -459,15 +480,14 @@ class RAGEngine:
             answer = response.choices[0].message.content
             return answer
 
+        except ImportError:
+            # litellm 未安装，使用 fallback
+            return ""
         except Exception as e:
-            print(f"LLM call failed: {e}")
-            # Fallback: 返回上下文中最相关的部分
-            if source_chunks:
-                first_source = source_chunks[0]
-                textbook = first_source['metadata'].get('textbook', '')
-                chapter = first_source['metadata'].get('chapter', '')
-                return f"基于《{textbook}》的《{chapter}》章节，相关内容为：\n{first_source['content'][:500]}..."
-            return "无法生成答案，请稍后重试"
+            # 其他错误（如提供商未配置），使用 fallback，不打印大段错误
+            if "NOT provided" not in str(e) and "BadRequestError" not in str(type(e).__name__):
+                print(f"⚠️  LLM call warning: {type(e).__name__}")
+            return ""
 
     def _build_citations(self, source_chunks: List[dict]) -> List[Dict]:
         """构建引用信息"""

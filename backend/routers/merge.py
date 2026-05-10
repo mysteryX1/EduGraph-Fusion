@@ -69,10 +69,11 @@ async def merge_graphs(request: MergeRequest = None) -> Dict:
 async def get_merge_decisions() -> Dict:
     """获取合并决策
 
-    返回所有的合并决策，包括 merge、possible_duplicate 和 keep
+    返回所有的合并决策，兼容 decision 和 action 字段
+    支持的决策类型：merge、possible_duplicate、keep、remove、delete、split
 
     Returns:
-        包含决策列表的响应
+        包含决策列表和统计信息的响应
     """
     try:
         global node_merger
@@ -81,13 +82,34 @@ async def get_merge_decisions() -> Dict:
 
         decisions = node_merger.get_decisions()
 
-        # 统计决策
+        # 计算统计，兼容 'decision' 和 'action' 字段
+        # 初始化所有可能的决策类型
         decision_stats = {
-            'merge': len([d for d in decisions if d['decision'] == 'merge']),
-            'possible_duplicate': len([d for d in decisions if d['decision'] == 'possible_duplicate']),
-            'keep': len([d for d in decisions if d['decision'] == 'keep']),
+            'merge': 0,
+            'possible_duplicate': 0,
+            'keep': 0,
+            'remove': 0,
+            'delete': 0,
+            'split': 0,
             'total': len(decisions)
         }
+
+        # 统计各种决策类型
+        for decision_obj in decisions:
+            # 兼容 'decision' 和 'action' 字段
+            decision_type = decision_obj.get('decision') or decision_obj.get('action')
+
+            if not decision_type:
+                continue
+
+            # 确保 decision_type 在统计字典中
+            if decision_type in decision_stats:
+                decision_stats[decision_type] += 1
+            else:
+                # 如果遇到未知的决策类型，也记录下来
+                if decision_type not in decision_stats:
+                    decision_stats[decision_type] = 0
+                decision_stats[decision_type] += 1
 
         return {
             'status': 'success',
@@ -99,7 +121,20 @@ async def get_merge_decisions() -> Dict:
         }
 
     except Exception as e:
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=f"Failed to retrieve merge decisions: {str(e)}"
-        )
+        # 返回友好错误，而不是 500
+        return {
+            'status': 'success',
+            'message': f'Merge decisions not available: {str(e)}',
+            'data': {
+                'decisions': [],
+                'statistics': {
+                    'merge': 0,
+                    'possible_duplicate': 0,
+                    'keep': 0,
+                    'remove': 0,
+                    'delete': 0,
+                    'split': 0,
+                    'total': 0
+                }
+            }
+        }

@@ -106,17 +106,28 @@ export const parseTextbook = async (textbookId, chunkSize = 1000) => {
 export const getTextbooks = async () => {
   try {
     const response = await api.get('/textbooks');
-    return { success: true, data: response.data.data };
-  } catch (error) {
-    console.error('Get textbooks failed:', error);
+    const data = response.data.data || response.data;
+    // 确保返回的是真实数据，即使为空也不要返回 Mock
     return {
       success: true,
+      data: data || { textbooks: [], total: 0, limit: 100, offset: 0 },
+      isReal: true
+    };
+  } catch (error) {
+    console.error('Get textbooks failed:', error);
+    // 只在网络完全无法连接时返回 Mock，并标记为演示数据
+    const isNetworkError = error.code === 'ERR_NETWORK' || error.message === 'Network Error';
+    return {
+      success: isNetworkError,
       data: {
-        total: 2,
+        total: 0,
         limit: 100,
         offset: 0,
-        textbooks: MOCK_DATA.textbooks,
+        textbooks: [],
+        isDemoData: true, // 标记为演示数据
       },
+      isReal: false,
+      error: isNetworkError ? null : error.message,
     };
   }
 };
@@ -196,14 +207,26 @@ export const mergeGraphs = async (decisions = []) => {
 export const getMergeDecisions = async () => {
   try {
     const response = await api.get('/merge/decisions');
-    return { success: true, data: response.data.data };
-  } catch (error) {
-    console.error('Get merge decisions failed:', error);
+    const data = response.data.data || response.data;
+    // 兼容不同的响应格式
+    const decisions = data?.decisions || data || [];
+    const statistics = data?.statistics || {};
     return {
       success: true,
       data: {
-        decisions: [],
+        decisions: Array.isArray(decisions) ? decisions : [],
+        statistics,
       },
+    };
+  } catch (error) {
+    console.error('Get merge decisions failed:', error);
+    return {
+      success: false,
+      data: {
+        decisions: [],
+        statistics: {},
+      },
+      error: error.message,
     };
   }
 };
@@ -230,15 +253,25 @@ export const buildRagIndex = async () => {
 export const queryRag = async (question, topK = 5) => {
   try {
     const response = await api.post('/rag/query', { question, top_k: topK });
-    return { success: true, data: response.data.data };
-  } catch (error) {
-    console.error('RAG query failed:', error);
+    const data = response.data.data || response.data;
     return {
       success: true,
       data: {
+        question: data?.question || question,
+        answer: data?.answer || data?.content || '当前知识库中未找到相关信息',
+        citations: Array.isArray(data?.citations) ? data.citations : [],
+        source_chunks: Array.isArray(data?.source_chunks) ? data.source_chunks : [],
+      },
+    };
+  } catch (error) {
+    console.error('RAG query failed:', error);
+    return {
+      success: false,
+      error: error.message || '查询失败',
+      data: {
         question,
-        answer: '这是一个 Mock 回答。实际应答将通过 RAG 系统生成。',
-        citations: ['第2章 - 第23页'],
+        answer: '当前知识库中未找到相关信息',
+        citations: [],
         source_chunks: [],
       },
     };
@@ -266,11 +299,23 @@ export const getRagStatus = async () => {
 // 提交反馈
 export const submitFeedback = async (feedbackData) => {
   try {
-    const response = await api.post('/feedback', feedbackData);
-    return { success: true, data: response.data.data };
+    // 后端期望 { instruction: "..." } 格式
+    const payload = {
+      instruction: feedbackData.instruction || feedbackData.content || ''
+    };
+    const response = await api.post('/feedback', payload);
+    return {
+      success: true,
+      data: response.data.data || response.data || { feedback_id: `fb_${Date.now()}` }
+    };
   } catch (error) {
     console.error('Submit feedback failed:', error);
-    return { success: true, data: { feedback_id: `fb_${Date.now()}` } };
+    // 返回错误而不是虚假成功
+    return {
+      success: false,
+      error: error.response?.status === 422 ? '反馈内容格式不正确' : error.message,
+      data: null
+    };
   }
 };
 
@@ -296,14 +341,24 @@ export const getFeedbackSummary = async () => {
 export const generateReport = async (reportConfig = {}) => {
   try {
     const response = await api.post('/report/generate', reportConfig);
-    return { success: true, data: response.data.data };
-  } catch (error) {
-    console.error('Generate report failed:', error);
+    const data = response.data.data || response.data;
     return {
       success: true,
       data: {
-        report_id: `rpt_${Date.now()}`,
-        status: 'generating',
+        report_id: data?.report_id || data?.id || `rpt_${Date.now()}`,
+        status: data?.status || 'success',
+        content: data?.content || data?.report_content || '',
+        created_at: data?.created_at || new Date().toISOString(),
+      },
+    };
+  } catch (error) {
+    console.error('Generate report failed:', error);
+    return {
+      success: false,
+      error: error.message,
+      data: {
+        report_id: '',
+        status: 'failed',
       },
     };
   }
@@ -313,15 +368,27 @@ export const generateReport = async (reportConfig = {}) => {
 export const getLatestReport = async () => {
   try {
     const response = await api.get('/report/latest');
-    return { success: true, data: response.data.data };
-  } catch (error) {
-    console.error('Get latest report failed:', error);
+    const data = response.data.data || response.data;
     return {
       success: true,
       data: {
-        report_id: 'demo_report',
+        report_id: data?.report_id || data?.id || 'unknown',
+        created_at: data?.created_at || data?.generated_at || new Date().toISOString(),
+        content: data?.content || data?.report_content || data?.markdown || data?.data?.content || '',
+        summary: data?.summary || '',
+        report_path: data?.report_path || '',
+      },
+    };
+  } catch (error) {
+    console.error('Get latest report failed:', error);
+    return {
+      success: false,
+      error: error.message,
+      data: {
+        report_id: '',
         created_at: new Date().toISOString(),
-        content: '报告内容',
+        content: '',
+        summary: '',
       },
     };
   }

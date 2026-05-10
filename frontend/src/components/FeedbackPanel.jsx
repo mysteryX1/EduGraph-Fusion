@@ -20,11 +20,9 @@ export default function FeedbackPanel() {
     setMessage(null);
 
     try {
+      // 后端期望 instruction 字段
       const feedbackData = {
-        type: feedbackType,
-        content: content.trim(),
-        related_node: relatedNode.trim() || null,
-        created_at: new Date().toISOString(),
+        instruction: content.trim(),
       };
 
       const result = await submitFeedback(feedbackData);
@@ -37,10 +35,16 @@ export default function FeedbackPanel() {
         setRelatedNode('');
         setFeedbackType('bug');
       } else {
-        setMessage({ type: 'error', text: '提交失败' });
+        setMessage({
+          type: 'error',
+          text: result.error || '提交失败，请稍后重试',
+        });
       }
     } catch (error) {
-      setMessage({ type: 'error', text: error.message });
+      setMessage({
+        type: 'error',
+        text: '提交失败：' + (error.message || '未知错误'),
+      });
     } finally {
       setLoading(false);
     }

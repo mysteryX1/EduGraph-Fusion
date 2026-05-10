@@ -67,12 +67,28 @@ export default function RagPanel() {
     try {
       const res = await queryRag(question, topK);
       if (res.success) {
-        setResult(res.data);
+        // 安全地处理响应数据
+        const data = res.data || {};
+        setResult({
+          question: data.question || question,
+          answer: data.answer || '当前知识库中未找到相关信息',
+          citations: Array.isArray(data.citations) ? data.citations : [],
+          source_chunks: Array.isArray(data.source_chunks) ? data.source_chunks : [],
+        });
       } else {
-        setMessage({ type: 'error', text: '查询失败' });
+        setMessage({
+          type: 'error',
+          text: res.error || '查询失败',
+        });
       }
     } catch (error) {
-      setMessage({ type: 'error', text: error.message });
+      // 确保 catch 块不会导致白屏
+      console.error('Query error:', error);
+      setMessage({
+        type: 'error',
+        text: '查询出错：' + (error.message || '未知错误'),
+      });
+      setResult(null);
     } finally {
       setLoading(false);
     }

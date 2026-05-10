@@ -38,12 +38,22 @@ export default function ReportPanel() {
           type: 'success',
           text: '报告生成成功！报告 ID: ' + result.data.report_id,
         });
+        // 如果生成报告返回了内容，直接显示
+        if (result.data.content) {
+          setReportData(result.data);
+        }
         loadReportSummary();
       } else {
-        setMessage({ type: 'error', text: '报告生成失败' });
+        setMessage({
+          type: 'error',
+          text: result.error || '报告生成失败',
+        });
       }
     } catch (error) {
-      setMessage({ type: 'error', text: error.message });
+      setMessage({
+        type: 'error',
+        text: '生成失败：' + (error.message || '未知错误'),
+      });
     } finally {
       setLoading(false);
     }
@@ -51,15 +61,29 @@ export default function ReportPanel() {
 
   const handleViewLatest = async () => {
     setLoading(true);
+    setMessage(null);
+
     try {
       const result = await getLatestReport();
-      if (result.success) {
-        setReportData(result.data);
+      if (result.success && result.data) {
+        setReportData({
+          report_id: result.data.report_id,
+          created_at: result.data.created_at,
+          content: result.data.content || '报告已生成，但接口未返回正文内容',
+          summary: result.data.summary || '',
+          report_path: result.data.report_path || '',
+        });
       } else {
-        setMessage({ type: 'error', text: '加载报告失败' });
+        setMessage({
+          type: 'error',
+          text: result.error || '加载报告失败',
+        });
       }
     } catch (error) {
-      setMessage({ type: 'error', text: error.message });
+      setMessage({
+        type: 'error',
+        text: '加载失败：' + (error.message || '未知错误'),
+      });
     } finally {
       setLoading(false);
     }

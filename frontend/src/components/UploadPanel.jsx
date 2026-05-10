@@ -61,6 +61,8 @@ export default function UploadPanel({ onUploadSuccess }) {
           type: 'success',
           text: `解析完成: ${result.data.chapter_count} 章, ${result.data.total_words} 字`,
         });
+        // 解析成功后刷新教材列表和统计信息
+        onUploadSuccess({ textbook_id: selectedTextbookId, ...result.data });
       } else {
         setMessage({ type: 'error', text: '解析失败' });
       }

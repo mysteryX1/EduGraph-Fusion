@@ -15,10 +15,12 @@ export default function MergePanel() {
     try {
       const result = await getMergeDecisions();
       if (result.success) {
-        setDecisions(result.data.decisions || []);
+        const decisions = result.data?.decisions || [];
+        setDecisions(Array.isArray(decisions) ? decisions : []);
       }
     } catch (error) {
       console.error('Failed to load decisions:', error);
+      setDecisions([]);
     }
   };
 
