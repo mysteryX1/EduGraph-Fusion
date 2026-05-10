@@ -1,0 +1,18 @@
+model_list:
+  - model_name: qwen3-coder-480b
+    litellm_params:
+      model: openai/Qwen/Qwen/Qwen3-Coder-480B-A35B-Instruct
+      api_key: os.environ/MODELSCOPE_SDK_TOKEN
+      api_base: https://api-inference.modelscope.cn/v1
+
+  - model_name: qwen3-32b
+    litellm_params:
+      model: openai/Qwen/Qwen3-32B
+      api_key: os.environ/MODELSCOPE_SDK_TOKEN
+      api_base: https://api-inference.modelscope.cn/v1
+
+litellm_settings:
+  drop_params: true
+
+general_settings:
+  master_key: sk-litellm-modelscope

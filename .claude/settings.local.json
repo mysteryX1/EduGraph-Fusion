@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Skill(update-config)",
+      "PowerShell(pip show *)",
+      "PowerShell(pip install *)",
+      "Bash(python -m py_compile backend/main.py backend/models/schemas.py backend/services/parser.py backend/services/storage.py backend/services/report_stats.py backend/routers/upload.py backend/routers/textbooks.py)",
+      "Bash(python -c \"import backend.models.schemas\")",
+      "Bash(pip install *)",
+      "Bash(python -m uvicorn backend.main:app --host 127.0.0.1 --port 8000)",
+      "Bash(curl -s http://127.0.0.1:8000/health)",
+      "Bash(python -m json.tool)",
+      "Bash(python -c \"from backend.main import app; print\\('OK'\\)\")",
+      "Bash(python -c \"from backend.main import app; print\\('✅ 应用导入成功'\\)\")"
+    ]
+  }
+}
