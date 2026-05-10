@@ -1,5 +1,18 @@
-import React, { useState, useEffect } from 'react';
-import { buildRagIndex, queryRag, getRagStatus } from '../api';
+import React, { useEffect, useState } from 'react';
+import { buildRagIndex, getRagStatus, queryRag } from '../api';
+
+const normalizeStatus = (data) => ({
+  indexed: Boolean(data?.indexed),
+  chunk_count: Number(data?.chunk_count || 0),
+  textbook_count: Number(data?.textbook_count || 0),
+});
+
+const normalizeResult = (data, fallbackQuestion) => ({
+  question: data?.question || fallbackQuestion,
+  answer: data?.answer || '未找到相关答案',
+  citations: Array.isArray(data?.citations) ? data.citations : [],
+  source_chunks: Array.isArray(data?.source_chunks) ? data.source_chunks : [],
+});
 
 export default function RagPanel() {
   const [question, setQuestion] = useState('');
@@ -11,46 +24,60 @@ export default function RagPanel() {
   const [status, setStatus] = useState(null);
 
   useEffect(() => {
-    checkStatus();
-  }, []);
+    let cancelled = false;
 
-  const checkStatus = async () => {
-    try {
-      const res = await getRagStatus();
-      if (res.success) {
-        setStatus(res.data);
+    const loadStatus = async () => {
+      try {
+        const response = await getRagStatus();
+        if (!cancelled && response.success) {
+          setStatus(normalizeStatus(response.data));
+        }
+      } catch (error) {
+        if (!cancelled) {
+          setStatus(normalizeStatus(null));
+        }
       }
-    } catch (error) {
-      console.error('Failed to check status:', error);
-    }
-  };
+    };
+
+    loadStatus();
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   const handleBuildIndex = async () => {
     setIndexLoading(true);
     setMessage(null);
+    setResult(null);
 
     try {
-      const res = await buildRagIndex();
-      if (res.success) {
-        setMessage({
-          type: 'success',
-          text: `索引构建完成: ${res.data.chunk_count} 个文本块, ${res.data.textbook_count} 本教材`,
-        });
-        setStatus(res.data);
-      } else {
-        setMessage({ type: 'error', text: '索引构建失败' });
+      const response = await buildRagIndex();
+      if (!response.success) {
+        throw new Error(response.error || '索引构建失败');
       }
+
+      const nextStatus = normalizeStatus({ ...response.data, indexed: true });
+      setStatus(nextStatus);
+      setMessage({
+        type: 'success',
+        text: `索引构建完成：${nextStatus.chunk_count} 个文本块，${nextStatus.textbook_count} 本教材`,
+      });
     } catch (error) {
-      setMessage({ type: 'error', text: error.message });
+      setMessage({
+        type: 'error',
+        text: error.message || '索引构建失败',
+      });
     } finally {
       setIndexLoading(false);
     }
   };
 
-  const handleQuery = async (e) => {
-    e.preventDefault();
+  const handleQuery = async (event) => {
+    event.preventDefault();
 
-    if (!question.trim()) {
+    const cleanQuestion = question.trim();
+    if (!cleanQuestion) {
       setMessage({ type: 'error', text: '请输入问题' });
       return;
     }
@@ -65,30 +92,17 @@ export default function RagPanel() {
     setResult(null);
 
     try {
-      const res = await queryRag(question, topK);
-      if (res.success) {
-        // 安全地处理响应数据
-        const data = res.data || {};
-        setResult({
-          question: data.question || question,
-          answer: data.answer || '当前知识库中未找到相关信息',
-          citations: Array.isArray(data.citations) ? data.citations : [],
-          source_chunks: Array.isArray(data.source_chunks) ? data.source_chunks : [],
-        });
-      } else {
-        setMessage({
-          type: 'error',
-          text: res.error || '查询失败',
-        });
+      const response = await queryRag(cleanQuestion, topK);
+      if (!response.success) {
+        throw new Error(response.error || '检索失败');
       }
+
+      setResult(normalizeResult(response.data, cleanQuestion));
     } catch (error) {
-      // 确保 catch 块不会导致白屏
-      console.error('Query error:', error);
       setMessage({
         type: 'error',
-        text: '查询出错：' + (error.message || '未知错误'),
+        text: error.message || '检索失败，请稍后重试',
       });
-      setResult(null);
     } finally {
       setLoading(false);
     }
@@ -98,114 +112,132 @@ export default function RagPanel() {
     <div className="rag-panel">
       <div className="section-title">知识检索</div>
 
-      {!status?.indexed ? (
-        <>
-          <div className="alert alert-info">
-            <span className="alert-message">需要先构建 RAG 索引以启用知识检索</span>
+      <div className="stats" style={{ marginBottom: 12 }}>
+        <div className="stat-card">
+          <div className="stat-label">索引状态</div>
+          <div className="stat-value" style={{ fontSize: 16 }}>
+            {status?.indexed ? '已建立' : '未建立'}
           </div>
+        </div>
+        <div className="stat-card">
+          <div className="stat-label">文本块</div>
+          <div className="stat-value">{status?.chunk_count || 0}</div>
+        </div>
+      </div>
 
-          <button
-            className={`btn btn-primary btn-full-width ${indexLoading ? 'loading' : ''}`}
-            onClick={handleBuildIndex}
-            disabled={indexLoading}
-          >
-            {indexLoading && <span className="loading-spinner"></span>}
-            {indexLoading ? '构建中...' : '构建索引'}
-          </button>
-        </>
-      ) : (
-        <>
-          <div className="stats">
-            <div className="stat-card">
-              <div className="stat-label">文本块</div>
-              <div className="stat-value">{status?.chunk_count || 0}</div>
-            </div>
-            <div className="stat-card">
-              <div className="stat-label">教材数</div>
-              <div className="stat-value">{status?.textbook_count || 0}</div>
-            </div>
-          </div>
+      <button
+        type="button"
+        className={`btn btn-primary btn-full-width ${indexLoading ? 'loading' : ''}`}
+        onClick={handleBuildIndex}
+        disabled={indexLoading || loading}
+      >
+        {indexLoading && <span className="loading-spinner"></span>}
+        {indexLoading ? '构建中...' : '构建索引'}
+      </button>
 
-          <form onSubmit={handleQuery}>
-            <div className="form-group">
-              <label>输入问题</label>
-              <textarea
-                value={question}
-                onChange={(e) => setQuestion(e.target.value)}
-                placeholder="例如: 什么是函数?"
-                disabled={loading}
-              />
-            </div>
+      <form onSubmit={handleQuery} style={{ marginTop: 14 }}>
+        <div className="form-group">
+          <label>输入问题</label>
+          <textarea
+            value={question}
+            onChange={(event) => setQuestion(event.target.value)}
+            placeholder="例如：什么是函数？"
+            disabled={loading || indexLoading}
+            rows="4"
+          />
+        </div>
 
-            <div className="form-group">
-              <label>返回结果数 (Top-K)</label>
-              <input
-                type="number"
-                value={topK}
-                onChange={(e) => setTopK(Math.max(1, parseInt(e.target.value) || 5))}
-                min="1"
-                max="20"
-                disabled={loading}
-              />
-            </div>
+        <div className="form-group">
+          <label>返回结果数 Top-K</label>
+          <input
+            type="number"
+            min="1"
+            max="20"
+            value={topK}
+            onChange={(event) => setTopK(Math.max(1, Number.parseInt(event.target.value, 10) || 5))}
+            disabled={loading || indexLoading}
+          />
+        </div>
 
-            <button
-              type="submit"
-              className={`btn btn-primary btn-full-width ${loading ? 'loading' : ''}`}
-              disabled={loading || !question.trim()}
-            >
-              {loading && <span className="loading-spinner"></span>}
-              {loading ? '查询中...' : '搜索'}
-            </button>
-          </form>
-        </>
-      )}
+        <button
+          type="submit"
+          className={`btn btn-primary btn-full-width ${loading ? 'loading' : ''}`}
+          disabled={loading || indexLoading || !question.trim()}
+        >
+          {loading && <span className="loading-spinner"></span>}
+          {loading ? '检索中...' : '搜索'}
+        </button>
+      </form>
 
       {message && (
-        <div className={`alert alert-${message.type}`} style={{ marginTop: '12px' }}>
+        <div className={`alert alert-${message.type}`} style={{ marginTop: 12 }}>
           <span className="alert-message">{message.text}</span>
         </div>
       )}
 
       {result && (
-        <div style={{ marginTop: '16px', background: '#fff', padding: '12px', borderRadius: '4px', border: '1px solid #e0e0e0' }}>
-          <div className="section-title" style={{ marginTop: 0 }}>查询结果</div>
+        <div
+          style={{
+            marginTop: 16,
+            background: '#fff',
+            padding: 12,
+            borderRadius: 4,
+            border: '1px solid #e0e0e0',
+          }}
+        >
+          <div className="section-title" style={{ marginTop: 0 }}>
+            检索结果
+          </div>
 
           <div className="form-group">
             <label style={{ color: '#666', fontWeight: 'normal' }}>问题</label>
-            <div style={{ fontSize: '13px', color: '#333', padding: '8px', background: '#f5f5f5', borderRadius: '3px' }}>
+            <div style={{ fontSize: 13, color: '#333', padding: 8, background: '#f5f5f5', borderRadius: 3 }}>
               {result.question}
             </div>
           </div>
 
           <div className="form-group">
-            <label style={{ color: '#666', fontWeight: 'normal' }}>回答</label>
-            <div style={{ fontSize: '13px', color: '#333', lineHeight: '1.6', padding: '8px', background: '#f5f5f5', borderRadius: '3px', maxHeight: '200px', overflowY: 'auto' }}>
+            <label style={{ color: '#666', fontWeight: 'normal' }}>答案</label>
+            <div
+              style={{
+                fontSize: 13,
+                color: '#333',
+                lineHeight: 1.6,
+                padding: 8,
+                background: '#f5f5f5',
+                borderRadius: 3,
+                maxHeight: 220,
+                overflowY: 'auto',
+                whiteSpace: 'pre-wrap',
+              }}
+            >
               {result.answer}
             </div>
           </div>
 
-          {result.citations && result.citations.length > 0 && (
-            <div className="form-group">
-              <label style={{ color: '#666', fontWeight: 'normal' }}>引用来源</label>
-              <div style={{ fontSize: '12px' }}>
-                {result.citations.map((citation, idx) => (
+          <div className="form-group">
+            <label style={{ color: '#666', fontWeight: 'normal' }}>引用来源</label>
+            {result.citations.length > 0 ? (
+              <div style={{ fontSize: 12 }}>
+                {result.citations.map((citation, index) => (
                   <div
-                    key={idx}
+                    key={`${citation}-${index}`}
                     style={{
                       padding: '6px 8px',
                       background: '#f5f5f5',
-                      borderRadius: '3px',
-                      marginBottom: '4px',
-                      color: '#666',
+                      borderRadius: 3,
+                      marginBottom: 4,
+                      color: '#555',
                     }}
                   >
-                    {citation}
+                    {String(citation)}
                   </div>
                 ))}
               </div>
-            </div>
-          )}
+            ) : (
+              <div style={{ fontSize: 12, color: '#888' }}>暂无引用来源</div>
+            )}
+          </div>
         </div>
       )}
     </div>

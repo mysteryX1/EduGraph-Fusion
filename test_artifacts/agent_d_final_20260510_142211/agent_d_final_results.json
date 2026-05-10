@@ -1,0 +1,91 @@
+﻿{
+    "test_time":  "2026-05-10 14:22:11 +08:00",
+    "artifact_dir":  "D:\\我的大学\\博一下\\黑客松2\\test_artifacts\\agent_d_final_20260510_142211",
+    "abc_completion_evidence":  {
+                                    "AgentC":  true,
+                                    "AgentA":  true,
+                                    "AgentB":  true
+                                },
+    "git_before":  "git.exe : warning: unable to access \u0027C:\\Users\\Amber/.config/git/ignore\u0027: Permission denied\r\n所在位置 行:73 字符: 23\r\n+ $result.git_before = (\u0026 git status --short 2\u003e\u00261 | Out-String).Trim()\r\n+                       ~~~~~~~~~~~~~~~~~~~~~~~~~\r\n    + CategoryInfo          : NotSpecified: (warning: unable...rmission denied:String) [], RemoteException\r\n    + FullyQualifiedErrorId : NativeCommandError\r\n \r\nwarning: unable to access \u0027C:\\Users\\Amber/.config/git/ignore\u0027: Permission denied\r\n M backend/routers/feedback.py\r\n M backend/routers/upload.py\r\n M backend/services/feedback.py\r\n M backend/services/rag.py\r\n?? UPLOAD_FIX_SUMMARY.md\r\n?? data/metadata/textbook_f295c8abe2a6_chapters.json\r\n?? data/metadata/textbook_f295c8abe2a6_metadata.json\r\n?? \"leader/\\346\\234\\200\\345\\220\\216\\344\\270\\200\\345\\260\\217\\346\\227\\266\\346\\224\\266\\345\\260\\276\\350\\256\\241\\345\\210\\222.md\"\r\n?? test_artifacts/",
+    "backend_start":  {
+                          "job_id":  1,
+                          "ready":  true,
+                          "health_code":  200,
+                          "health_body":  "{\"status\":\"healthy\",\"message\":\"Service is running\"}"
+                      },
+    "frontend_start":  {
+                           "job_id":  3,
+                           "ready_3000":  true,
+                           "code_3000":  200,
+                           "ready_5173":  false,
+                           "code_5173":  null
+                       },
+    "frontend_port":  3000,
+    "build":  {
+                  "code":  0,
+                  "log":  "D:\\我的大学\\博一下\\黑客松2\\test_artifacts\\agent_d_final_20260510_142211\\frontend_build.log",
+                  "chunk_warning":  true
+              },
+    "tests":  {
+                  "health":  {
+                                 "code":  200,
+                                 "ok":  true,
+                                 "body":  "{\"status\":\"healthy\",\"message\":\"Service is running\"}"
+                             },
+                  "frontend":  {
+                                   "port":  3000,
+                                   "url":  "http://localhost:3000/",
+                                   "open_code":  200
+                               },
+                  "textbooks":  {
+                                    "code":  200,
+                                    "total":  3,
+                                    "first_items":  [
+                                                        "textbook_f295c8abe2a6|reference_03_physiology.pdf|reference_03_physiology|ch=519|w=46357",
+                                                        "textbook_math_001|é«ä¸­æ°å­¦.pdf|é«ä¸­æ°å­¦åºç¡|ch=5|w=5650",
+                                                        "textbook_physics_001|é«ä¸­ç©ç.pdf|é«ä¸­ç©çåºç¡|ch=5|w=5500"
+                                                    ],
+                                    "fake_highlighted":  false
+                                },
+                  "upload_parse":  {
+                                       "upload_code":  400,
+                                       "upload_body":  "{\"status\":\"error\",\"message\":\"Unsupported file type: . Allowed: .markdown, .txt, .md, .pdf\",\"path\":\"http://localhost:8000/api/upload\"}",
+                                       "textbook_id":  null,
+                                       "parse_code":  null,
+                                       "chapter_count":  null,
+                                       "total_words":  null
+                                   },
+                  "kg":  {
+                             "build_code":  200,
+                             "get_code":  200,
+                             "nodes":  86,
+                             "edges":  235
+                         },
+                  "merge":  {
+                                "merge_code":  200,
+                                "decisions_code":  200,
+                                "decisions_count":  15,
+                                "compression_ratio":  0.2263
+                            },
+                  "rag":  {
+                              "index_code":  200,
+                              "query_code":  200,
+                              "answer_length":  607,
+                              "citations_count":  5,
+                              "backend_log_has_list_get_error":  false
+                          },
+                  "feedback":  {
+                                   "code":  200,
+                                   "body":  "{\"status\":\"success\",\"message\":\"å·²æ è®°ä¿çï¼å½æ°\",\"data\":{\"instruction\":\"ä¿ç å½æ°\",\"action\":\"keep\",\"summary\":\"å·²æ è®°ä¿çï¼å½æ°\",\"knowledge_graph_summary\":{\"total_decisions\":16,\"keep_count\":1,\"delete_count\":0,\"split_count\":0,\"merge_count\":0,\"kg_nodes\":81,\"kg_edges\":227,\"last_updated\":\"2026-05-10T14:23:04.722830\"}}}"
+                               },
+                  "report":  {
+                                 "generate_code":  200,
+                                 "latest_code":  200,
+                                 "markdown_length":  2385,
+                                 "markdown_starts_with_heading":  true
+                             }
+              },
+    "git_after":  "git.exe : warning: unable to access \u0027C:\\Users\\Amber/.config/git/ignore\u0027: Permission denied\r\n所在位置 行:176 字符: 22\r\n+ $result.git_after = (\u0026 git status --short 2\u003e\u00261 | Out-String).Trim()\r\n+                      ~~~~~~~~~~~~~~~~~~~~~~~~~\r\n    + CategoryInfo          : NotSpecified: (warning: unable...rmission denied:String) [], RemoteException\r\n    + FullyQualifiedErrorId : NativeCommandError\r\n \r\nwarning: unable to access \u0027C:\\Users\\Amber/.config/git/ignore\u0027: Permission denied\r\n M backend/routers/feedback.py\r\n M backend/routers/upload.py\r\n M backend/services/feedback.py\r\n M backend/services/rag.py\r\n M data/processed/kg_edges.json\r\n M data/processed/kg_nodes.json\r\n M data/processed/merge_decisions.json\r\n M data/processed/merged_kg.json\r\n M \"report/\\346\\225\\264\\345\\220\\210\\346\\212\\245\\345\\221\\212.md\"\r\n?? UPLOAD_FIX_SUMMARY.md\r\n?? data/metadata/textbook_f295c8abe2a6_chapters.json\r\n?? data/metadata/textbook_f295c8abe2a6_metadata.json\r\n?? \"leader/\\346\\234\\200\\345\\220\\216\\344\\270\\200\\345\\260\\217\\346\\227\\266\\346\\224\\266\\345\\260\\276\\350\\256\\241\\345\\210\\222.md\"\r\n?? test_artifacts/",
+    "backend_log_path":  "D:\\我的大学\\博一下\\黑客松2\\test_artifacts\\agent_d_final_20260510_142211\\backend_job.log",
+    "frontend_log_path":  "D:\\我的大学\\博一下\\黑客松2\\test_artifacts\\agent_d_final_20260510_142211\\frontend_job.log"
+}

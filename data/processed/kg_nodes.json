@@ -1,80 +1,430 @@
 [
   {
     "id": "node_0",
-    "name": "第1章 集合与函数",
+    "name": "Introduction",
     "type": "concept",
-    "description": "集合（Set）是数学中的基本概念",
-    "definition": "集...",
-    "chapter": "第1章 集合与函数",
-    "page": 1,
-    "source_textbook": "高中数学基础",
+    "description": "Physiology 主      审  |  王庭槐 主      编  |  罗自强　管又飞 副  主  编  |  武宇明　朱依纯　林默君 数 字 主 编  |  罗自强　管又飞 数字副主编  |  林默君　向秋玲 g 北　京 g 生理学 第",
+    "definition": "Physiology 主      审  |  王庭槐 主      编  |  罗自强　管又飞 副  主  编  |  武宇明　朱依纯　林默君 数 字 主 编  |  罗自强　管又飞 数字副主编  |  林默君　向秋玲 g 北　京 g 生理学 第",
+    "chapter": "Introduction",
+    "page": 0,
+    "source_textbook": "reference_03_physiology",
     "frequency": 1,
     "sources": [
-      "高中数学基础"
+      "reference_03_physiology"
     ]
   },
   {
     "id": "node_1",
-    "name": "Set",
+    "name": "Physiology",
     "type": "concept",
-    "description": "集合（Set）是数学中的基本概念",
-    "definition": "集...",
-    "chapter": "第1章 集合与函数",
-    "page": 1,
-    "source_textbook": "高中数学基础",
+    "description": "Physiology 主      审  |  王庭槐 主      编  |  罗自强　管又飞 副  主  编  |  武宇明　朱依纯　林默君 数 字 主 编  |  罗自强　管又飞 数字副主编  |  林默君　向秋玲 g 北　京 g 生理学 第",
+    "definition": "Physiology 主      审  |  王庭槐 主      编  |  罗自强　管又飞 副  主  编  |  武宇明　朱依纯　林默君 数 字 主 编  |  罗自强　管又飞 数字副主编  |  林默君　向秋玲 g 北　京 g 生理学 第",
+    "chapter": "Introduction",
+    "page": 0,
+    "source_textbook": "reference_03_physiology",
     "frequency": 1,
     "sources": [
-      "高中数学基础"
+      "reference_03_physiology"
     ]
   },
   {
     "id": "node_2",
-    "name": "集合（Set）是数学中的基本概念",
+    "name": "Introduction-3",
     "type": "concept",
-    "description": "集合（Set）是数学中的基本概念",
-    "definition": "集...",
-    "chapter": "第1章 集合与函数",
-    "page": 1,
-    "source_textbook": "高中数学基础",
+    "description": "Physiology 主      审  |  王庭槐 主      编  |  罗自强　管又飞 副  主  编  |  武宇明　朱依纯　林默君 数 字 主 编  |  罗自强　管又飞 数字副主编  |  林默君　向秋玲 g 北　京 g 生理学 第",
+    "definition": "Physiology 主      审  |  王庭槐 主      编  |  罗自强　管又飞 副  主  编  |  武宇明　朱依纯　林默君 数 字 主 编  |  罗自强　管又飞 数字副主编  |  林默君　向秋玲 g 北　京 g 生理学 第",
+    "chapter": "Introduction",
+    "page": 0,
+    "source_textbook": "reference_03_physiology",
     "frequency": 1,
     "sources": [
-      "高中数学基础"
+      "reference_03_physiology"
     ]
   },
   {
     "id": "node_3",
-    "name": "Function",
+    "name": "Introduction-4",
     "type": "concept",
-    "description": "函数（Function）是建立集合之间对应关系的工具",
-    "definition": "函...",
-    "chapter": "第1章 集合与函数",
-    "page": 1,
-    "source_textbook": "高中数学基础",
+    "description": "Physiology 主      审  |  王庭槐 主      编  |  罗自强　管又飞 副  主  编  |  武宇明　朱依纯　林默君 数 字 主 编  |  罗自强　管又飞 数字副主编  |  林默君　向秋玲 g 北　京 g 生理学 第",
+    "definition": "Physiology 主      审  |  王庭槐 主      编  |  罗自强　管又飞 副  主  编  |  武宇明　朱依纯　林默君 数 字 主 编  |  罗自强　管又飞 数字副主编  |  林默君　向秋玲 g 北　京 g 生理学 第",
+    "chapter": "Introduction",
+    "page": 0,
+    "source_textbook": "reference_03_physiology",
     "frequency": 1,
     "sources": [
-      "高中数学基础"
+      "reference_03_physiology"
     ]
   },
   {
     "id": "node_4",
-    "name": "函数的定义域和值域是重要属性",
+    "name": "Introduction-5",
     "type": "concept",
-    "description": "函数的定义域和值域是重要属性",
-    "definition": "函...",
-    "chapter": "第1章 集合与函数",
-    "page": 1,
-    "source_textbook": "高中数学基础",
+    "description": "Physiology 主      审  |  王庭槐 主      编  |  罗自强　管又飞 副  主  编  |  武宇明　朱依纯　林默君 数 字 主 编  |  罗自强　管又飞 数字副主编  |  林默君　向秋玲 g 北　京 g 生理学 第",
+    "definition": "Physiology 主      审  |  王庭槐 主      编  |  罗自强　管又飞 副  主  编  |  武宇明　朱依纯　林默君 数 字 主 编  |  罗自强　管又飞 数字副主编  |  林默君　向秋玲 g 北　京 g 生理学 第",
+    "chapter": "Introduction",
+    "page": 0,
+    "source_textbook": "reference_03_physiology",
     "frequency": 1,
     "sources": [
-      "高中数学基础"
+      "reference_03_physiology"
     ]
   },
   {
     "id": "node_5",
-    "name": "一次函数和二次函数是常见类型",
+    "name": "10 版",
     "type": "concept",
-    "description": "一次函数和二次函数是常见类型",
-    "definition": "一...",
+    "description": "生　理　学 Shenglixue 第 10 版 主    编：罗自强　管又飞 出版发行：人民卫生出版社（中继线 010-59780011） 地    址：北京市朝阳区潘家园南里 19 号 邮    编：100021 E   -  mail：pmph @ pmph.com 购书热线：010-59787592 010-59787584 010-65264830 印    刷： 经    销：新华书店 开    本：850×1168 1/16",
+    "definition": "生　理　学 Shenglixue 第 10 版 主    编：罗自强　管又飞 出版发行：人民卫生出版社（中继线 010-59780011） 地    址：北京市朝阳区潘家园南里 19 号 邮    编：100021 E   -  mail：pmph @ pmph.com 购书热线：010-59787592 010-59787584 010-65264830 印    刷： 经    销：新华书店 开    本：850×1168 1/16",
+    "chapter": "10 版",
+    "page": 1,
+    "source_textbook": "reference_03_physiology",
+    "frequency": 1,
+    "sources": [
+      "reference_03_physiology"
+    ]
+  },
+  {
+    "id": "node_6",
+    "name": "中继线 010-59780011",
+    "type": "concept",
+    "description": "生　理　学 Shenglixue 第 10 版 主    编：罗自强　管又飞 出版发行：人民卫生出版社（中继线 010-59780011） 地    址：北京市朝阳区潘家园南里 19 号 邮    编：100021 E   -  mail：pmph @ pmph.com 购书热线：010-59787592 010-59787584 010-65264830 印    刷： 经    销：新华书店 开    本：850×1168 1/16",
+    "definition": "生　理　学 Shenglixue 第 10 版 主    编：罗自强　管又飞 出版发行：人民卫生出版社（中继线 010-59780011） 地    址：北京市朝阳区潘家园南里 19 号 邮    编：100021 E   -  mail：pmph @ pmph.com 购书热线：010-59787592 010-59787584 010-65264830 印    刷： 经    销：新华书店 开    本：850×1168 1/16",
+    "chapter": "10 版",
+    "page": 1,
+    "source_textbook": "reference_03_physiology",
+    "frequency": 1,
+    "sources": [
+      "reference_03_physiology"
+    ]
+  },
+  {
+    "id": "node_7",
+    "name": "CIP",
+    "type": "concept",
+    "description": "生　理　学 Shenglixue 第 10 版 主    编：罗自强　管又飞 出版发行：人民卫生出版社（中继线 010-59780011） 地    址：北京市朝阳区潘家园南里 19 号 邮    编：100021 E   -  mail：pmph @ pmph.com 购书热线：010-59787592 010-59787584 010-65264830 印    刷： 经    销：新华书店 开    本：850×1168 1/16",
+    "definition": "生　理　学 Shenglixue 第 10 版 主    编：罗自强　管又飞 出版发行：人民卫生出版社（中继线 010-59780011） 地    址：北京市朝阳区潘家园南里 19 号 邮    编：100021 E   -  mail：pmph @ pmph.com 购书热线：010-59787592 010-59787584 010-65264830 印    刷： 经    销：新华书店 开    本：850×1168 1/16",
+    "chapter": "10 版",
+    "page": 1,
+    "source_textbook": "reference_03_physiology",
+    "frequency": 1,
+    "sources": [
+      "reference_03_physiology"
+    ]
+  },
+  {
+    "id": "node_8",
+    "name": "全国高等学校五年制本 科临床医学专业第十轮规划教材",
+    "type": "concept",
+    "description": "生　理　学 Shenglixue 第 10 版 主    编：罗自强　管又飞 出版发行：人民卫生出版社（中继线 010-59780011） 地    址：北京市朝阳区潘家园南里 19 号 邮    编：100021 E   -  mail：pmph @ pmph.com 购书热线：010-59787592 010-59787584 010-65264830 印    刷： 经    销：新华书店 开    本：850×1168 1/16",
+    "definition": "生　理　学 Shenglixue 第 10 版 主    编：罗自强　管又飞 出版发行：人民卫生出版社（中继线 010-59780011） 地    址：北京市朝阳区潘家园南里 19 号 邮    编：100021 E   -  mail：pmph @ pmph.com 购书热线：010-59787592 010-59787584 010-65264830 印    刷： 经    销：新华书店 开    本：850×1168 1/16",
+    "chapter": "10 版",
+    "page": 1,
+    "source_textbook": "reference_03_physiology",
+    "frequency": 1,
+    "sources": [
+      "reference_03_physiology"
+    ]
+  },
+  {
+    "id": "node_9",
+    "name": "以姓氏笔画为序",
+    "type": "concept",
+    "description": "生　理　学 Shenglixue 第 10 版 主    编：罗自强　管又飞 出版发行：人民卫生出版社（中继线 010-59780011） 地    址：北京市朝阳区潘家园南里 19 号 邮    编：100021 E   -  mail：pmph @ pmph.com 购书热线：010-59787592 010-59787584 010-65264830 印    刷： 经    销：新华书店 开    本：850×1168 1/16",
+    "definition": "生　理　学 Shenglixue 第 10 版 主    编：罗自强　管又飞 出版发行：人民卫生出版社（中继线 010-59780011） 地    址：北京市朝阳区潘家园南里 19 号 邮    编：100021 E   -  mail：pmph @ pmph.com 购书热线：010-59787592 010-59787584 010-65264830 印    刷： 经    销：新华书店 开    本：850×1168 1/16",
+    "chapter": "10 版",
+    "page": 1,
+    "source_textbook": "reference_03_physiology",
+    "frequency": 1,
+    "sources": [
+      "reference_03_physiology"
+    ]
+  },
+  {
+    "id": "node_10",
+    "name": "Shenglixue",
+    "type": "concept",
+    "description": "生　理　学 Shenglixue 第 10 版 主    编：罗自强　管又飞 出版发行：人民卫生出版社（中继线 010-59780011） 地    址：北京市朝阳区潘家园南里 19 号 邮    编：100021 E   -  mail：pmph @ pmph.com 购书热线：010-59787592 010-59787584 010-65264830 印    刷： 经    销：新华书店 开    本：850×1168 1/16",
+    "definition": "生　理　学 Shenglixue 第 10 版 主    编：罗自强　管又飞 出版发行：人民卫生出版社（中继线 010-59780011） 地    址：北京市朝阳区潘家园南里 19 号 邮    编：100021 E   -  mail：pmph @ pmph.com 购书热线：010-59787592 010-59787584 010-65264830 印    刷： 经    销：新华书店 开    本：850×1168 1/16",
+    "chapter": "10 版",
+    "page": 1,
+    "source_textbook": "reference_03_physiology",
+    "frequency": 1,
+    "sources": [
+      "reference_03_physiology"
+    ]
+  },
+  {
+    "id": "node_11",
+    "name": "新形态教材使用说明",
+    "type": "concept",
+    "description": "新形态教材使用说明 新形态教材是充分利用多种形式的数字资源及现代信息技术，通过二维码将纸书内容与数字 资源进行深度融合的教材",
+    "definition": "新形态教材使用说明 新形态教材是充分利用多种形式的数字资源及现代信息技术，通过二维码将纸书内容与数字 资源进行深度融合的教材",
+    "chapter": "10 版",
+    "page": 1,
+    "source_textbook": "reference_03_physiology",
+    "frequency": 1,
+    "sources": [
+      "reference_03_physiology"
+    ]
+  },
+  {
+    "id": "node_12",
+    "name": "通过二维码将纸书内容与数字",
+    "type": "concept",
+    "description": "新形态教材使用说明 新形态教材是充分利用多种形式的数字资源及现代信息技术，通过二维码将纸书内容与数字 资源进行深度融合的教材",
+    "definition": "新形态教材使用说明 新形态教材是充分利用多种形式的数字资源及现代信息技术，通过二维码将纸书内容与数字 资源进行深度融合的教材",
+    "chapter": "10 版",
+    "page": 1,
+    "source_textbook": "reference_03_physiology",
+    "frequency": 1,
+    "sources": [
+      "reference_03_physiology"
+    ]
+  },
+  {
+    "id": "node_13",
+    "name": "8 版、第 9 版）副主编，《中华医学教育杂志》编委；教育部国家级教学",
+    "type": "concept",
+    "description": "成果二等奖（2019）主持人，首届全国教材建设奖全国优秀教材一等奖 （2021）获得者，国家级一流本科专业建设点“临床医学”（2019）负责 人，国家级一流本科（线上）课程“人体生理学”（2023）负责人",
+    "definition": "成果二等奖（2019）主持人，首届全国教材建设奖全国优秀教材一等奖 （2021）获得者，国家级一流本科专业建设点“临床医学”（2019）负责 人，国家级一流本科（线上）课程“人体生理学”（2023）负责人",
+    "chapter": "8 版、第 9 版）副主编，《中华医学教育杂志》编委；教育部国家级教学",
+    "page": 11,
+    "source_textbook": "reference_03_physiology",
+    "frequency": 1,
+    "sources": [
+      "reference_03_physiology"
+    ]
+  },
+  {
+    "id": "node_14",
+    "name": "2019",
+    "type": "concept",
+    "description": "成果二等奖（2019）主持人，首届全国教材建设奖全国优秀教材一等奖 （2021）获得者，国家级一流本科专业建设点“临床医学”（2019）负责 人，国家级一流本科（线上）课程“人体生理学”（2023）负责人",
+    "definition": "成果二等奖（2019）主持人，首届全国教材建设奖全国优秀教材一等奖 （2021）获得者，国家级一流本科专业建设点“临床医学”（2019）负责 人，国家级一流本科（线上）课程“人体生理学”（2023）负责人",
+    "chapter": "8 版、第 9 版）副主编，《中华医学教育杂志》编委；教育部国家级教学",
+    "page": 11,
+    "source_textbook": "reference_03_physiology",
+    "frequency": 1,
+    "sources": [
+      "reference_03_physiology"
+    ]
+  },
+  {
+    "id": "node_15",
+    "name": "2021",
+    "type": "concept",
+    "description": "成果二等奖（2019）主持人，首届全国教材建设奖全国优秀教材一等奖 （2021）获得者，国家级一流本科专业建设点“临床医学”（2019）负责 人，国家级一流本科（线上）课程“人体生理学”（2023）负责人",
+    "definition": "成果二等奖（2019）主持人，首届全国教材建设奖全国优秀教材一等奖 （2021）获得者，国家级一流本科专业建设点“临床医学”（2019）负责 人，国家级一流本科（线上）课程“人体生理学”（2023）负责人",
+    "chapter": "8 版、第 9 版）副主编，《中华医学教育杂志》编委；教育部国家级教学",
+    "page": 11,
+    "source_textbook": "reference_03_physiology",
+    "frequency": 1,
+    "sources": [
+      "reference_03_physiology"
+    ]
+  },
+  {
+    "id": "node_16",
+    "name": "线上",
+    "type": "concept",
+    "description": "成果二等奖（2019）主持人，首届全国教材建设奖全国优秀教材一等奖 （2021）获得者，国家级一流本科专业建设点“临床医学”（2019）负责 人，国家级一流本科（线上）课程“人体生理学”（2023）负责人",
+    "definition": "成果二等奖（2019）主持人，首届全国教材建设奖全国优秀教材一等奖 （2021）获得者，国家级一流本科专业建设点“临床医学”（2019）负责 人，国家级一流本科（线上）课程“人体生理学”（2023）负责人",
+    "chapter": "8 版、第 9 版）副主编，《中华医学教育杂志》编委；教育部国家级教学",
+    "page": 11,
+    "source_textbook": "reference_03_physiology",
+    "frequency": 1,
+    "sources": [
+      "reference_03_physiology"
+    ]
+  },
+  {
+    "id": "node_17",
+    "name": "2023",
+    "type": "concept",
+    "description": "成果二等奖（2019）主持人，首届全国教材建设奖全国优秀教材一等奖 （2021）获得者，国家级一流本科专业建设点“临床医学”（2019）负责 人，国家级一流本科（线上）课程“人体生理学”（2023）负责人",
+    "definition": "成果二等奖（2019）主持人，首届全国教材建设奖全国优秀教材一等奖 （2021）获得者，国家级一流本科专业建设点“临床医学”（2019）负责 人，国家级一流本科（线上）课程“人体生理学”（2023）负责人",
+    "chapter": "8 版、第 9 版）副主编，《中华医学教育杂志》编委；教育部国家级教学",
+    "page": 11,
+    "source_textbook": "reference_03_physiology",
+    "frequency": 1,
+    "sources": [
+      "reference_03_physiology"
+    ]
+  },
+  {
+    "id": "node_18",
+    "name": "成果二等奖（2019）主持人",
+    "type": "concept",
+    "description": "成果二等奖（2019）主持人，首届全国教材建设奖全国优秀教材一等奖 （2021）获得者，国家级一流本科专业建设点“临床医学”（2019）负责 人，国家级一流本科（线上）课程“人体生理学”（2023）负责人",
+    "definition": "成果二等奖（2019）主持人，首届全国教材建设奖全国优秀教材一等奖 （2021）获得者，国家级一流本科专业建设点“临床医学”（2019）负责 人，国家级一流本科（线上）课程“人体生理学”（2023）负责人",
+    "chapter": "8 版、第 9 版）副主编，《中华医学教育杂志》编委；教育部国家级教学",
+    "page": 11,
+    "source_textbook": "reference_03_physiology",
+    "frequency": 1,
+    "sources": [
+      "reference_03_physiology"
+    ]
+  },
+  {
+    "id": "node_19",
+    "name": "首届全国教材建设奖全国优秀教材一等奖",
+    "type": "concept",
+    "description": "成果二等奖（2019）主持人，首届全国教材建设奖全国优秀教材一等奖 （2021）获得者，国家级一流本科专业建设点“临床医学”（2019）负责 人，国家级一流本科（线上）课程“人体生理学”（2023）负责人",
+    "definition": "成果二等奖（2019）主持人，首届全国教材建设奖全国优秀教材一等奖 （2021）获得者，国家级一流本科专业建设点“临床医学”（2019）负责 人，国家级一流本科（线上）课程“人体生理学”（2023）负责人",
+    "chapter": "8 版、第 9 版）副主编，《中华医学教育杂志》编委；教育部国家级教学",
+    "page": 11,
+    "source_textbook": "reference_03_physiology",
+    "frequency": 1,
+    "sources": [
+      "reference_03_physiology"
+    ]
+  },
+  {
+    "id": "node_20",
+    "name": "获得者",
+    "type": "concept",
+    "description": "成果二等奖（2019）主持人，首届全国教材建设奖全国优秀教材一等奖 （2021）获得者，国家级一流本科专业建设点“临床医学”（2019）负责 人，国家级一流本科（线上）课程“人体生理学”（2023）负责人",
+    "definition": "成果二等奖（2019）主持人，首届全国教材建设奖全国优秀教材一等奖 （2021）获得者，国家级一流本科专业建设点“临床医学”（2019）负责 人，国家级一流本科（线上）课程“人体生理学”（2023）负责人",
+    "chapter": "8 版、第 9 版）副主编，《中华医学教育杂志》编委；教育部国家级教学",
+    "page": 11,
+    "source_textbook": "reference_03_physiology",
+    "frequency": 1,
+    "sources": [
+      "reference_03_physiology"
+    ]
+  },
+  {
+    "id": "node_21",
+    "name": "第一章",
+    "type": "concept",
+    "description": "绪论 1 第一节　生理学的研究对象和任务 ........................................ 1 一、  生理学的研究对象 ..................................................... 1 二、  生理学的研究任务 ..................................................... 1 三、  生理学与医学的关系 ....",
+    "definition": "绪论 1 第一节　生理学的研究对象和任务 ........................................ 1 一、  生理学的研究对象 ..................................................... 1 二、  生理学的研究任务 ..................................................... 1 三、  生理学与医学的关系 ....",
+    "chapter": "第一章",
+    "page": 15,
+    "source_textbook": "reference_03_physiology",
+    "frequency": 1,
+    "sources": [
+      "reference_03_physiology"
+    ]
+  },
+  {
+    "id": "node_22",
+    "name": "绪论",
+    "type": "concept",
+    "description": "绪论 1 第一节　生理学的研究对象和任务 ........................................ 1 一、  生理学的研究对象 ..................................................... 1 二、  生理学的研究任务 ..................................................... 1 三、  生理学与医学的关系 ....",
+    "definition": "绪论 1 第一节　生理学的研究对象和任务 ........................................ 1 一、  生理学的研究对象 ..................................................... 1 二、  生理学的研究任务 ..................................................... 1 三、  生理学与医学的关系 ....",
+    "chapter": "第一章",
+    "page": 15,
+    "source_textbook": "reference_03_physiology",
+    "frequency": 1,
+    "sources": [
+      "reference_03_physiology"
+    ]
+  },
+  {
+    "id": "node_23",
+    "name": "第一节",
+    "type": "concept",
+    "description": "绪论 1 第一节　生理学的研究对象和任务 ........................................ 1 一、  生理学的研究对象 ..................................................... 1 二、  生理学的研究任务 ..................................................... 1 三、  生理学与医学的关系 ....",
+    "definition": "绪论 1 第一节　生理学的研究对象和任务 ........................................ 1 一、  生理学的研究对象 ..................................................... 1 二、  生理学的研究任务 ..................................................... 1 三、  生理学与医学的关系 ....",
+    "chapter": "第一章",
+    "page": 15,
+    "source_textbook": "reference_03_physiology",
+    "frequency": 2,
+    "sources": [
+      "reference_03_physiology"
+    ]
+  },
+  {
+    "id": "node_24",
+    "name": "生理学的研究对象和任务",
+    "type": "concept",
+    "description": "绪论 1 第一节　生理学的研究对象和任务 ........................................ 1 一、  生理学的研究对象 ..................................................... 1 二、  生理学的研究任务 ..................................................... 1 三、  生理学与医学的关系 ....",
+    "definition": "绪论 1 第一节　生理学的研究对象和任务 ........................................ 1 一、  生理学的研究对象 ..................................................... 1 二、  生理学的研究任务 ..................................................... 1 三、  生理学与医学的关系 ....",
+    "chapter": "第一章",
+    "page": 15,
+    "source_textbook": "reference_03_physiology",
+    "frequency": 1,
+    "sources": [
+      "reference_03_physiology"
+    ]
+  },
+  {
+    "id": "node_25",
+    "name": "第一章-5",
+    "type": "concept",
+    "description": "绪论 1 第一节　生理学的研究对象和任务 ........................................ 1 一、  生理学的研究对象 ..................................................... 1 二、  生理学的研究任务 ..................................................... 1 三、  生理学与医学的关系 ....",
+    "definition": "绪论 1 第一节　生理学的研究对象和任务 ........................................ 1 一、  生理学的研究对象 ..................................................... 1 二、  生理学的研究任务 ..................................................... 1 三、  生理学与医学的关系 ....",
+    "chapter": "第一章",
+    "page": 15,
+    "source_textbook": "reference_03_physiology",
+    "frequency": 1,
+    "sources": [
+      "reference_03_physiology"
+    ]
+  },
+  {
+    "id": "node_26",
+    "name": "第二章",
+    "type": "concept",
+    "description": "细胞的基本功能 13 第一节　细胞膜的物质转运功能........................................... 13 一、  细胞膜的化学组成及其分子排列形式 ............................. 13 二、  跨细胞膜的物质转运 ................................................ 14 第二节　细胞的信号转导 ................",
+    "definition": "细胞的基本功能 13 第一节　细胞膜的物质转运功能........................................... 13 一、  细胞膜的化学组成及其分子排列形式 ............................. 13 二、  跨细胞膜的物质转运 ................................................ 14 第二节　细胞的信号转导 ................",
+    "chapter": "第二章",
+    "page": 15,
+    "source_textbook": "reference_03_physiology",
+    "frequency": 1,
+    "sources": [
+      "reference_03_physiology"
+    ]
+  },
+  {
+    "id": "node_27",
+    "name": "细胞的基本功能",
+    "type": "concept",
+    "description": "细胞的基本功能 13 第一节　细胞膜的物质转运功能........................................... 13 一、  细胞膜的化学组成及其分子排列形式 ............................. 13 二、  跨细胞膜的物质转运 ................................................ 14 第二节　细胞的信号转导 ................",
+    "definition": "细胞的基本功能 13 第一节　细胞膜的物质转运功能........................................... 13 一、  细胞膜的化学组成及其分子排列形式 ............................. 13 二、  跨细胞膜的物质转运 ................................................ 14 第二节　细胞的信号转导 ................",
+    "chapter": "第二章",
+    "page": 15,
+    "source_textbook": "reference_03_physiology",
+    "frequency": 1,
+    "sources": [
+      "reference_03_physiology"
+    ]
+  },
+  {
+    "id": "node_28",
+    "name": "第二章-4",
+    "type": "concept",
+    "description": "细胞的基本功能 13 第一节　细胞膜的物质转运功能........................................... 13 一、  细胞膜的化学组成及其分子排列形式 ............................. 13 二、  跨细胞膜的物质转运 ................................................ 14 第二节　细胞的信号转导 ................",
+    "definition": "细胞的基本功能 13 第一节　细胞膜的物质转运功能........................................... 13 一、  细胞膜的化学组成及其分子排列形式 ............................. 13 二、  跨细胞膜的物质转运 ................................................ 14 第二节　细胞的信号转导 ................",
+    "chapter": "第二章",
+    "page": 15,
+    "source_textbook": "reference_03_physiology",
+    "frequency": 1,
+    "sources": [
+      "reference_03_physiology"
+    ]
+  },
+  {
+    "id": "node_29",
+    "name": "第二章-5",
+    "type": "concept",
+    "description": "细胞的基本功能 13 第一节　细胞膜的物质转运功能........................................... 13 一、  细胞膜的化学组成及其分子排列形式 ............................. 13 二、  跨细胞膜的物质转运 ................................................ 14 第二节　细胞的信号转导 ................",
+    "definition": "细胞的基本功能 13 第一节　细胞膜的物质转运功能........................................... 13 一、  细胞膜的化学组成及其分子排列形式 ............................. 13 二、  跨细胞膜的物质转运 ................................................ 14 第二节　细胞的信号转导 ................",
+    "chapter": "第二章",
+    "page": 15,
+    "source_textbook": "reference_03_physiology",
+    "frequency": 1,
+    "sources": [
+      "reference_03_physiology"
+    ]
+  },
+  {
+    "id": "node_30",
+    "name": "第1章 集合与函数",
+    "type": "concept",
+    "description": "集合（Set）是数学中的基本概念",
+    "definition": "集合（Set）是数学中的基本概念",
     "chapter": "第1章 集合与函数",
     "page": 1,
     "source_textbook": "高中数学基础",
@@ -84,403 +434,417 @@
     ]
   },
   {
-    "id": "node_6",
-    "name": "第2章 导数与微分",
-    "type": "concept",
-    "description": "导数（Derivative）表示函数在某点的变化率",
-    "definition": "导...",
-    "chapter": "第2章 导数与微分",
-    "page": 51,
-    "source_textbook": "高中数学基础",
-    "frequency": 1,
-    "sources": [
-      "高中数学基础"
-    ]
-  },
-  {
-    "id": "node_7",
-    "name": "Derivative",
-    "type": "concept",
-    "description": "导数（Derivative）表示函数在某点的变化率",
-    "definition": "导...",
-    "chapter": "第2章 导数与微分",
-    "page": 51,
-    "source_textbook": "高中数学基础",
-    "frequency": 1,
-    "sources": [
-      "高中数学基础"
-    ]
-  },
-  {
-    "id": "node_8",
-    "name": "Differential",
-    "type": "concept",
-    "description": "微分（Differential）是导数的应用",
-    "definition": "微...",
-    "chapter": "第2章 导数与微分",
-    "page": 51,
-    "source_textbook": "高中数学基础",
-    "frequency": 1,
-    "sources": [
-      "高中数学基础"
-    ]
-  },
-  {
-    "id": "node_9",
-    "name": "微分（Differential）是导数的应用",
-    "type": "concept",
-    "description": "微分（Differential）是导数的应用",
-    "definition": "微...",
-    "chapter": "第2章 导数与微分",
-    "page": 51,
-    "source_textbook": "高中数学基础",
-    "frequency": 1,
-    "sources": [
-      "高中数学基础"
-    ]
-  },
-  {
-    "id": "node_10",
-    "name": "梯度下降法在机器学习中应用广泛",
-    "type": "concept",
-    "description": "梯度下降法在机器学习中应用广泛",
-    "definition": "梯...",
-    "chapter": "第2章 导数与微分",
-    "page": 51,
-    "source_textbook": "高中数学基础",
-    "frequency": 1,
-    "sources": [
-      "高中数学基础"
-    ]
-  },
-  {
-    "id": "node_11",
-    "name": "反向传播算法基于链式求导法则",
-    "type": "concept",
-    "description": "反向传播算法基于链式求导法则",
-    "definition": "反...",
-    "chapter": "第2章 导数与微分",
-    "page": 51,
-    "source_textbook": "高中数学基础",
-    "frequency": 1,
-    "sources": [
-      "高中数学基础"
-    ]
-  },
-  {
-    "id": "node_12",
-    "name": "第3章 三角函数",
-    "type": "concept",
-    "description": "三角函数（Trigonometric Functions）包括正弦、余弦、正切等",
-    "definition": "三...",
-    "chapter": "第3章 三角函数",
-    "page": 121,
-    "source_textbook": "高中数学基础",
-    "frequency": 1,
-    "sources": [
-      "高中数学基础"
-    ]
-  },
-  {
-    "id": "node_13",
-    "name": "Trigonometric Functions",
-    "type": "concept",
-    "description": "三角函数（Trigonometric Functions）包括正弦、余弦、正切等",
-    "definition": "三...",
-    "chapter": "第3章 三角函数",
-    "page": 121,
-    "source_textbook": "高中数学基础",
-    "frequency": 1,
-    "sources": [
-      "高中数学基础"
-    ]
-  },
-  {
-    "id": "node_14",
-    "name": "三角函数（Trigonometric",
-    "type": "concept",
-    "description": "三角函数（Trigonometric Functions）包括正弦、余弦、正切等",
-    "definition": "三...",
-    "chapter": "第3章 三角函数",
-    "page": 121,
-    "source_textbook": "高中数学基础",
-    "frequency": 1,
-    "sources": [
-      "高中数学基础"
-    ]
-  },
-  {
-    "id": "node_15",
-    "name": "Functions）包括正弦",
-    "type": "concept",
-    "description": "三角函数（Trigonometric Functions）包括正弦、余弦、正切等",
-    "definition": "三...",
-    "chapter": "第3章 三角函数",
-    "page": 121,
-    "source_textbook": "高中数学基础",
-    "frequency": 1,
-    "sources": [
-      "高中数学基础"
-    ]
-  },
-  {
-    "id": "node_16",
-    "name": "余弦",
-    "type": "concept",
-    "description": "三角函数（Trigonometric Functions）包括正弦、余弦、正切等",
-    "definition": "三...",
-    "chapter": "第3章 三角函数",
-    "page": 121,
-    "source_textbook": "高中数学基础",
-    "frequency": 1,
-    "sources": [
-      "高中数学基础"
-    ]
-  },
-  {
-    "id": "node_17",
-    "name": "正切等",
-    "type": "concept",
-    "description": "三角函数（Trigonometric Functions）包括正弦、余弦、正切等",
-    "definition": "三...",
-    "chapter": "第3章 三角函数",
-    "page": 121,
-    "source_textbook": "高中数学基础",
-    "frequency": 1,
-    "sources": [
-      "高中数学基础"
-    ]
-  },
-  {
-    "id": "node_18",
-    "name": "傅里叶变换基于三角函数的分解",
-    "type": "concept",
-    "description": "傅里叶变换基于三角函数的分解",
-    "definition": "傅...",
-    "chapter": "第3章 三角函数",
-    "page": 121,
-    "source_textbook": "高中数学基础",
-    "frequency": 1,
-    "sources": [
-      "高中数学基础"
-    ]
-  },
-  {
-    "id": "node_19",
-    "name": "傅里叶级数用三角函数逼近周期函数",
-    "type": "concept",
-    "description": "傅里叶级数用三角函数逼近周期函数",
-    "definition": "傅...",
-    "chapter": "第3章 三角函数",
-    "page": 121,
-    "source_textbook": "高中数学基础",
-    "frequency": 1,
-    "sources": [
-      "高中数学基础"
-    ]
-  },
-  {
-    "id": "node_20",
-    "name": "第4章 积分学",
-    "type": "concept",
-    "description": "积分是微分的逆运算",
-    "definition": "积...",
-    "chapter": "第4章 积分学",
-    "page": 181,
-    "source_textbook": "高中数学基础",
-    "frequency": 1,
-    "sources": [
-      "高中数学基础"
-    ]
-  },
-  {
-    "id": "node_21",
-    "name": "积分是微分的逆运算",
-    "type": "concept",
-    "description": "积分是微分的逆运算",
-    "definition": "积...",
-    "chapter": "第4章 积分学",
-    "page": 181,
-    "source_textbook": "高中数学基础",
-    "frequency": 1,
-    "sources": [
-      "高中数学基础"
-    ]
-  },
-  {
-    "id": "node_22",
-    "name": "定积分计算函数曲线下的面积",
-    "type": "concept",
-    "description": "定积分计算函数曲线下的面积",
-    "definition": "定...",
-    "chapter": "第4章 积分学",
-    "page": 181,
-    "source_textbook": "高中数学基础",
-    "frequency": 1,
-    "sources": [
-      "高中数学基础"
-    ]
-  },
-  {
-    "id": "node_23",
-    "name": "牛顿-莱布尼茨公式建立了积分与微分的联系",
-    "type": "concept",
-    "description": "牛顿-莱布尼茨公式建立了积分与微分的联系",
-    "definition": "牛...",
-    "chapter": "第4章 积分学",
-    "page": 181,
-    "source_textbook": "高中数学基础",
-    "frequency": 1,
-    "sources": [
-      "高中数学基础"
-    ]
-  },
-  {
-    "id": "node_24",
-    "name": "第4章 积分学-5",
-    "type": "concept",
-    "description": "牛顿-莱布尼茨公式建立了积分与微分的联系",
-    "definition": "牛...",
-    "chapter": "第4章 积分学",
-    "page": 181,
-    "source_textbook": "高中数学基础",
-    "frequency": 1,
-    "sources": [
-      "高中数学基础"
-    ]
-  },
-  {
-    "id": "node_25",
-    "name": "第5章 线性代数",
-    "type": "concept",
-    "description": "线性代数是机器学习的基础",
-    "definition": "线...",
-    "chapter": "第5章 线性代数",
-    "page": 251,
-    "source_textbook": "高中数学基础",
-    "frequency": 1,
-    "sources": [
-      "高中数学基础"
-    ]
-  },
-  {
-    "id": "node_26",
-    "name": "线性代数是机器学习的基础",
-    "type": "concept",
-    "description": "线性代数是机器学习的基础",
-    "definition": "线...",
-    "chapter": "第5章 线性代数",
-    "page": 251,
-    "source_textbook": "高中数学基础",
-    "frequency": 1,
-    "sources": [
-      "高中数学基础"
-    ]
-  },
-  {
-    "id": "node_27",
-    "name": "矩阵用于表示线性变换",
-    "type": "concept",
-    "description": "矩阵用于表示线性变换",
-    "definition": "矩...",
-    "chapter": "第5章 线性代数",
-    "page": 251,
-    "source_textbook": "高中数学基础",
-    "frequency": 1,
-    "sources": [
-      "高中数学基础"
-    ]
-  },
-  {
-    "id": "node_28",
-    "name": "特征值和特征向量描述矩阵的本质性质",
-    "type": "concept",
-    "description": "特征值和特征向量描述矩阵的本质性质",
-    "definition": "特...",
-    "chapter": "第5章 线性代数",
-    "page": 251,
-    "source_textbook": "高中数学基础",
-    "frequency": 1,
-    "sources": [
-      "高中数学基础"
-    ]
-  },
-  {
-    "id": "node_29",
-    "name": "奇异值分解在降维中应用",
-    "type": "concept",
-    "description": "奇异值分解在降维中应用",
-    "definition": "奇...",
-    "chapter": "第5章 线性代数",
-    "page": 251,
-    "source_textbook": "高中数学基础",
-    "frequency": 1,
-    "sources": [
-      "高中数学基础"
-    ]
-  },
-  {
-    "id": "node_30",
-    "name": "第1章 运动学",
-    "type": "concept",
-    "description": "运动学研究物体运动规律",
-    "definition": "运...",
-    "chapter": "第1章 运动学",
-    "page": 1,
-    "source_textbook": "高中物理基础",
-    "frequency": 1,
-    "sources": [
-      "高中物理基础"
-    ]
-  },
-  {
     "id": "node_31",
-    "name": "运动学研究物体运动规律",
+    "name": "Set",
     "type": "concept",
-    "description": "运动学研究物体运动规律",
-    "definition": "运...",
-    "chapter": "第1章 运动学",
+    "description": "集合（Set）是数学中的基本概念",
+    "definition": "集合（Set）是数学中的基本概念",
+    "chapter": "第1章 集合与函数",
     "page": 1,
-    "source_textbook": "高中物理基础",
+    "source_textbook": "高中数学基础",
     "frequency": 1,
     "sources": [
-      "高中物理基础"
+      "高中数学基础"
     ]
   },
   {
     "id": "node_32",
-    "name": "位移和速度是基本概念",
+    "name": "集合（Set）是数学中的基本概念",
     "type": "concept",
-    "description": "位移和速度是基本概念",
-    "definition": "位...",
-    "chapter": "第1章 运动学",
+    "description": "集合（Set）是数学中的基本概念",
+    "definition": "集合（Set）是数学中的基本概念",
+    "chapter": "第1章 集合与函数",
     "page": 1,
-    "source_textbook": "高中物理基础",
+    "source_textbook": "高中数学基础",
     "frequency": 1,
     "sources": [
-      "高中物理基础"
+      "高中数学基础"
     ]
   },
   {
     "id": "node_33",
-    "name": "加速度描述速度变化",
+    "name": "Function",
     "type": "concept",
-    "description": "加速度描述速度变化",
-    "definition": "加...",
-    "chapter": "第1章 运动学",
+    "description": "函数（Function）是建立集合之间对应关系的工具",
+    "definition": "函数（Function）是建立集合之间对应关系的工具",
+    "chapter": "第1章 集合与函数",
     "page": 1,
-    "source_textbook": "高中物理基础",
+    "source_textbook": "高中数学基础",
     "frequency": 1,
     "sources": [
-      "高中物理基础"
+      "高中数学基础"
     ]
   },
   {
     "id": "node_34",
-    "name": "匀加速直线运动有简单的运动方程",
+    "name": "函数的定义域和值域是重要属性",
     "type": "concept",
-    "description": "匀加速直线运动有简单的运动方程",
-    "definition": "匀...",
+    "description": "函数的定义域和值域是重要属性",
+    "definition": "函数的定义域和值域是重要属性",
+    "chapter": "第1章 集合与函数",
+    "page": 1,
+    "source_textbook": "高中数学基础",
+    "frequency": 1,
+    "sources": [
+      "高中数学基础"
+    ]
+  },
+  {
+    "id": "node_35",
+    "name": "一次函数和二次函数是常见类型",
+    "type": "concept",
+    "description": "一次函数和二次函数是常见类型",
+    "definition": "一次函数和二次函数是常见类型",
+    "chapter": "第1章 集合与函数",
+    "page": 1,
+    "source_textbook": "高中数学基础",
+    "frequency": 1,
+    "sources": [
+      "高中数学基础"
+    ]
+  },
+  {
+    "id": "node_36",
+    "name": "第2章 导数与微分",
+    "type": "concept",
+    "description": "导数（Derivative）表示函数在某点的变化率",
+    "definition": "导数（Derivative）表示函数在某点的变化率",
+    "chapter": "第2章 导数与微分",
+    "page": 51,
+    "source_textbook": "高中数学基础",
+    "frequency": 1,
+    "sources": [
+      "高中数学基础"
+    ]
+  },
+  {
+    "id": "node_37",
+    "name": "Derivative",
+    "type": "concept",
+    "description": "导数（Derivative）表示函数在某点的变化率",
+    "definition": "导数（Derivative）表示函数在某点的变化率",
+    "chapter": "第2章 导数与微分",
+    "page": 51,
+    "source_textbook": "高中数学基础",
+    "frequency": 1,
+    "sources": [
+      "高中数学基础"
+    ]
+  },
+  {
+    "id": "node_38",
+    "name": "Differential",
+    "type": "concept",
+    "description": "微分（Differential）是导数的应用",
+    "definition": "微分（Differential）是导数的应用",
+    "chapter": "第2章 导数与微分",
+    "page": 51,
+    "source_textbook": "高中数学基础",
+    "frequency": 1,
+    "sources": [
+      "高中数学基础"
+    ]
+  },
+  {
+    "id": "node_39",
+    "name": "微分（Differential）是导数的应用",
+    "type": "concept",
+    "description": "微分（Differential）是导数的应用",
+    "definition": "微分（Differential）是导数的应用",
+    "chapter": "第2章 导数与微分",
+    "page": 51,
+    "source_textbook": "高中数学基础",
+    "frequency": 1,
+    "sources": [
+      "高中数学基础"
+    ]
+  },
+  {
+    "id": "node_40",
+    "name": "梯度下降法在机器学习中应用广泛",
+    "type": "concept",
+    "description": "梯度下降法在机器学习中应用广泛",
+    "definition": "梯度下降法在机器学习中应用广泛",
+    "chapter": "第2章 导数与微分",
+    "page": 51,
+    "source_textbook": "高中数学基础",
+    "frequency": 1,
+    "sources": [
+      "高中数学基础"
+    ]
+  },
+  {
+    "id": "node_41",
+    "name": "反向传播算法基于链式求导法则",
+    "type": "concept",
+    "description": "反向传播算法基于链式求导法则",
+    "definition": "反向传播算法基于链式求导法则",
+    "chapter": "第2章 导数与微分",
+    "page": 51,
+    "source_textbook": "高中数学基础",
+    "frequency": 1,
+    "sources": [
+      "高中数学基础"
+    ]
+  },
+  {
+    "id": "node_42",
+    "name": "第3章 三角函数",
+    "type": "concept",
+    "description": "三角函数（Trigonometric Functions）包括正弦、余弦、正切等",
+    "definition": "三角函数（Trigonometric Functions）包括正弦、余弦、正切等",
+    "chapter": "第3章 三角函数",
+    "page": 121,
+    "source_textbook": "高中数学基础",
+    "frequency": 1,
+    "sources": [
+      "高中数学基础"
+    ]
+  },
+  {
+    "id": "node_43",
+    "name": "Trigonometric Functions",
+    "type": "concept",
+    "description": "三角函数（Trigonometric Functions）包括正弦、余弦、正切等",
+    "definition": "三角函数（Trigonometric Functions）包括正弦、余弦、正切等",
+    "chapter": "第3章 三角函数",
+    "page": 121,
+    "source_textbook": "高中数学基础",
+    "frequency": 1,
+    "sources": [
+      "高中数学基础"
+    ]
+  },
+  {
+    "id": "node_44",
+    "name": "三角函数（Trigonometric",
+    "type": "concept",
+    "description": "三角函数（Trigonometric Functions）包括正弦、余弦、正切等",
+    "definition": "三角函数（Trigonometric Functions）包括正弦、余弦、正切等",
+    "chapter": "第3章 三角函数",
+    "page": 121,
+    "source_textbook": "高中数学基础",
+    "frequency": 1,
+    "sources": [
+      "高中数学基础"
+    ]
+  },
+  {
+    "id": "node_45",
+    "name": "Functions）包括正弦",
+    "type": "concept",
+    "description": "三角函数（Trigonometric Functions）包括正弦、余弦、正切等",
+    "definition": "三角函数（Trigonometric Functions）包括正弦、余弦、正切等",
+    "chapter": "第3章 三角函数",
+    "page": 121,
+    "source_textbook": "高中数学基础",
+    "frequency": 1,
+    "sources": [
+      "高中数学基础"
+    ]
+  },
+  {
+    "id": "node_46",
+    "name": "余弦",
+    "type": "concept",
+    "description": "三角函数（Trigonometric Functions）包括正弦、余弦、正切等",
+    "definition": "三角函数（Trigonometric Functions）包括正弦、余弦、正切等",
+    "chapter": "第3章 三角函数",
+    "page": 121,
+    "source_textbook": "高中数学基础",
+    "frequency": 1,
+    "sources": [
+      "高中数学基础"
+    ]
+  },
+  {
+    "id": "node_47",
+    "name": "正切等",
+    "type": "concept",
+    "description": "三角函数（Trigonometric Functions）包括正弦、余弦、正切等",
+    "definition": "三角函数（Trigonometric Functions）包括正弦、余弦、正切等",
+    "chapter": "第3章 三角函数",
+    "page": 121,
+    "source_textbook": "高中数学基础",
+    "frequency": 1,
+    "sources": [
+      "高中数学基础"
+    ]
+  },
+  {
+    "id": "node_48",
+    "name": "傅里叶变换基于三角函数的分解",
+    "type": "concept",
+    "description": "傅里叶变换基于三角函数的分解",
+    "definition": "傅里叶变换基于三角函数的分解",
+    "chapter": "第3章 三角函数",
+    "page": 121,
+    "source_textbook": "高中数学基础",
+    "frequency": 1,
+    "sources": [
+      "高中数学基础"
+    ]
+  },
+  {
+    "id": "node_49",
+    "name": "傅里叶级数用三角函数逼近周期函数",
+    "type": "concept",
+    "description": "傅里叶级数用三角函数逼近周期函数",
+    "definition": "傅里叶级数用三角函数逼近周期函数",
+    "chapter": "第3章 三角函数",
+    "page": 121,
+    "source_textbook": "高中数学基础",
+    "frequency": 1,
+    "sources": [
+      "高中数学基础"
+    ]
+  },
+  {
+    "id": "node_50",
+    "name": "第4章 积分学",
+    "type": "concept",
+    "description": "积分是微分的逆运算",
+    "definition": "积分是微分的逆运算",
+    "chapter": "第4章 积分学",
+    "page": 181,
+    "source_textbook": "高中数学基础",
+    "frequency": 1,
+    "sources": [
+      "高中数学基础"
+    ]
+  },
+  {
+    "id": "node_51",
+    "name": "积分是微分的逆运算",
+    "type": "concept",
+    "description": "积分是微分的逆运算",
+    "definition": "积分是微分的逆运算",
+    "chapter": "第4章 积分学",
+    "page": 181,
+    "source_textbook": "高中数学基础",
+    "frequency": 1,
+    "sources": [
+      "高中数学基础"
+    ]
+  },
+  {
+    "id": "node_52",
+    "name": "定积分计算函数曲线下的面积",
+    "type": "concept",
+    "description": "定积分计算函数曲线下的面积",
+    "definition": "定积分计算函数曲线下的面积",
+    "chapter": "第4章 积分学",
+    "page": 181,
+    "source_textbook": "高中数学基础",
+    "frequency": 1,
+    "sources": [
+      "高中数学基础"
+    ]
+  },
+  {
+    "id": "node_53",
+    "name": "牛顿-莱布尼茨公式建立了积分与微分的联系",
+    "type": "concept",
+    "description": "牛顿-莱布尼茨公式建立了积分与微分的联系",
+    "definition": "牛顿-莱布尼茨公式建立了积分与微分的联系",
+    "chapter": "第4章 积分学",
+    "page": 181,
+    "source_textbook": "高中数学基础",
+    "frequency": 1,
+    "sources": [
+      "高中数学基础"
+    ]
+  },
+  {
+    "id": "node_54",
+    "name": "第4章 积分学-5",
+    "type": "concept",
+    "description": "牛顿-莱布尼茨公式建立了积分与微分的联系",
+    "definition": "牛顿-莱布尼茨公式建立了积分与微分的联系",
+    "chapter": "第4章 积分学",
+    "page": 181,
+    "source_textbook": "高中数学基础",
+    "frequency": 1,
+    "sources": [
+      "高中数学基础"
+    ]
+  },
+  {
+    "id": "node_55",
+    "name": "第5章 线性代数",
+    "type": "concept",
+    "description": "线性代数是机器学习的基础",
+    "definition": "线性代数是机器学习的基础",
+    "chapter": "第5章 线性代数",
+    "page": 251,
+    "source_textbook": "高中数学基础",
+    "frequency": 1,
+    "sources": [
+      "高中数学基础"
+    ]
+  },
+  {
+    "id": "node_56",
+    "name": "线性代数是机器学习的基础",
+    "type": "concept",
+    "description": "线性代数是机器学习的基础",
+    "definition": "线性代数是机器学习的基础",
+    "chapter": "第5章 线性代数",
+    "page": 251,
+    "source_textbook": "高中数学基础",
+    "frequency": 1,
+    "sources": [
+      "高中数学基础"
+    ]
+  },
+  {
+    "id": "node_57",
+    "name": "矩阵用于表示线性变换",
+    "type": "concept",
+    "description": "矩阵用于表示线性变换",
+    "definition": "矩阵用于表示线性变换",
+    "chapter": "第5章 线性代数",
+    "page": 251,
+    "source_textbook": "高中数学基础",
+    "frequency": 1,
+    "sources": [
+      "高中数学基础"
+    ]
+  },
+  {
+    "id": "node_58",
+    "name": "特征值和特征向量描述矩阵的本质性质",
+    "type": "concept",
+    "description": "特征值和特征向量描述矩阵的本质性质",
+    "definition": "特征值和特征向量描述矩阵的本质性质",
+    "chapter": "第5章 线性代数",
+    "page": 251,
+    "source_textbook": "高中数学基础",
+    "frequency": 1,
+    "sources": [
+      "高中数学基础"
+    ]
+  },
+  {
+    "id": "node_59",
+    "name": "奇异值分解在降维中应用",
+    "type": "concept",
+    "description": "奇异值分解在降维中应用",
+    "definition": "奇异值分解在降维中应用",
+    "chapter": "第5章 线性代数",
+    "page": 251,
+    "source_textbook": "高中数学基础",
+    "frequency": 1,
+    "sources": [
+      "高中数学基础"
+    ]
+  },
+  {
+    "id": "node_60",
+    "name": "第1章 运动学",
+    "type": "concept",
+    "description": "运动学研究物体运动规律",
+    "definition": "运动学研究物体运动规律",
     "chapter": "第1章 运动学",
     "page": 1,
     "source_textbook": "高中物理基础",
@@ -490,11 +854,67 @@
     ]
   },
   {
-    "id": "node_35",
+    "id": "node_61",
+    "name": "运动学研究物体运动规律",
+    "type": "concept",
+    "description": "运动学研究物体运动规律",
+    "definition": "运动学研究物体运动规律",
+    "chapter": "第1章 运动学",
+    "page": 1,
+    "source_textbook": "高中物理基础",
+    "frequency": 1,
+    "sources": [
+      "高中物理基础"
+    ]
+  },
+  {
+    "id": "node_62",
+    "name": "位移和速度是基本概念",
+    "type": "concept",
+    "description": "位移和速度是基本概念",
+    "definition": "位移和速度是基本概念",
+    "chapter": "第1章 运动学",
+    "page": 1,
+    "source_textbook": "高中物理基础",
+    "frequency": 1,
+    "sources": [
+      "高中物理基础"
+    ]
+  },
+  {
+    "id": "node_63",
+    "name": "加速度描述速度变化",
+    "type": "concept",
+    "description": "加速度描述速度变化",
+    "definition": "加速度描述速度变化",
+    "chapter": "第1章 运动学",
+    "page": 1,
+    "source_textbook": "高中物理基础",
+    "frequency": 1,
+    "sources": [
+      "高中物理基础"
+    ]
+  },
+  {
+    "id": "node_64",
+    "name": "匀加速直线运动有简单的运动方程",
+    "type": "concept",
+    "description": "匀加速直线运动有简单的运动方程",
+    "definition": "匀加速直线运动有简单的运动方程",
+    "chapter": "第1章 运动学",
+    "page": 1,
+    "source_textbook": "高中物理基础",
+    "frequency": 1,
+    "sources": [
+      "高中物理基础"
+    ]
+  },
+  {
+    "id": "node_65",
     "name": "第2章 牛顿定律",
     "type": "concept",
     "description": "牛顿运动定律是经典力学的基础",
-    "definition": "牛...",
+    "definition": "牛顿运动定律是经典力学的基础",
     "chapter": "第2章 牛顿定律",
     "page": 61,
     "source_textbook": "高中物理基础",
@@ -504,11 +924,11 @@
     ]
   },
   {
-    "id": "node_36",
+    "id": "node_66",
     "name": "牛顿运动定律是经典力学的基础",
     "type": "concept",
     "description": "牛顿运动定律是经典力学的基础",
-    "definition": "牛...",
+    "definition": "牛顿运动定律是经典力学的基础",
     "chapter": "第2章 牛顿定律",
     "page": 61,
     "source_textbook": "高中物理基础",
@@ -518,11 +938,11 @@
     ]
   },
   {
-    "id": "node_37",
+    "id": "node_67",
     "name": "第一定律是惯性定律",
     "type": "concept",
     "description": "第一定律是惯性定律",
-    "definition": "第...",
+    "definition": "第一定律是惯性定律",
     "chapter": "第2章 牛顿定律",
     "page": 61,
     "source_textbook": "高中物理基础",
@@ -532,11 +952,11 @@
     ]
   },
   {
-    "id": "node_38",
+    "id": "node_68",
     "name": "第二定律是",
     "type": "concept",
     "description": "第二定律是 F = ma",
-    "definition": "第...",
+    "definition": "第二定律是 F = ma",
     "chapter": "第2章 牛顿定律",
     "page": 61,
     "source_textbook": "高中物理基础",
@@ -546,11 +966,11 @@
     ]
   },
   {
-    "id": "node_39",
+    "id": "node_69",
     "name": "ma",
     "type": "concept",
     "description": "第二定律是 F = ma",
-    "definition": "第...",
+    "definition": "第二定律是 F = ma",
     "chapter": "第2章 牛顿定律",
     "page": 61,
     "source_textbook": "高中物理基础",
@@ -560,11 +980,11 @@
     ]
   },
   {
-    "id": "node_40",
+    "id": "node_70",
     "name": "第三定律是作用力与反作用力",
     "type": "concept",
     "description": "第三定律是作用力与反作用力",
-    "definition": "第...",
+    "definition": "第三定律是作用力与反作用力",
     "chapter": "第2章 牛顿定律",
     "page": 61,
     "source_textbook": "高中物理基础",
@@ -574,11 +994,11 @@
     ]
   },
   {
-    "id": "node_41",
+    "id": "node_71",
     "name": "第3章 能量与功",
     "type": "concept",
     "description": "功是力与位移的乘积",
-    "definition": "功...",
+    "definition": "功是力与位移的乘积",
     "chapter": "第3章 能量与功",
     "page": 131,
     "source_textbook": "高中物理基础",
@@ -588,11 +1008,11 @@
     ]
   },
   {
-    "id": "node_42",
+    "id": "node_72",
     "name": "功是力与位移的乘积",
     "type": "concept",
     "description": "功是力与位移的乘积",
-    "definition": "功...",
+    "definition": "功是力与位移的乘积",
     "chapter": "第3章 能量与功",
     "page": 131,
     "source_textbook": "高中物理基础",
@@ -602,11 +1022,11 @@
     ]
   },
   {
-    "id": "node_43",
+    "id": "node_73",
     "name": "动能与运动有关",
     "type": "concept",
     "description": "动能与运动有关",
-    "definition": "动...",
+    "definition": "动能与运动有关",
     "chapter": "第3章 能量与功",
     "page": 131,
     "source_textbook": "高中物理基础",
@@ -616,11 +1036,11 @@
     ]
   },
   {
-    "id": "node_44",
+    "id": "node_74",
     "name": "势能与位置有关",
     "type": "concept",
     "description": "势能与位置有关",
-    "definition": "势...",
+    "definition": "势能与位置有关",
     "chapter": "第3章 能量与功",
     "page": 131,
     "source_textbook": "高中物理基础",
@@ -630,11 +1050,11 @@
     ]
   },
   {
-    "id": "node_45",
+    "id": "node_75",
     "name": "能量守恒定律是基本定律",
     "type": "concept",
     "description": "能量守恒定律是基本定律",
-    "definition": "能...",
+    "definition": "能量守恒定律是基本定律",
     "chapter": "第3章 能量与功",
     "page": 131,
     "source_textbook": "高中物理基础",
@@ -644,11 +1064,11 @@
     ]
   },
   {
-    "id": "node_46",
+    "id": "node_76",
     "name": "第4章 波与振动",
     "type": "concept",
     "description": "简谐振动是常见的振动形式",
-    "definition": "简...",
+    "definition": "简谐振动是常见的振动形式",
     "chapter": "第4章 波与振动",
     "page": 191,
     "source_textbook": "高中物理基础",
@@ -658,11 +1078,11 @@
     ]
   },
   {
-    "id": "node_47",
+    "id": "node_77",
     "name": "简谐振动是常见的振动形式",
     "type": "concept",
     "description": "简谐振动是常见的振动形式",
-    "definition": "简...",
+    "definition": "简谐振动是常见的振动形式",
     "chapter": "第4章 波与振动",
     "page": 191,
     "source_textbook": "高中物理基础",
@@ -672,11 +1092,11 @@
     ]
   },
   {
-    "id": "node_48",
+    "id": "node_78",
     "name": "波是振动的传播",
     "type": "concept",
     "description": "波是振动的传播",
-    "definition": "波...",
+    "definition": "波是振动的传播",
     "chapter": "第4章 波与振动",
     "page": 191,
     "source_textbook": "高中物理基础",
@@ -686,11 +1106,11 @@
     ]
   },
   {
-    "id": "node_49",
+    "id": "node_79",
     "name": "横波与纵波是两种基本形式",
     "type": "concept",
     "description": "横波与纵波是两种基本形式",
-    "definition": "横...",
+    "definition": "横波与纵波是两种基本形式",
     "chapter": "第4章 波与振动",
     "page": 191,
     "source_textbook": "高中物理基础",
@@ -700,11 +1120,11 @@
     ]
   },
   {
-    "id": "node_50",
+    "id": "node_80",
     "name": "干涉和衍射是波的特有现象",
     "type": "concept",
     "description": "干涉和衍射是波的特有现象",
-    "definition": "干...",
+    "definition": "干涉和衍射是波的特有现象",
     "chapter": "第4章 波与振动",
     "page": 191,
     "source_textbook": "高中物理基础",
@@ -714,11 +1134,11 @@
     ]
   },
   {
-    "id": "node_51",
+    "id": "node_81",
     "name": "第5章 电磁学",
     "type": "concept",
     "description": "电荷是电磁学的基本概念",
-    "definition": "电...",
+    "definition": "电荷是电磁学的基本概念",
     "chapter": "第5章 电磁学",
     "page": 261,
     "source_textbook": "高中物理基础",
@@ -728,11 +1148,11 @@
     ]
   },
   {
-    "id": "node_52",
+    "id": "node_82",
     "name": "电荷是电磁学的基本概念",
     "type": "concept",
     "description": "电荷是电磁学的基本概念",
-    "definition": "电...",
+    "definition": "电荷是电磁学的基本概念",
     "chapter": "第5章 电磁学",
     "page": 261,
     "source_textbook": "高中物理基础",
@@ -742,11 +1162,11 @@
     ]
   },
   {
-    "id": "node_53",
+    "id": "node_83",
     "name": "库伦定律描述电荷相互作用",
     "type": "concept",
     "description": "库伦定律描述电荷相互作用",
-    "definition": "库...",
+    "definition": "库伦定律描述电荷相互作用",
     "chapter": "第5章 电磁学",
     "page": 261,
     "source_textbook": "高中物理基础",
@@ -756,11 +1176,11 @@
     ]
   },
   {
-    "id": "node_54",
+    "id": "node_84",
     "name": "电场和磁场是电磁学核心",
     "type": "concept",
     "description": "电场和磁场是电磁学核心",
-    "definition": "电...",
+    "definition": "电场和磁场是电磁学核心",
     "chapter": "第5章 电磁学",
     "page": 261,
     "source_textbook": "高中物理基础",
@@ -770,11 +1190,11 @@
     ]
   },
   {
-    "id": "node_55",
+    "id": "node_85",
     "name": "电磁感应是发电原理",
     "type": "concept",
     "description": "电磁感应是发电原理",
-    "definition": "电...",
+    "definition": "电磁感应是发电原理",
     "chapter": "第5章 电磁学",
     "page": 261,
     "source_textbook": "高中物理基础",

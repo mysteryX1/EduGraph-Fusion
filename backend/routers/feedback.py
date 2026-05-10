@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from fastapi import APIRouter, HTTPException, status
 from typing import Dict
 from pydantic import BaseModel

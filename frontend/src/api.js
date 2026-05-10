@@ -235,16 +235,21 @@ export const getMergeDecisions = async () => {
 export const buildRagIndex = async () => {
   try {
     const response = await api.post('/rag/index');
-    return { success: true, data: response.data.data };
-  } catch (error) {
-    console.error('Build RAG index failed:', error);
+    const data = response.data.data || response.data || {};
     return {
       success: true,
       data: {
-        indexed: true,
-        chunk_count: 150,
-        textbook_count: 2,
+        indexed: data.indexed ?? true,
+        chunk_count: Number(data.chunk_count || 0),
+        textbook_count: Number(data.textbook_count || 0),
       },
+    };
+  } catch (error) {
+    console.error('Build RAG index failed:', error);
+    return {
+      success: false,
+      error: error.response?.data?.detail || error.message || '索引构建失败',
+      data: { indexed: false, chunk_count: 0, textbook_count: 0 },
     };
   }
 };
@@ -267,10 +272,10 @@ export const queryRag = async (question, topK = 5) => {
     console.error('RAG query failed:', error);
     return {
       success: false,
-      error: error.message || '查询失败',
+      error: error.response?.data?.detail || error.message || '查询失败',
       data: {
         question,
-        answer: '当前知识库中未找到相关信息',
+        answer: '未找到相关答案',
         citations: [],
         source_chunks: [],
       },
@@ -282,16 +287,21 @@ export const queryRag = async (question, topK = 5) => {
 export const getRagStatus = async () => {
   try {
     const response = await api.get('/rag/status');
-    return { success: true, data: response.data.data };
-  } catch (error) {
-    console.error('Get RAG status failed:', error);
+    const data = response.data.data || response.data || {};
     return {
       success: true,
       data: {
-        indexed: true,
-        chunk_count: 150,
-        textbook_count: 2,
+        indexed: Boolean(data.indexed),
+        chunk_count: Number(data.chunk_count || 0),
+        textbook_count: Number(data.textbook_count || 0),
       },
+    };
+  } catch (error) {
+    console.error('Get RAG status failed:', error);
+    return {
+      success: false,
+      error: error.response?.data?.detail || error.message || '状态获取失败',
+      data: { indexed: false, chunk_count: 0, textbook_count: 0 },
     };
   }
 };

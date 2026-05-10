@@ -2,36 +2,70 @@ import React, { useEffect, useRef, useState } from 'react';
 import * as echarts from 'echarts';
 import { getKnowledgeGraph } from '../api';
 
-const TEXTBOOK_COLORS = {
-  textbook_demo001: '#FF6B6B',
-  textbook_demo002: '#4ECDC4',
-  textbook_demo003: '#45B7D1',
-  textbook_demo004: '#FFA07A',
-  textbook_demo005: '#98D8C8',
+const PALETTE = [
+  '#93c5fd',
+  '#86efac',
+  '#fcd34d',
+  '#fca5a5',
+  '#c4b5fd',
+  '#67e8f9',
+  '#fdba74',
+  '#a7f3d0',
+];
+
+const RELATION_COLORS = {
+  contains: '#2563eb',
+  prerequisite: '#dc2626',
+  parallel: '#059669',
+  related: '#7c3aed',
 };
+
+const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
+
+const normalizeLinks = (data) => data?.links || data?.edges || [];
+
+const getLinkSource = (link) => link.source ?? link.source_id;
+const getLinkTarget = (link) => link.target ?? link.target_id;
 
 export default function GraphView({ onNodeClick }) {
   const chartRef = useRef(null);
   const chartInstance = useRef(null);
   const [graphData, setGraphData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
 
   useEffect(() => {
+    let cancelled = false;
+
     const loadGraph = async () => {
       setLoading(true);
+      setError('');
+
       try {
         const result = await getKnowledgeGraph();
-        if (result.success) {
-          setGraphData(result.data);
+        if (!cancelled) {
+          if (result.success) {
+            setGraphData(result.data || { nodes: [], links: [] });
+          } else {
+            setError(result.error || '知识图谱加载失败');
+          }
         }
-      } catch (error) {
-        console.error('Failed to load graph:', error);
+      } catch (err) {
+        if (!cancelled) {
+          setError(err.message || '知识图谱加载失败');
+        }
       } finally {
-        setLoading(false);
+        if (!cancelled) {
+          setLoading(false);
+        }
       }
     };
 
     loadGraph();
+
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
   useEffect(() => {
@@ -41,106 +75,123 @@ export default function GraphView({ onNodeClick }) {
       chartInstance.current = echarts.init(chartRef.current);
     }
 
-    const getNodeColor = (node) => {
-      return TEXTBOOK_COLORS[node.source_textbook] || '#1890ff';
-    };
+    const rawNodes = Array.isArray(graphData.nodes) ? graphData.nodes : [];
+    const rawLinks = normalizeLinks(graphData).filter((link) => getLinkSource(link) && getLinkTarget(link));
+    const degreeMap = new Map();
+    const sourceColorMap = new Map();
 
-    // 计算节点度数（连接数）以动态调整大小
-    const calculateNodeDegree = (nodeId) => {
-      return (graphData.links || []).filter(
-        (link) => link.source === nodeId || link.target === nodeId
-      ).length;
-    };
+    rawNodes.forEach((node) => {
+      degreeMap.set(node.id, 0);
+      const source = node.source_textbook || node.source || node.category || 'default';
+      if (!sourceColorMap.has(source)) {
+        sourceColorMap.set(source, PALETTE[sourceColorMap.size % PALETTE.length]);
+      }
+    });
 
-    const nodes = (graphData.nodes || []).map((node) => {
-      const frequency = node.frequency || node.value || 10;
-      const degree = calculateNodeDegree(node.id);
-      // 节点大小基于 frequency 和 degree 动态计算，范围 25-100
-      const baseSize = Math.max(25, Math.min(100, frequency / 2 + degree * 5));
-      const labelSize = Math.max(10, Math.min(14, frequency / 20));
+    rawLinks.forEach((link) => {
+      const source = getLinkSource(link);
+      const target = getLinkTarget(link);
+      degreeMap.set(source, (degreeMap.get(source) || 0) + 1);
+      degreeMap.set(target, (degreeMap.get(target) || 0) + 1);
+    });
 
-      // 节点标签只显示前 10 个字符
-      const shortName = node.name.length > 10 ? node.name.slice(0, 10) + '...' : node.name;
+    const nodes = rawNodes.map((node) => {
+      const frequency = Number(node.frequency ?? node.value ?? node.weight ?? 1);
+      const degree = degreeMap.get(node.id) || 0;
+      const importance = degree * 2 + Math.log(frequency + 1);
+      const symbolSize = clamp(24 + importance * 4, 24, 90);
+      const isCore = symbolSize >= 54;
+      const source = node.source_textbook || node.source || node.category || 'default';
 
       return {
-        id: node.id,
-        name: node.name,
-        value: frequency,
-        category: node.category || '默认',
+        ...node,
+        id: String(node.id),
+        name: node.name || node.label || String(node.id),
+        value: importance,
+        frequency,
         degree,
-        symbolSize: baseSize,
+        symbolSize,
+        draggable: true,
         itemStyle: {
-          color: getNodeColor(node),
-          borderColor: '#fff',
-          borderWidth: 2,
+          color: sourceColorMap.get(source) || PALETTE[0],
+          borderColor: isCore ? '#111827' : '#ffffff',
+          borderWidth: isCore ? 2.5 : 1.5,
+          shadowColor: 'rgba(15, 23, 42, 0.22)',
+          shadowBlur: isCore ? 10 : 4,
         },
         label: {
           show: true,
-          formatter: shortName,
-          fontSize: labelSize,
-          fontWeight: 'bold',
-          color: '#fff',
-          position: 'inside',
+          formatter: ({ data }) => {
+            const label = data.name || '';
+            return label.length > 12 ? `${label.slice(0, 12)}...` : label;
+          },
+          position: isCore ? 'inside' : 'right',
+          distance: 5,
+          fontSize: isCore ? 12 : 10,
+          fontWeight: isCore ? 700 : 500,
+          color: '#111827',
+          textBorderColor: '#ffffff',
+          textBorderWidth: 2,
           overflow: 'truncate',
         },
-        ...node,
       };
     });
 
-    const links = (graphData.links || []).map((link) => {
-      // 关系类型颜色映射
-      const relationTypeColors = {
-        prerequisite: '#FF6B6B',  // 前置关系 - 红色
-        contains: '#4ECDC4',      // 包含关系 - 绿色
-        parallel: '#95E1D3',      // 平行关系 - 浅绿
-        related: '#FFA07A',       // 相关关系 - 橙色
-      };
-      const relationType = link.relation_type || link.type || 'related';
-      const relationColor = relationTypeColors[relationType] || 'rgba(0, 0, 0, 0.2)';
+    const links = rawLinks.map((link) => {
+      const relationType = link.relation_type || link.type || link.relation || 'related';
+      const strength = Number(link.value ?? link.weight ?? 1);
+      const width = clamp(1 + Math.log(strength + 1), 1, 5);
 
       return {
         ...link,
+        source: String(getLinkSource(link)),
+        target: String(getLinkTarget(link)),
+        value: strength,
         lineStyle: {
-          width: Math.max(1, (link.value || 1) / 5),
-          color: relationColor,
-          opacity: 0.6,
+          width,
+          color: RELATION_COLORS[relationType] || '#64748b',
+          opacity: clamp(0.28 + width * 0.09, 0.32, 0.78),
+          curveness: 0.12,
         },
       };
     });
 
     const option = {
+      backgroundColor: '#f8fafc',
       title: {
         text: '知识图谱',
         left: 'center',
         top: 10,
         textStyle: {
+          color: '#111827',
           fontSize: 16,
           fontWeight: 'bold',
         },
       },
       tooltip: {
         trigger: 'item',
+        confine: true,
         formatter: (params) => {
           if (params.dataType === 'node') {
             const data = params.data;
             return `<strong>${data.name}</strong><br/>
-                   分类: ${data.category || '未分类'}<br/>
-                   频率: ${data.frequency || data.value || 0}<br/>
-                   连接数: ${data.degree || 0}<br/>
-                   来源: ${data.source_textbook || '未知'}`;
-          } else {
-            const relationType = params.data.relation_type || params.data.type || 'related';
-            return `关系类型: ${relationType}<br/>强度: ${params.data.value || 1}`;
+              类型：${data.category || data.type || '未分类'}<br/>
+              频次：${data.frequency || 0}<br/>
+              连接数：${data.degree || 0}<br/>
+              来源：${data.source_textbook || data.source || '未知'}`;
           }
+
+          const relationType = params.data.relation_type || params.data.type || 'related';
+          return `关系：${relationType}<br/>强度：${params.data.value || 1}`;
         },
-        backgroundColor: 'rgba(0, 0, 0, 0.9)',
-        borderColor: '#333',
+        backgroundColor: 'rgba(15, 23, 42, 0.92)',
+        borderColor: '#334155',
         textStyle: {
           color: '#fff',
           fontSize: 12,
         },
       },
-      animationDuration: 800,
+      animationDuration: 900,
       animationEasing: 'cubicOut',
       series: [
         {
@@ -149,33 +200,42 @@ export default function GraphView({ onNodeClick }) {
           roam: true,
           draggable: true,
           focusNodeAdjacency: true,
+          layoutAnimation: true,
           scaleLimit: {
-            min: 0.5,
-            max: 3,
+            min: 0.35,
+            max: 4,
           },
           force: {
-            repulsion: 100,
-            gravity: 0.1,
-            edgeLength: 150,
-            friction: 0.6,
+            repulsion: 620,
+            gravity: 0.045,
+            edgeLength: [70, 210],
+            friction: 0.45,
           },
-          nodes: nodes,
-          links: links,
+          nodes,
+          links,
           lineStyle: {
-            curveness: 0.3,
+            color: '#94a3b8',
+            opacity: 0.45,
+            width: 1.2,
           },
           emphasis: {
             focus: 'adjacency',
+            label: {
+              show: true,
+              color: '#111827',
+              textBorderColor: '#ffffff',
+              textBorderWidth: 3,
+            },
             lineStyle: {
-              width: 3,
-              color: '#1890ff',
+              width: 4,
+              opacity: 0.9,
             },
           },
         },
       ],
     };
 
-    chartInstance.current.setOption(option);
+    chartInstance.current.setOption(option, true);
 
     const handleClick = (params) => {
       if (params.dataType === 'node' && onNodeClick) {
@@ -183,7 +243,7 @@ export default function GraphView({ onNodeClick }) {
       }
     };
 
-    chartInstance.current.off('click', handleClick);
+    chartInstance.current.off('click');
     chartInstance.current.on('click', handleClick);
 
     const handleResize = () => {
@@ -196,13 +256,28 @@ export default function GraphView({ onNodeClick }) {
     };
   }, [graphData, onNodeClick]);
 
+  useEffect(() => {
+    return () => {
+      chartInstance.current?.dispose();
+      chartInstance.current = null;
+    };
+  }, []);
+
   if (loading) {
     return (
       <div className="graph-container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
         <div>
           <div className="loading-spinner"></div>
-          <p style={{ marginTop: '12px', color: '#666' }}>加载知识图谱中...</p>
+          <p style={{ marginTop: 12, color: '#666' }}>加载知识图谱中...</p>
         </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="graph-container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <div className="alert alert-error">{error}</div>
       </div>
     );
   }

@@ -21,7 +21,8 @@
       "Bash(git add *)",
       "Bash(git commit -m 'feat: Add knowledge graph merge, RAG improvements, and frontend UI enhancements *)",
       "Bash(git commit -m 'fix: Update backend services and add task assignments *)",
-      "Bash(git commit -m 'fix: Fix frontend integration and server issues *)"
+      "Bash(git commit -m 'fix: Fix frontend integration and server issues *)",
+      "Bash(git commit -m 'feat: Update backend services and add data processing *)"
     ]
   }
 }

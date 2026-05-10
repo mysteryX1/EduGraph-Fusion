@@ -1,0 +1,117 @@
+﻿{
+    "test_time":  "2026-05-10 14:09:57 +08:00",
+    "artifact_dir":  "D:\\我的大学\\博一下\\黑客松2\\test_artifacts\\agent_d_20260510_140957",
+    "steps":  [
+                  {
+                      "name":  "1 后端基础接口",
+                      "pass":  true,
+                      "status_codes":  {
+                                           "docs":  200,
+                                           "health":  200
+                                       },
+                      "page":  "health={\"status\":\"healthy\",\"message\":\"Service is running\"}; docs HTML length=942",
+                      "console":  "",
+                      "screenshot":  "D:\\我的大学\\博一下\\黑客松2\\test_artifacts\\agent_d_20260510_140957\\backend_docs.png",
+                      "owner":  ""
+                  },
+                  {
+                      "name":  "2 教材列表",
+                      "pass":  true,
+                      "status_codes":  {
+                                           "frontend_build":  0,
+                                           "textbooks":  200,
+                                           "stats":  200
+                                       },
+                      "page":  "api total=2; fakeNamesInApi=False; frontend build exit=0",
+                      "console":  "D:\\我的大学\\博一下\\黑客松2\\test_artifacts\\agent_d_20260510_140957\\frontend_build.log",
+                      "screenshot":  "D:\\我的大学\\博一下\\黑客松2\\test_artifacts\\agent_d_20260510_140957\\frontend_home.png",
+                      "owner":  "Agent C"
+                  },
+                  {
+                      "name":  "3 上传和解析",
+                      "pass":  false,
+                      "status_codes":  {
+                                           "parse":  null,
+                                           "upload":  0
+                                       },
+                      "page":  "uploaded=; chapters=; total_words=; 左侧立即显示需以前端可编译为前提，当前 build=0",
+                      "console":  "D:\\我的大学\\博一下\\黑客松2\\test_artifacts\\agent_d_20260510_140957\\frontend_build.log",
+                      "screenshot":  "D:\\我的大学\\博一下\\黑客松2\\test_artifacts\\agent_d_20260510_140957\\frontend_home.png",
+                      "owner":  "Agent C"
+                  },
+                  {
+                      "name":  "4 知识图谱",
+                      "pass":  true,
+                      "status_codes":  {
+                                           "kg":  200,
+                                           "kg_build":  200
+                                       },
+                      "page":  "api nodes=56 edges=158; 图谱显示/节点点击需前端编译通过，当前 build=0",
+                      "console":  "D:\\我的大学\\博一下\\黑客松2\\test_artifacts\\agent_d_20260510_140957\\frontend_build.log",
+                      "screenshot":  "D:\\我的大学\\博一下\\黑客松2\\test_artifacts\\agent_d_20260510_140957\\frontend_home.png",
+                      "owner":  "Agent A/Agent C"
+                  },
+                  {
+                      "name":  "5 跨教材整合",
+                      "pass":  true,
+                      "status_codes":  {
+                                           "merge":  200,
+                                           "decisions":  200
+                                       },
+                      "page":  "compression_ratio=0.2462; decisions_count=8; statistics_present=True; 页面展示需前端编译通过 build=0",
+                      "console":  "D:\\我的大学\\博一下\\黑客松2\\test_artifacts\\agent_d_20260510_140957\\frontend_build.log",
+                      "screenshot":  "D:\\我的大学\\博一下\\黑客松2\\test_artifacts\\agent_d_20260510_140957\\frontend_home.png",
+                      "owner":  "Agent A/Agent C"
+                  },
+                  {
+                      "name":  "6 RAG",
+                      "pass":  true,
+                      "status_codes":  {
+                                           "rag_query":  200,
+                                           "rag_index":  200
+                                       },
+                      "page":  "answer_length=231; citations=5; 白屏/console 需前端可编译，当前 build=0",
+                      "console":  "D:\\我的大学\\博一下\\黑客松2\\test_artifacts\\agent_d_20260510_140957\\frontend_build.log",
+                      "screenshot":  "D:\\我的大学\\博一下\\黑客松2\\test_artifacts\\agent_d_20260510_140957\\frontend_home.png",
+                      "owner":  "Agent B/Agent C"
+                  },
+                  {
+                      "name":  "7 教师反馈",
+                      "pass":  false,
+                      "status_codes":  {
+                                           "expected_body":  "{\"instruction\":\"保留 函数\"}",
+                                           "feedback":  400
+                                       },
+                      "page":  "body={\"instruction\":\"保留 函数\"}; response=远程服务器返回错误: (400) 错误的请求。; 页面成功反馈需前端编译通过 build=0",
+                      "console":  "D:\\我的大学\\博一下\\黑客松2\\test_artifacts\\agent_d_20260510_140957\\frontend_build.log",
+                      "screenshot":  "D:\\我的大学\\博一下\\黑客松2\\test_artifacts\\agent_d_20260510_140957\\frontend_home.png",
+                      "owner":  "Agent B/Agent C"
+                  },
+                  {
+                      "name":  "8 报告生成",
+                      "pass":  true,
+                      "status_codes":  {
+                                           "generate":  200,
+                                           "latest":  200
+                                       },
+                      "page":  "latest_content_length=2331; markdown_preview=# ææç¥è¯æ´åæ¥å\n\n**çææ¶é´**ï¼2026-05-10 14:10:42\n\n## 1. æ´å ; 页面正文显示需前端编译通过 build=0",
+                      "console":  "D:\\我的大学\\博一下\\黑客松2\\test_artifacts\\agent_d_20260510_140957\\frontend_build.log",
+                      "screenshot":  "D:\\我的大学\\博一下\\黑客松2\\test_artifacts\\agent_d_20260510_140957\\frontend_home.png",
+                      "owner":  "Agent B/Agent C"
+                  }
+              ],
+    "git_status":  "git.exe : warning: unable to access \u0027C:\\Users\\Amber/.config/git/ignore\u0027: Permission denied\r\n所在位置 行:34 字符: 24\r\n+ $results.git_status = (\u0026 git status --short 2\u003e\u00261 | Out-String).Trim()\r\n+                        ~~~~~~~~~~~~~~~~~~~~~~~~~\r\n    + CategoryInfo          : NotSpecified: (warning: unable...rmission denied:String) [], RemoteException\r\n    + FullyQualifiedErrorId : NativeCommandError\r\n \r\nwarning: unable to access \u0027C:\\Users\\Amber/.config/git/ignore\u0027: Permission denied\r\n M .claude/settings.local.json\r\n D AGENT_C_COMPLETION.md\r\n D BUGFIX_REPORT.md\r\n D BUGFIX_SUMMARY.md\r\n D BUGFIX_SUMMARY.txt\r\n D CHANGES_SUMMARY.txt\r\n D CODEX_HANDOFF_EduGraph_Fusion.md\r\n D COMPLETION_REPORT.md\r\n D COMPLETION_SUMMARY.md\r\n D CURL_TESTS.sh\r\n D DEMO_OUTPUT.md\r\n D FILES_MANIFEST.txt\r\n D FILES_SUMMARY.txt\r\n D FILE_STRUCTURE.md\r\n D FIX_SUMMARY.md\r\n D IMPLEMENTATION_CHECKLIST.md\r\n D INTEGRATION_CHECKLIST.md\r\n D KG_MERGE_CHECKLIST.md\r\n D KG_MERGE_GUIDE.md\r\n D KG_MERGE_IMPLEMENTATION.md\r\n D MERGE_DECISIONS_FIX.md\r\n D MODULE_HARDENING_SUMMARY.md\r\n D PROJECT_COMPLETION.md\r\n D PROJECT_STRUCTURE.md\r\n D QUICKSTART_KG_MERGE.md\r\n D QUICK_REFERENCE.md\r\n D README_BACKEND.md\r\n D STARTUP.md\r\n D STARTUP_COMMANDS.txt\r\n D generate_test_data.py\r\n D \"leader/server\\346\\227\\245\\345\\277\\227\\351\\227\\256\\351\\242\\230\\350\\257\\212\\346\\226\\255\\344\\270\\216\\344\\277\\256\\345\\244\\215\\346\\264\\276\\345\\217\\221.md\"\r\n D \"leader/\\345\\211\\215\\347\\253\\257\\351\\227\\256\\351\\242\\230\\344\\277\\256\\345\\244\\215\\344\\273\\273\\345\\212\\241\\346\\264\\276\\345\\217\\221.md\"\r\n D run_full_test.py\r\n D start.bat\r\n D start.sh\r\n D test_api.ps1\r\n D test_api_kg_merge.sh\r\n D test_bugfixes.ps1\r\n D test_kg_merge.py\r\n D verify_imports.py\r\n D verify_merge_fix.py",
+    "backend_start":  {
+                          "job_id":  1,
+                          "ready":  true,
+                          "health_code":  200,
+                          "health_body":  "{\"status\":\"healthy\",\"message\":\"Service is running\"}"
+                      },
+    "frontend_start":  {
+                           "job_id":  3,
+                           "ready_3000":  true,
+                           "code_3000":  200,
+                           "ready_5173":  false,
+                           "code_5173":  null
+                       }
+}

@@ -334,12 +334,18 @@ class RAGEngine:
         all_chunks = []
 
         for json_file in self.data_dir.glob("*.json"):
-            if json_file.name.startswith('_') or json_file.name in ['merged_kg.json', 'merge_decisions.json']:
+            if json_file.name.startswith('_') or json_file.name in ['merged_kg.json', 'merge_decisions.json', 'kg_nodes.json', 'kg_edges.json']:
                 continue
 
             try:
                 with open(json_file, 'r', encoding='utf-8') as f:
                     data = json.load(f)
+
+                # 兼容 list 和 dict 格式
+                if isinstance(data, list):
+                    continue
+                if not isinstance(data, dict):
+                    continue
 
                 # 处理教材数据
                 textbook_id = data.get('id', json_file.stem)
