@@ -19,7 +19,16 @@ class FeedbackProcessor:
         decisions_file = self.data_dir / "merge_decisions.json"
         if decisions_file.exists():
             with open(decisions_file, 'r', encoding='utf-8') as f:
-                return json.load(f)
+                data = json.load(f)
+            if isinstance(data, list):
+                return {
+                    'decisions': data,
+                    'updated_at': datetime.now().isoformat()
+                }
+            if isinstance(data, dict):
+                data.setdefault('decisions', [])
+                data.setdefault('updated_at', datetime.now().isoformat())
+                return data
         return {
             'decisions': [],
             'updated_at': datetime.now().isoformat()

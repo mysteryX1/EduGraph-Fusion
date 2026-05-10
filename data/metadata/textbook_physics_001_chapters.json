@@ -1,0 +1,47 @@
+[
+  {
+    "id": "textbook_physics_001_ch_0",
+    "chapter_num": 0,
+    "title": "第1章 运动学",
+    "start_page": 1,
+    "end_page": 60,
+    "content": "运动学研究物体运动规律。位移和速度是基本概念。加速度描述速度变化。匀加速直线运动有简单的运动方程。",
+    "word_count": 1100
+  },
+  {
+    "id": "textbook_physics_001_ch_1",
+    "chapter_num": 1,
+    "title": "第2章 牛顿定律",
+    "start_page": 61,
+    "end_page": 130,
+    "content": "牛顿运动定律是经典力学的基础。第一定律是惯性定律。第二定律是 F = ma。第三定律是作用力与反作用力。",
+    "word_count": 1200
+  },
+  {
+    "id": "textbook_physics_001_ch_2",
+    "chapter_num": 2,
+    "title": "第3章 能量与功",
+    "start_page": 131,
+    "end_page": 190,
+    "content": "功是力与位移的乘积。动能与运动有关。势能与位置有关。能量守恒定律是基本定律。",
+    "word_count": 1050
+  },
+  {
+    "id": "textbook_physics_001_ch_3",
+    "chapter_num": 3,
+    "title": "第4章 波与振动",
+    "start_page": 191,
+    "end_page": 260,
+    "content": "简谐振动是常见的振动形式。波是振动的传播。横波与纵波是两种基本形式。干涉和衍射是波的特有现象。",
+    "word_count": 1150
+  },
+  {
+    "id": "textbook_physics_001_ch_4",
+    "chapter_num": 4,
+    "title": "第5章 电磁学",
+    "start_page": 261,
+    "end_page": 320,
+    "content": "电荷是电磁学的基本概念。库伦定律描述电荷相互作用。电场和磁场是电磁学核心。电磁感应是发电原理。",
+    "word_count": 1000
+  }
+]

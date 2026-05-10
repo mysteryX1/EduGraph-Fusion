@@ -18,7 +18,9 @@
       "Bash(Get-ChildItem -Recurse -Depth 2)",
       "Bash(Select-Object FullName)",
       "Bash(python *)",
-      "Bash(git add *)"
+      "Bash(git add *)",
+      "Bash(git commit -m 'feat: Add knowledge graph merge, RAG improvements, and frontend UI enhancements *)",
+      "Bash(git commit -m 'fix: Update backend services and add task assignments *)"
     ]
   }
 }

@@ -1,0 +1,71 @@
+{
+  "decisions": [
+    {
+      "node_id1": "node_8",
+      "node_id2": "node_9",
+      "similarity": 0.8181818181818181,
+      "decision": "possible_duplicate",
+      "timestamp": "2026-05-10T13:29:57.590175"
+    },
+    {
+      "node_id1": "node_13",
+      "node_id2": "node_14",
+      "similarity": 0.7391304347826086,
+      "decision": "possible_duplicate",
+      "timestamp": "2026-05-10T13:29:57.590175"
+    },
+    {
+      "node_id1": "node_14",
+      "node_id2": "node_15",
+      "similarity": 0.6888888888888889,
+      "decision": "possible_duplicate",
+      "timestamp": "2026-05-10T13:29:57.590175"
+    },
+    {
+      "node_id1": "node_1",
+      "node_id2": "node_2",
+      "similarity": 0.675,
+      "decision": "possible_duplicate",
+      "timestamp": "2026-05-10T13:29:57.590175"
+    },
+    {
+      "node_id1": "node_30",
+      "node_id2": "node_31",
+      "similarity": 0.6727272727272726,
+      "decision": "possible_duplicate",
+      "timestamp": "2026-05-10T13:29:57.590175"
+    },
+    {
+      "node_id1": "node_51",
+      "node_id2": "node_52",
+      "similarity": 0.6727272727272726,
+      "decision": "possible_duplicate",
+      "timestamp": "2026-05-10T13:29:57.590175"
+    },
+    {
+      "node_id1": "node_13",
+      "node_id2": "node_15",
+      "similarity": 0.6695652173913044,
+      "decision": "possible_duplicate",
+      "timestamp": "2026-05-10T13:29:57.590175"
+    },
+    {
+      "node_id1": "node_46",
+      "node_id2": "node_47",
+      "similarity": 0.6666666666666666,
+      "decision": "possible_duplicate",
+      "timestamp": "2026-05-10T13:29:57.590175"
+    },
+    {
+      "action": "keep",
+      "target": "函数",
+      "timestamp": "2026-05-10T13:30:59.602827"
+    },
+    {
+      "action": "keep",
+      "target": "函数",
+      "timestamp": "2026-05-10T13:32:42.562305"
+    }
+  ],
+  "updated_at": "2026-05-10T13:32:42.562305"
+}

@@ -1,0 +1,47 @@
+[
+  {
+    "id": "textbook_math_001_ch_0",
+    "chapter_num": 0,
+    "title": "第1章 集合与函数",
+    "start_page": 1,
+    "end_page": 50,
+    "content": "集合（Set）是数学中的基本概念。函数（Function）是建立集合之间对应关系的工具。函数的定义域和值域是重要属性。一次函数和二次函数是常见类型。",
+    "word_count": 1200
+  },
+  {
+    "id": "textbook_math_001_ch_1",
+    "chapter_num": 1,
+    "title": "第2章 导数与微分",
+    "start_page": 51,
+    "end_page": 120,
+    "content": "导数（Derivative）表示函数在某点的变化率。微分（Differential）是导数的应用。梯度下降法在机器学习中应用广泛。反向传播算法基于链式求导法则。",
+    "word_count": 1350
+  },
+  {
+    "id": "textbook_math_001_ch_2",
+    "chapter_num": 2,
+    "title": "第3章 三角函数",
+    "start_page": 121,
+    "end_page": 180,
+    "content": "三角函数（Trigonometric Functions）包括正弦、余弦、正切等。傅里叶变换基于三角函数的分解。傅里叶级数用三角函数逼近周期函数。",
+    "word_count": 1100
+  },
+  {
+    "id": "textbook_math_001_ch_3",
+    "chapter_num": 3,
+    "title": "第4章 积分学",
+    "start_page": 181,
+    "end_page": 250,
+    "content": "积分是微分的逆运算。定积分计算函数曲线下的面积。牛顿-莱布尼茨公式建立了积分与微分的联系。",
+    "word_count": 950
+  },
+  {
+    "id": "textbook_math_001_ch_4",
+    "chapter_num": 4,
+    "title": "第5章 线性代数",
+    "start_page": 251,
+    "end_page": 320,
+    "content": "线性代数是机器学习的基础。矩阵用于表示线性变换。特征值和特征向量描述矩阵的本质性质。奇异值分解在降维中应用。",
+    "word_count": 1050
+  }
+]

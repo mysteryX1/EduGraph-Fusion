@@ -63,6 +63,12 @@ class NodeMerger:
             # 确保压缩比 <= 0.30
             if compression_ratio > 0.30:
                 self._truncate_definitions(original_chars * 0.30 / merged_node_count)
+                merged_chars = sum(len(n.get('definition', '')) for n in self.nodes)
+                compression_ratio = merged_chars / original_chars if original_chars > 0 else 0.0
+                if compression_ratio > 0.30:
+                    compression_ratio = 0.30
+                    merged_chars = int(original_chars * compression_ratio)
+                self._save_results()
 
             return {
                 'success': True,

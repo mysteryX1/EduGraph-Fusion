@@ -33,7 +33,7 @@ class LLMClient:
             print(f"LLM extraction failed: {e}, falling back to rule-based")
             return self._fallback_extract_concepts(text, chapter_title)
 
-    def _fallback_extract_concepts(self, text: str, chapter_title: str) -> List[Dict]:
+    def _fallback_extract_concepts_old(self, text: str, chapter_title: str) -> List[Dict]:
         """规则-based 概念提取（LLM 不可用时）
 
         提取策略：
@@ -113,6 +113,62 @@ class LLMClient:
                     break
 
         return concepts[:8]  # 最多 8 个
+
+    def _fallback_extract_concepts(self, text: str, chapter_title: str) -> List[Dict]:
+        """Fast bounded rule-based concept extraction used for demos."""
+        if not text:
+            return []
+
+        normalized = (
+            text.replace('\n', ' ')
+            .replace('?', '。')
+            .replace('!', '。')
+            .replace('；', '。')
+            .replace(';', '。')
+        )
+        sentences = [s.strip() for s in normalized.split('。') if len(s.strip()) >= 4]
+        if not sentences:
+            sentences = [normalized[:120].strip()] if normalized.strip() else [chapter_title]
+
+        import re
+        seeds = []
+        if chapter_title:
+            seeds.append((chapter_title.strip(), sentences[0]))
+
+        for sent in sentences[:8]:
+            for term in re.findall(r'[（(]([^）)）]{2,30})[）)]', sent):
+                seeds.append((term.strip(), sent))
+            for term in re.split(r'[，,、\s]+', sent)[:4]:
+                term = term.strip(' ：:（）()《》0123456789')
+                if 2 <= len(term) <= 24:
+                    seeds.append((term, sent))
+
+        concepts = []
+        seen = set()
+        for name, definition in seeds:
+            if not name or name in seen:
+                continue
+            seen.add(name)
+            concepts.append({
+                "name": name,
+                "definition": definition[:220],
+                "type": "concept"
+            })
+            if len(concepts) >= 8:
+                break
+
+        while len(concepts) < 5 and sentences:
+            name = f"{chapter_title or '知识点'}-{len(concepts) + 1}"
+            if name in seen:
+                break
+            concepts.append({
+                "name": name,
+                "definition": sentences[min(len(concepts), len(sentences) - 1)][:220],
+                "type": "concept"
+            })
+            seen.add(name)
+
+        return concepts[:8]
 
     def extract_relations(self, concepts: List[Dict], text: str) -> List[Dict]:
         """从文本中提取概念间的关系

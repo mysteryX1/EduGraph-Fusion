@@ -211,7 +211,8 @@ class ReportGenerator:
             'total_decisions': keep_count + remove_count + merge_count + split_count
         }
 
-    def _extract_typical_cases(self) -> List[Dict]:
+    def _extract_typical_cases_broken(self) -> List[Dict]:
+        r'''
         """提取典型整合案例"""
         decisions_file = self.data_dir / "merge_decisions.json"
         cases = []
@@ -296,6 +297,75 @@ class ReportGenerator:
                     'impact': '提高教学效率 10-15%'
                 }
             ]
+
+        return cases[:3]
+
+        '''
+
+    def _extract_typical_cases(self) -> List[Dict]:
+        """Extract representative integration cases."""
+        decisions_file = self.data_dir / "merge_decisions.json"
+        cases = []
+
+        if decisions_file.exists():
+            try:
+                with open(decisions_file, 'r', encoding='utf-8') as f:
+                    data = json.load(f)
+                decisions = data.get('decisions', [])
+
+                merge_cases = [d for d in decisions if d.get('action') == 'merge']
+                remove_cases = [d for d in decisions if d.get('action') in ['remove', 'delete']]
+                split_cases = [d for d in decisions if d.get('action') == 'split']
+
+                if merge_cases:
+                    case = merge_cases[0]
+                    cases.append({
+                        'type': '合并',
+                        'description': f"将《{case.get('source', '')}》与《{case.get('target', '')}》合并，保留目标教材的知识框架，避免内容重复。",
+                        'impact': '减少重复知识 15-20%'
+                    })
+
+                if remove_cases:
+                    case = remove_cases[0]
+                    cases.append({
+                        'type': '删除',
+                        'description': f"删除冗余内容《{case.get('target', '')}》，保留关键概念的核心内容，避免教学冗余。",
+                        'impact': '减少冗余内容 10-15%'
+                    })
+
+                if split_cases:
+                    case = split_cases[0]
+                    cases.append({
+                        'type': '拆分',
+                        'description': f"将《{case.get('source', '')}》拆分为《{case.get('target', '')}》，形成更细粒度的知识节点。",
+                        'impact': '提高知识细粒度 20-30%'
+                    })
+            except Exception as e:
+                print(f"Error extracting cases: {e}")
+
+        defaults = [
+            {
+                'type': '合并',
+                'description': '整合不同教材中相同或相似的知识点，避免内容重复。',
+                'impact': '减少重复知识 15-20%'
+            },
+            {
+                'type': '保留',
+                'description': '保留各教材中的核心概念和关键知识点，确保教学完整性和系统性。',
+                'impact': '保证学科知识的完整覆盖'
+            },
+            {
+                'type': '优化',
+                'description': '重新组织知识结构，提高教学材料的清晰度和易用性。',
+                'impact': '提高教学效率 10-15%'
+            }
+        ]
+
+        for item in defaults:
+            if len(cases) >= 3:
+                break
+            if not any(c.get('type') == item['type'] for c in cases):
+                cases.append(item)
 
         return cases[:3]
 

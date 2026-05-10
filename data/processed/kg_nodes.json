@@ -1,0 +1,786 @@
+[
+  {
+    "id": "node_0",
+    "name": "第1章 集合与函数",
+    "type": "concept",
+    "description": "集合（Set）是数学中的基本概念",
+    "definition": "集...",
+    "chapter": "第1章 集合与函数",
+    "page": 1,
+    "source_textbook": "高中数学基础",
+    "frequency": 1,
+    "sources": [
+      "高中数学基础"
+    ]
+  },
+  {
+    "id": "node_1",
+    "name": "Set",
+    "type": "concept",
+    "description": "集合（Set）是数学中的基本概念",
+    "definition": "集...",
+    "chapter": "第1章 集合与函数",
+    "page": 1,
+    "source_textbook": "高中数学基础",
+    "frequency": 1,
+    "sources": [
+      "高中数学基础"
+    ]
+  },
+  {
+    "id": "node_2",
+    "name": "集合（Set）是数学中的基本概念",
+    "type": "concept",
+    "description": "集合（Set）是数学中的基本概念",
+    "definition": "集...",
+    "chapter": "第1章 集合与函数",
+    "page": 1,
+    "source_textbook": "高中数学基础",
+    "frequency": 1,
+    "sources": [
+      "高中数学基础"
+    ]
+  },
+  {
+    "id": "node_3",
+    "name": "Function",
+    "type": "concept",
+    "description": "函数（Function）是建立集合之间对应关系的工具",
+    "definition": "函...",
+    "chapter": "第1章 集合与函数",
+    "page": 1,
+    "source_textbook": "高中数学基础",
+    "frequency": 1,
+    "sources": [
+      "高中数学基础"
+    ]
+  },
+  {
+    "id": "node_4",
+    "name": "函数的定义域和值域是重要属性",
+    "type": "concept",
+    "description": "函数的定义域和值域是重要属性",
+    "definition": "函...",
+    "chapter": "第1章 集合与函数",
+    "page": 1,
+    "source_textbook": "高中数学基础",
+    "frequency": 1,
+    "sources": [
+      "高中数学基础"
+    ]
+  },
+  {
+    "id": "node_5",
+    "name": "一次函数和二次函数是常见类型",
+    "type": "concept",
+    "description": "一次函数和二次函数是常见类型",
+    "definition": "一...",
+    "chapter": "第1章 集合与函数",
+    "page": 1,
+    "source_textbook": "高中数学基础",
+    "frequency": 1,
+    "sources": [
+      "高中数学基础"
+    ]
+  },
+  {
+    "id": "node_6",
+    "name": "第2章 导数与微分",
+    "type": "concept",
+    "description": "导数（Derivative）表示函数在某点的变化率",
+    "definition": "导...",
+    "chapter": "第2章 导数与微分",
+    "page": 51,
+    "source_textbook": "高中数学基础",
+    "frequency": 1,
+    "sources": [
+      "高中数学基础"
+    ]
+  },
+  {
+    "id": "node_7",
+    "name": "Derivative",
+    "type": "concept",
+    "description": "导数（Derivative）表示函数在某点的变化率",
+    "definition": "导...",
+    "chapter": "第2章 导数与微分",
+    "page": 51,
+    "source_textbook": "高中数学基础",
+    "frequency": 1,
+    "sources": [
+      "高中数学基础"
+    ]
+  },
+  {
+    "id": "node_8",
+    "name": "Differential",
+    "type": "concept",
+    "description": "微分（Differential）是导数的应用",
+    "definition": "微...",
+    "chapter": "第2章 导数与微分",
+    "page": 51,
+    "source_textbook": "高中数学基础",
+    "frequency": 1,
+    "sources": [
+      "高中数学基础"
+    ]
+  },
+  {
+    "id": "node_9",
+    "name": "微分（Differential）是导数的应用",
+    "type": "concept",
+    "description": "微分（Differential）是导数的应用",
+    "definition": "微...",
+    "chapter": "第2章 导数与微分",
+    "page": 51,
+    "source_textbook": "高中数学基础",
+    "frequency": 1,
+    "sources": [
+      "高中数学基础"
+    ]
+  },
+  {
+    "id": "node_10",
+    "name": "梯度下降法在机器学习中应用广泛",
+    "type": "concept",
+    "description": "梯度下降法在机器学习中应用广泛",
+    "definition": "梯...",
+    "chapter": "第2章 导数与微分",
+    "page": 51,
+    "source_textbook": "高中数学基础",
+    "frequency": 1,
+    "sources": [
+      "高中数学基础"
+    ]
+  },
+  {
+    "id": "node_11",
+    "name": "反向传播算法基于链式求导法则",
+    "type": "concept",
+    "description": "反向传播算法基于链式求导法则",
+    "definition": "反...",
+    "chapter": "第2章 导数与微分",
+    "page": 51,
+    "source_textbook": "高中数学基础",
+    "frequency": 1,
+    "sources": [
+      "高中数学基础"
+    ]
+  },
+  {
+    "id": "node_12",
+    "name": "第3章 三角函数",
+    "type": "concept",
+    "description": "三角函数（Trigonometric Functions）包括正弦、余弦、正切等",
+    "definition": "三...",
+    "chapter": "第3章 三角函数",
+    "page": 121,
+    "source_textbook": "高中数学基础",
+    "frequency": 1,
+    "sources": [
+      "高中数学基础"
+    ]
+  },
+  {
+    "id": "node_13",
+    "name": "Trigonometric Functions",
+    "type": "concept",
+    "description": "三角函数（Trigonometric Functions）包括正弦、余弦、正切等",
+    "definition": "三...",
+    "chapter": "第3章 三角函数",
+    "page": 121,
+    "source_textbook": "高中数学基础",
+    "frequency": 1,
+    "sources": [
+      "高中数学基础"
+    ]
+  },
+  {
+    "id": "node_14",
+    "name": "三角函数（Trigonometric",
+    "type": "concept",
+    "description": "三角函数（Trigonometric Functions）包括正弦、余弦、正切等",
+    "definition": "三...",
+    "chapter": "第3章 三角函数",
+    "page": 121,
+    "source_textbook": "高中数学基础",
+    "frequency": 1,
+    "sources": [
+      "高中数学基础"
+    ]
+  },
+  {
+    "id": "node_15",
+    "name": "Functions）包括正弦",
+    "type": "concept",
+    "description": "三角函数（Trigonometric Functions）包括正弦、余弦、正切等",
+    "definition": "三...",
+    "chapter": "第3章 三角函数",
+    "page": 121,
+    "source_textbook": "高中数学基础",
+    "frequency": 1,
+    "sources": [
+      "高中数学基础"
+    ]
+  },
+  {
+    "id": "node_16",
+    "name": "余弦",
+    "type": "concept",
+    "description": "三角函数（Trigonometric Functions）包括正弦、余弦、正切等",
+    "definition": "三...",
+    "chapter": "第3章 三角函数",
+    "page": 121,
+    "source_textbook": "高中数学基础",
+    "frequency": 1,
+    "sources": [
+      "高中数学基础"
+    ]
+  },
+  {
+    "id": "node_17",
+    "name": "正切等",
+    "type": "concept",
+    "description": "三角函数（Trigonometric Functions）包括正弦、余弦、正切等",
+    "definition": "三...",
+    "chapter": "第3章 三角函数",
+    "page": 121,
+    "source_textbook": "高中数学基础",
+    "frequency": 1,
+    "sources": [
+      "高中数学基础"
+    ]
+  },
+  {
+    "id": "node_18",
+    "name": "傅里叶变换基于三角函数的分解",
+    "type": "concept",
+    "description": "傅里叶变换基于三角函数的分解",
+    "definition": "傅...",
+    "chapter": "第3章 三角函数",
+    "page": 121,
+    "source_textbook": "高中数学基础",
+    "frequency": 1,
+    "sources": [
+      "高中数学基础"
+    ]
+  },
+  {
+    "id": "node_19",
+    "name": "傅里叶级数用三角函数逼近周期函数",
+    "type": "concept",
+    "description": "傅里叶级数用三角函数逼近周期函数",
+    "definition": "傅...",
+    "chapter": "第3章 三角函数",
+    "page": 121,
+    "source_textbook": "高中数学基础",
+    "frequency": 1,
+    "sources": [
+      "高中数学基础"
+    ]
+  },
+  {
+    "id": "node_20",
+    "name": "第4章 积分学",
+    "type": "concept",
+    "description": "积分是微分的逆运算",
+    "definition": "积...",
+    "chapter": "第4章 积分学",
+    "page": 181,
+    "source_textbook": "高中数学基础",
+    "frequency": 1,
+    "sources": [
+      "高中数学基础"
+    ]
+  },
+  {
+    "id": "node_21",
+    "name": "积分是微分的逆运算",
+    "type": "concept",
+    "description": "积分是微分的逆运算",
+    "definition": "积...",
+    "chapter": "第4章 积分学",
+    "page": 181,
+    "source_textbook": "高中数学基础",
+    "frequency": 1,
+    "sources": [
+      "高中数学基础"
+    ]
+  },
+  {
+    "id": "node_22",
+    "name": "定积分计算函数曲线下的面积",
+    "type": "concept",
+    "description": "定积分计算函数曲线下的面积",
+    "definition": "定...",
+    "chapter": "第4章 积分学",
+    "page": 181,
+    "source_textbook": "高中数学基础",
+    "frequency": 1,
+    "sources": [
+      "高中数学基础"
+    ]
+  },
+  {
+    "id": "node_23",
+    "name": "牛顿-莱布尼茨公式建立了积分与微分的联系",
+    "type": "concept",
+    "description": "牛顿-莱布尼茨公式建立了积分与微分的联系",
+    "definition": "牛...",
+    "chapter": "第4章 积分学",
+    "page": 181,
+    "source_textbook": "高中数学基础",
+    "frequency": 1,
+    "sources": [
+      "高中数学基础"
+    ]
+  },
+  {
+    "id": "node_24",
+    "name": "第4章 积分学-5",
+    "type": "concept",
+    "description": "牛顿-莱布尼茨公式建立了积分与微分的联系",
+    "definition": "牛...",
+    "chapter": "第4章 积分学",
+    "page": 181,
+    "source_textbook": "高中数学基础",
+    "frequency": 1,
+    "sources": [
+      "高中数学基础"
+    ]
+  },
+  {
+    "id": "node_25",
+    "name": "第5章 线性代数",
+    "type": "concept",
+    "description": "线性代数是机器学习的基础",
+    "definition": "线...",
+    "chapter": "第5章 线性代数",
+    "page": 251,
+    "source_textbook": "高中数学基础",
+    "frequency": 1,
+    "sources": [
+      "高中数学基础"
+    ]
+  },
+  {
+    "id": "node_26",
+    "name": "线性代数是机器学习的基础",
+    "type": "concept",
+    "description": "线性代数是机器学习的基础",
+    "definition": "线...",
+    "chapter": "第5章 线性代数",
+    "page": 251,
+    "source_textbook": "高中数学基础",
+    "frequency": 1,
+    "sources": [
+      "高中数学基础"
+    ]
+  },
+  {
+    "id": "node_27",
+    "name": "矩阵用于表示线性变换",
+    "type": "concept",
+    "description": "矩阵用于表示线性变换",
+    "definition": "矩...",
+    "chapter": "第5章 线性代数",
+    "page": 251,
+    "source_textbook": "高中数学基础",
+    "frequency": 1,
+    "sources": [
+      "高中数学基础"
+    ]
+  },
+  {
+    "id": "node_28",
+    "name": "特征值和特征向量描述矩阵的本质性质",
+    "type": "concept",
+    "description": "特征值和特征向量描述矩阵的本质性质",
+    "definition": "特...",
+    "chapter": "第5章 线性代数",
+    "page": 251,
+    "source_textbook": "高中数学基础",
+    "frequency": 1,
+    "sources": [
+      "高中数学基础"
+    ]
+  },
+  {
+    "id": "node_29",
+    "name": "奇异值分解在降维中应用",
+    "type": "concept",
+    "description": "奇异值分解在降维中应用",
+    "definition": "奇...",
+    "chapter": "第5章 线性代数",
+    "page": 251,
+    "source_textbook": "高中数学基础",
+    "frequency": 1,
+    "sources": [
+      "高中数学基础"
+    ]
+  },
+  {
+    "id": "node_30",
+    "name": "第1章 运动学",
+    "type": "concept",
+    "description": "运动学研究物体运动规律",
+    "definition": "运...",
+    "chapter": "第1章 运动学",
+    "page": 1,
+    "source_textbook": "高中物理基础",
+    "frequency": 1,
+    "sources": [
+      "高中物理基础"
+    ]
+  },
+  {
+    "id": "node_31",
+    "name": "运动学研究物体运动规律",
+    "type": "concept",
+    "description": "运动学研究物体运动规律",
+    "definition": "运...",
+    "chapter": "第1章 运动学",
+    "page": 1,
+    "source_textbook": "高中物理基础",
+    "frequency": 1,
+    "sources": [
+      "高中物理基础"
+    ]
+  },
+  {
+    "id": "node_32",
+    "name": "位移和速度是基本概念",
+    "type": "concept",
+    "description": "位移和速度是基本概念",
+    "definition": "位...",
+    "chapter": "第1章 运动学",
+    "page": 1,
+    "source_textbook": "高中物理基础",
+    "frequency": 1,
+    "sources": [
+      "高中物理基础"
+    ]
+  },
+  {
+    "id": "node_33",
+    "name": "加速度描述速度变化",
+    "type": "concept",
+    "description": "加速度描述速度变化",
+    "definition": "加...",
+    "chapter": "第1章 运动学",
+    "page": 1,
+    "source_textbook": "高中物理基础",
+    "frequency": 1,
+    "sources": [
+      "高中物理基础"
+    ]
+  },
+  {
+    "id": "node_34",
+    "name": "匀加速直线运动有简单的运动方程",
+    "type": "concept",
+    "description": "匀加速直线运动有简单的运动方程",
+    "definition": "匀...",
+    "chapter": "第1章 运动学",
+    "page": 1,
+    "source_textbook": "高中物理基础",
+    "frequency": 1,
+    "sources": [
+      "高中物理基础"
+    ]
+  },
+  {
+    "id": "node_35",
+    "name": "第2章 牛顿定律",
+    "type": "concept",
+    "description": "牛顿运动定律是经典力学的基础",
+    "definition": "牛...",
+    "chapter": "第2章 牛顿定律",
+    "page": 61,
+    "source_textbook": "高中物理基础",
+    "frequency": 1,
+    "sources": [
+      "高中物理基础"
+    ]
+  },
+  {
+    "id": "node_36",
+    "name": "牛顿运动定律是经典力学的基础",
+    "type": "concept",
+    "description": "牛顿运动定律是经典力学的基础",
+    "definition": "牛...",
+    "chapter": "第2章 牛顿定律",
+    "page": 61,
+    "source_textbook": "高中物理基础",
+    "frequency": 1,
+    "sources": [
+      "高中物理基础"
+    ]
+  },
+  {
+    "id": "node_37",
+    "name": "第一定律是惯性定律",
+    "type": "concept",
+    "description": "第一定律是惯性定律",
+    "definition": "第...",
+    "chapter": "第2章 牛顿定律",
+    "page": 61,
+    "source_textbook": "高中物理基础",
+    "frequency": 1,
+    "sources": [
+      "高中物理基础"
+    ]
+  },
+  {
+    "id": "node_38",
+    "name": "第二定律是",
+    "type": "concept",
+    "description": "第二定律是 F = ma",
+    "definition": "第...",
+    "chapter": "第2章 牛顿定律",
+    "page": 61,
+    "source_textbook": "高中物理基础",
+    "frequency": 1,
+    "sources": [
+      "高中物理基础"
+    ]
+  },
+  {
+    "id": "node_39",
+    "name": "ma",
+    "type": "concept",
+    "description": "第二定律是 F = ma",
+    "definition": "第...",
+    "chapter": "第2章 牛顿定律",
+    "page": 61,
+    "source_textbook": "高中物理基础",
+    "frequency": 1,
+    "sources": [
+      "高中物理基础"
+    ]
+  },
+  {
+    "id": "node_40",
+    "name": "第三定律是作用力与反作用力",
+    "type": "concept",
+    "description": "第三定律是作用力与反作用力",
+    "definition": "第...",
+    "chapter": "第2章 牛顿定律",
+    "page": 61,
+    "source_textbook": "高中物理基础",
+    "frequency": 1,
+    "sources": [
+      "高中物理基础"
+    ]
+  },
+  {
+    "id": "node_41",
+    "name": "第3章 能量与功",
+    "type": "concept",
+    "description": "功是力与位移的乘积",
+    "definition": "功...",
+    "chapter": "第3章 能量与功",
+    "page": 131,
+    "source_textbook": "高中物理基础",
+    "frequency": 1,
+    "sources": [
+      "高中物理基础"
+    ]
+  },
+  {
+    "id": "node_42",
+    "name": "功是力与位移的乘积",
+    "type": "concept",
+    "description": "功是力与位移的乘积",
+    "definition": "功...",
+    "chapter": "第3章 能量与功",
+    "page": 131,
+    "source_textbook": "高中物理基础",
+    "frequency": 1,
+    "sources": [
+      "高中物理基础"
+    ]
+  },
+  {
+    "id": "node_43",
+    "name": "动能与运动有关",
+    "type": "concept",
+    "description": "动能与运动有关",
+    "definition": "动...",
+    "chapter": "第3章 能量与功",
+    "page": 131,
+    "source_textbook": "高中物理基础",
+    "frequency": 1,
+    "sources": [
+      "高中物理基础"
+    ]
+  },
+  {
+    "id": "node_44",
+    "name": "势能与位置有关",
+    "type": "concept",
+    "description": "势能与位置有关",
+    "definition": "势...",
+    "chapter": "第3章 能量与功",
+    "page": 131,
+    "source_textbook": "高中物理基础",
+    "frequency": 1,
+    "sources": [
+      "高中物理基础"
+    ]
+  },
+  {
+    "id": "node_45",
+    "name": "能量守恒定律是基本定律",
+    "type": "concept",
+    "description": "能量守恒定律是基本定律",
+    "definition": "能...",
+    "chapter": "第3章 能量与功",
+    "page": 131,
+    "source_textbook": "高中物理基础",
+    "frequency": 1,
+    "sources": [
+      "高中物理基础"
+    ]
+  },
+  {
+    "id": "node_46",
+    "name": "第4章 波与振动",
+    "type": "concept",
+    "description": "简谐振动是常见的振动形式",
+    "definition": "简...",
+    "chapter": "第4章 波与振动",
+    "page": 191,
+    "source_textbook": "高中物理基础",
+    "frequency": 1,
+    "sources": [
+      "高中物理基础"
+    ]
+  },
+  {
+    "id": "node_47",
+    "name": "简谐振动是常见的振动形式",
+    "type": "concept",
+    "description": "简谐振动是常见的振动形式",
+    "definition": "简...",
+    "chapter": "第4章 波与振动",
+    "page": 191,
+    "source_textbook": "高中物理基础",
+    "frequency": 1,
+    "sources": [
+      "高中物理基础"
+    ]
+  },
+  {
+    "id": "node_48",
+    "name": "波是振动的传播",
+    "type": "concept",
+    "description": "波是振动的传播",
+    "definition": "波...",
+    "chapter": "第4章 波与振动",
+    "page": 191,
+    "source_textbook": "高中物理基础",
+    "frequency": 1,
+    "sources": [
+      "高中物理基础"
+    ]
+  },
+  {
+    "id": "node_49",
+    "name": "横波与纵波是两种基本形式",
+    "type": "concept",
+    "description": "横波与纵波是两种基本形式",
+    "definition": "横...",
+    "chapter": "第4章 波与振动",
+    "page": 191,
+    "source_textbook": "高中物理基础",
+    "frequency": 1,
+    "sources": [
+      "高中物理基础"
+    ]
+  },
+  {
+    "id": "node_50",
+    "name": "干涉和衍射是波的特有现象",
+    "type": "concept",
+    "description": "干涉和衍射是波的特有现象",
+    "definition": "干...",
+    "chapter": "第4章 波与振动",
+    "page": 191,
+    "source_textbook": "高中物理基础",
+    "frequency": 1,
+    "sources": [
+      "高中物理基础"
+    ]
+  },
+  {
+    "id": "node_51",
+    "name": "第5章 电磁学",
+    "type": "concept",
+    "description": "电荷是电磁学的基本概念",
+    "definition": "电...",
+    "chapter": "第5章 电磁学",
+    "page": 261,
+    "source_textbook": "高中物理基础",
+    "frequency": 1,
+    "sources": [
+      "高中物理基础"
+    ]
+  },
+  {
+    "id": "node_52",
+    "name": "电荷是电磁学的基本概念",
+    "type": "concept",
+    "description": "电荷是电磁学的基本概念",
+    "definition": "电...",
+    "chapter": "第5章 电磁学",
+    "page": 261,
+    "source_textbook": "高中物理基础",
+    "frequency": 1,
+    "sources": [
+      "高中物理基础"
+    ]
+  },
+  {
+    "id": "node_53",
+    "name": "库伦定律描述电荷相互作用",
+    "type": "concept",
+    "description": "库伦定律描述电荷相互作用",
+    "definition": "库...",
+    "chapter": "第5章 电磁学",
+    "page": 261,
+    "source_textbook": "高中物理基础",
+    "frequency": 1,
+    "sources": [
+      "高中物理基础"
+    ]
+  },
+  {
+    "id": "node_54",
+    "name": "电场和磁场是电磁学核心",
+    "type": "concept",
+    "description": "电场和磁场是电磁学核心",
+    "definition": "电...",
+    "chapter": "第5章 电磁学",
+    "page": 261,
+    "source_textbook": "高中物理基础",
+    "frequency": 1,
+    "sources": [
+      "高中物理基础"
+    ]
+  },
+  {
+    "id": "node_55",
+    "name": "电磁感应是发电原理",
+    "type": "concept",
+    "description": "电磁感应是发电原理",
+    "definition": "电...",
+    "chapter": "第5章 电磁学",
+    "page": 261,
+    "source_textbook": "高中物理基础",
+    "frequency": 1,
+    "sources": [
+      "高中物理基础"
+    ]
+  }
+]
